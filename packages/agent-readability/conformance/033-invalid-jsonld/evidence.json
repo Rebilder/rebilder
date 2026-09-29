@@ -1,0 +1,156 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://broken-jsonld.example/products/brass-corkscrew",
+    "origin": "https://broken-jsonld.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://broken-jsonld.example/products/brass-corkscrew",
+          "finalUrl": "https://broken-jsonld.example/products/brass-corkscrew",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"bc-42\""
+            ],
+            "link": [
+              "<https://broken-jsonld.example/products/brass-corkscrew>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 818,
+          "bodySha256": "ab0f17e06826a178212ff8f19d6d2b7f91456b9c10b63a8b72f549e9d11e56a9",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Brass Corkscrew — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://broken-jsonld.example/products/brass-corkscrew\">\n<meta name=\"description\" content=\"A solid brass waiter's corkscrew with a walnut handle.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Brass Corkscrew\",offers:{\"@type\":\"Offer\",\"price\":\"42.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\",},}</script>\n</head>\n<body>\n<main>\n<h1>Brass Corkscrew</h1>\n<p class=\"price\">$42.00</p>\n<p class=\"stock\">In stock</p>\n<p>Solid brass, walnut handle, boxed. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://broken-jsonld.example/products/brass-corkscrew",
+          "finalUrl": "https://broken-jsonld.example/products/brass-corkscrew",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"bc-42\""
+            ],
+            "link": [
+              "<https://broken-jsonld.example/products/brass-corkscrew>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 818,
+          "bodySha256": "ab0f17e06826a178212ff8f19d6d2b7f91456b9c10b63a8b72f549e9d11e56a9",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Brass Corkscrew — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://broken-jsonld.example/products/brass-corkscrew\">\n<meta name=\"description\" content=\"A solid brass waiter's corkscrew with a walnut handle.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Brass Corkscrew\",offers:{\"@type\":\"Offer\",\"price\":\"42.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\",},}</script>\n</head>\n<body>\n<main>\n<h1>Brass Corkscrew</h1>\n<p class=\"price\">$42.00</p>\n<p class=\"stock\">In stock</p>\n<p>Solid brass, walnut handle, boxed. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://broken-jsonld.example/robots.txt",
+          "finalUrl": "https://broken-jsonld.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 74,
+          "bodySha256": "1881c7849169d57d3bafa9dc9aaa228521a32c3891d82e441e0a959f1ff6dd58",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://broken-jsonld.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://broken-jsonld.example/llms.txt",
+          "finalUrl": "https://broken-jsonld.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://broken-jsonld.example/.well-known/ucp",
+          "finalUrl": "https://broken-jsonld.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

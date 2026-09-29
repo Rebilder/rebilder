@@ -1,0 +1,25 @@
+{
+  "name": "claude-code",
+  "description": "Anthropic Claude Code CLI fetching a page. Sends an explicit Accept: text/markdown media range alongside its CLI user agent.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "accept-encoding": "gzip, deflate, br",
+        "user-agent": "claude-code/1.0.58 (external, cli)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/olive-oil-500ml",
+      "expected": { "kind": "agent", "platform": "claude-code", "acceptsMarkdown": true }
+    },
+    {
+      "headers": {
+        "Accept": "text/markdown, text/plain;q=0.8, */*;q=0.5",
+        "Accept-Encoding": "gzip, deflate",
+        "User-Agent": "claude-code/2.0.13 (external, cli)"
+      },
+      "url": "/policies/shipping",
+      "expected": { "kind": "agent", "platform": "claude-code", "acceptsMarkdown": true }
+    }
+  ]
+}

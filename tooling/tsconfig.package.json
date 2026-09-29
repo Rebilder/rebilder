@@ -1,0 +1,15 @@
+{
+  // Shared strict TypeScript config for library packages.
+  // New @rebilder/* packages extend this from their own tsconfig.json:
+  //   { "extends": "../../tooling/tsconfig.package.json", "include": ["src"] }
+  // Root tsconfig.base.json stays at repo root (Turborepo convention); this extends it.
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    // Check the public API surface (declarations) even though nothing is emitted.
+    "declaration": true,
+    "composite": false,
+    // Packages are typecheck-only for now (turbo `typecheck` runs tsc with no emit);
+    // a package that later needs build output overrides noEmit in its own tsconfig.
+    "noEmit": true
+  }
+}

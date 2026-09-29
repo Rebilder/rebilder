@@ -1,0 +1,15 @@
+{
+  "name": "amazonbot",
+  "description": "Amazon's crawler, which Amazon says improves its products and may train its AI models. Classifies as agent/amazon from the User-Agent alone, at medium confidence, the same treatment as GPTBot. The User-Agent is transcribed verbatim from Amazon's published documentation (https://developer.amazon.com/amazonbot, fetched 2026-09-28), including its `W.X.Y.Z` placeholder for the Chrome version; it is not captured from our own traffic, and the other headers are illustrative. Replace the sample with a real capture the first time one is observed.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Amazonbot/0.1) Chrome/W.X.Y.Z Safari/537.36",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/olive-oil-500ml",
+      "expected": { "kind": "agent", "platform": "amazon", "acceptsMarkdown": false }
+    }
+  ]
+}

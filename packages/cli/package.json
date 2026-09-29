@@ -1,0 +1,73 @@
+{
+  "name": "rebilder",
+  "version": "0.3.0",
+  "private": false,
+  "description": "Check what AI agents can read on any web page: a readability score, the missing facts and a ranked fix list. Runs locally with no telemetry.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rebilder/rebilder.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://rebilder.com/spec/ars",
+  "bugs": {
+    "url": "https://github.com/rebilder/rebilder/issues",
+    "email": "support@rebilder.com"
+  },
+  "keywords": [
+    "cli",
+    "ai",
+    "llm",
+    "ai-agents",
+    "agent-readability",
+    "ars",
+    "seo",
+    "llms-txt",
+    "markdown",
+    "audit",
+    "ci"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "bin": {
+    "rebilder": "./dist/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@rebilder/agent-readability": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-security": "^4.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.62.1",
+    "vitest": "^2.1.4"
+  }
+}

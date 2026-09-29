@@ -1,0 +1,47 @@
+{
+  "id": "collection",
+  "version": "0.1.0",
+  "label": "Collection or listing page",
+  "required": [
+    {
+      "name": "title",
+      "label": "Collection name",
+      "types": ["text"],
+      "why": "Names what the list is, so the agent can tell the user which set of things it read."
+    },
+    {
+      "name": "item-count",
+      "label": "Item count",
+      "types": ["number"],
+      "why": "Tells the agent how much of the list it is holding, and whether pagination hid the rest."
+    },
+    {
+      "name": "item-link",
+      "label": "Item links",
+      "types": ["url", "list"],
+      "why": "Without a resolvable URL per item the list is a dead end and the agent cannot go one level deeper."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "price",
+      "label": "Price per item",
+      "types": ["money"],
+      "why": "Per-item prices let the agent shortlist candidates without fetching every item page."
+    },
+    {
+      "name": "availability",
+      "label": "Availability per item",
+      "types": ["text", "boolean"],
+      "why": "Lets the agent drop items it cannot get before it spends a request on them."
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "types": ["text"],
+      "why": "Says what the collection is for, so the agent can decide it is reading the right list."
+    }
+  ],
+  "actions": [],
+  "jsonLdType": "CollectionPage"
+}

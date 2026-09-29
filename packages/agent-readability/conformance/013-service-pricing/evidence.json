@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://northgate-surveys.example/services/party-wall-surveys",
+    "origin": "https://northgate-surveys.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://northgate-surveys.example/services/party-wall-surveys",
+          "finalUrl": "https://northgate-surveys.example/services/party-wall-surveys",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"ngs-2026-06-19\""
+            ],
+            "last-modified": [
+              "Fri, 19 Jun 2026 08:31:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 1730,
+          "bodySha256": "1acfe56ef91da3981030da3269968acca00356bb0a24a84de8b63bfa35a52813",
+          "body": "<!doctype html>\n<html lang=\"en-GB\">\n<head>\n<meta charset=\"utf-8\">\n<title>Party wall surveys — Northgate Surveys</title>\n<meta name=\"description\" content=\"Party wall awards, schedules of condition and adjoining-owner notices across Greater Manchester.\">\n<link rel=\"canonical\" href=\"https://northgate-surveys.example/services/party-wall-surveys\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Service\",\"name\":\"Party wall surveys\",\"description\":\"Party wall awards, schedules of condition and adjoining-owner notices across Greater Manchester.\",\"provider\":{\"@type\":\"Organization\",\"name\":\"Northgate Surveys\"},\"serviceType\":\"Party wall survey\",\"areaServed\":\"Greater Manchester\",\"timeRequired\":\"PT90M\",\"eligibleCustomerType\":\"Business\",\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://northgate-surveys.example/request-a-quote\"}}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/services\">Services</a> <a href=\"/about\">About</a></nav></header>\n<main>\n<h1>Party wall surveys</h1>\n<p>Party wall awards, schedules of condition and adjoining-owner notices across Greater Manchester. Serving Manchester, Salford, Stockport and Trafford.</p>\n<p><strong>Pricing on request.</strong> Every party wall matter is quoted after a short call, because the fee depends on the number of adjoining owners and whether an award is contested.</p>\n<p><a href=\"/request-a-quote\">Request a quote</a></p>\n<h2>Requirements</h2>\n<p>You must be the building owner, or instructed in writing by the building owner, before we can serve notice. A typical first appointment takes 90 minutes on site.</p>\n</main>\n<footer><p>Northgate Surveys, 14 Tib Street, Manchester M4 1SH.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://northgate-surveys.example/services/party-wall-surveys",
+          "finalUrl": "https://northgate-surveys.example/services/party-wall-surveys",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"ngs-2026-06-19\""
+            ],
+            "last-modified": [
+              "Fri, 19 Jun 2026 08:31:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 1730,
+          "bodySha256": "1acfe56ef91da3981030da3269968acca00356bb0a24a84de8b63bfa35a52813",
+          "body": "<!doctype html>\n<html lang=\"en-GB\">\n<head>\n<meta charset=\"utf-8\">\n<title>Party wall surveys — Northgate Surveys</title>\n<meta name=\"description\" content=\"Party wall awards, schedules of condition and adjoining-owner notices across Greater Manchester.\">\n<link rel=\"canonical\" href=\"https://northgate-surveys.example/services/party-wall-surveys\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Service\",\"name\":\"Party wall surveys\",\"description\":\"Party wall awards, schedules of condition and adjoining-owner notices across Greater Manchester.\",\"provider\":{\"@type\":\"Organization\",\"name\":\"Northgate Surveys\"},\"serviceType\":\"Party wall survey\",\"areaServed\":\"Greater Manchester\",\"timeRequired\":\"PT90M\",\"eligibleCustomerType\":\"Business\",\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://northgate-surveys.example/request-a-quote\"}}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/services\">Services</a> <a href=\"/about\">About</a></nav></header>\n<main>\n<h1>Party wall surveys</h1>\n<p>Party wall awards, schedules of condition and adjoining-owner notices across Greater Manchester. Serving Manchester, Salford, Stockport and Trafford.</p>\n<p><strong>Pricing on request.</strong> Every party wall matter is quoted after a short call, because the fee depends on the number of adjoining owners and whether an award is contested.</p>\n<p><a href=\"/request-a-quote\">Request a quote</a></p>\n<h2>Requirements</h2>\n<p>You must be the building owner, or instructed in writing by the building owner, before we can serve notice. A typical first appointment takes 90 minutes on site.</p>\n</main>\n<footer><p>Northgate Surveys, 14 Tib Street, Manchester M4 1SH.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://northgate-surveys.example/robots.txt",
+          "finalUrl": "https://northgate-surveys.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 78,
+          "bodySha256": "6e2f047947178dc62ade6ff6d33fad9bfe9339e8066095bcbea108826ce47726",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://northgate-surveys.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://northgate-surveys.example/llms.txt",
+          "finalUrl": "https://northgate-surveys.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://northgate-surveys.example/.well-known/ucp",
+          "finalUrl": "https://northgate-surveys.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

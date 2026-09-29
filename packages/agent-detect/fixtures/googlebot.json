@@ -1,0 +1,34 @@
+{
+  "name": "googlebot",
+  "description": "Google search crawler (desktop and smartphone). MUST always classify as crawler — the gateway serves it canonical HTML, never markdown (cloaking guardrail).",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-encoding": "gzip, deflate, br",
+        "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "from": "googlebot(at)googlebot.com",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/olive-oil-500ml",
+      "expected": { "kind": "crawler", "platform": "googlebot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 (Linux; Android 6.0.1; Nexus 5X Build/MMB29P) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.175 Mobile Safari/537.36 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/",
+      "expected": { "kind": "crawler", "platform": "googlebot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/markdown, text/html;q=0.9",
+        "user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"
+      },
+      "url": "/products/olive-oil-500ml",
+      "expected": { "kind": "crawler", "platform": "googlebot", "acceptsMarkdown": true }
+    }
+  ]
+}

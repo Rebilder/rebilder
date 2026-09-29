@@ -1,0 +1,15 @@
+{
+  "name": "duckassistbot",
+  "description": "DuckDuckGo's real-time fetcher for DuckAssist answers, which cite their sources. Classifies as agent/duckduckgo from the User-Agent alone, at medium confidence. The User-Agent is transcribed verbatim from DuckDuckGo's published documentation (https://duckduckgo.com/duckduckgo-help-pages/results/duckassistbot, fetched 2026-09-28): no `Mozilla/` prefix and an unusual `; (` separator, both as printed. It is not captured from our own traffic, and the other headers are illustrative.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,*/*;q=0.8",
+        "user-agent": "DuckAssistBot/1.2; (+http://duckduckgo.com/duckassistbot.html)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/pages/opening-hours",
+      "expected": { "kind": "agent", "platform": "duckduckgo", "acceptsMarkdown": false }
+    }
+  ]
+}

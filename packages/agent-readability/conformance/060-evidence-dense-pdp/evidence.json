@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://gateway-clean.example/products/enamel-mug-12oz",
+    "origin": "https://gateway-clean.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://gateway-clean.example/products/enamel-mug-12oz",
+          "finalUrl": "https://gateway-clean.example/products/enamel-mug-12oz",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/markdown; charset=utf-8"
+            ],
+            "link": [
+              "<https://gateway-clean.example/products/enamel-mug-12oz>; rel=\"canonical\"",
+              "<https://gateway-clean.example/products/enamel-mug-12oz>; rel=\"alternate\"; type=\"text/html\"",
+              "<https://gateway-clean.example/feed.json>; rel=\"alternate\"; type=\"application/feed+json\""
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"mug-24-md\""
+            ]
+          },
+          "bytes": 587,
+          "bodySha256": "ec6c8693e0155b2cc11d3c6039667a4bf8f4ddeba1dbf8386b0f694444192014",
+          "body": "# [Enamel Mug 12oz](https://gateway-clean.example/products/enamel-mug-12oz)\n\n- **Brand:** Foundry Goods\n- **Price:** $24.00\n- **Availability:** In stock\n- **SKU:** FG-MUG-12\n- **Capacity:** 12 oz\n- **Weight:** 340 g\n- **Shipping:** Free shipping over $50\n- **Returns:** 30-day returns\n\n## Description\n\nA 12-ounce speckled enamel mug with a rolled steel rim. Camp-safe, dishwasher-shy.\n\n## Sizes\n\n| Size | Price | Capacity | Availability |\n| --- | --- | --- | --- |\n| 12oz | $24.00 | 355 ml | In stock |\n| 16oz | $28.00 | 473 ml | Ships in 3 weeks |\n| 20oz | $32.00 | 591 ml | In stock |\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://gateway-clean.example/products/enamel-mug-12oz",
+          "finalUrl": "https://gateway-clean.example/products/enamel-mug-12oz",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "link": [
+              "<https://gateway-clean.example/products/enamel-mug-12oz>; rel=\"canonical\"",
+              "<https://gateway-clean.example/products/enamel-mug-12oz.md>; rel=\"alternate\"; type=\"text/markdown\""
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"mug-24-html\""
+            ]
+          },
+          "bytes": 1515,
+          "bodySha256": "54ab1ab1bb12cf0b1d73f12e7cc212e754f9afdd89af9acfe25982e1c11ad108",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Enamel Mug 12oz — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://gateway-clean.example/products/enamel-mug-12oz\">\n<link rel=\"alternate\" type=\"text/markdown\" href=\"https://gateway-clean.example/products/enamel-mug-12oz.md\">\n<meta name=\"description\" content=\"A 12-ounce speckled enamel mug with a rolled steel rim.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Enamel Mug 12oz\",\"sku\":\"FG-MUG-12\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A 12-ounce speckled enamel mug with a rolled steel rim.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"24.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/collections/drinkware\">Drinkware</a> <a href=\"/pages/about\">About</a></nav></header>\n<main>\n<h1>Enamel Mug 12oz</h1>\n<p class=\"price\">$24.00</p>\n<p class=\"variant\">Enamel Mug 16oz — $28.00 — backordered, ships in 3 weeks</p>\n<p class=\"stock\">In stock</p>\n<p>Speckled enamel over a steel core with a rolled rim, so it survives a tailgate and a campfire. Camp-safe, dishwasher-shy.</p>\n<p>Free shipping over $50. 30-day returns.</p>\n<p class=\"review\">\"Third season on mine and the rim still looks new.\" — Dana R.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n<footer><p>Foundry Goods, Columbus, Ohio.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://gateway-clean.example/robots.txt",
+          "finalUrl": "https://gateway-clean.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 74,
+          "bodySha256": "31eee8e04e7d7159581ac5bff333af2fa30aed7a408193acf0bf142fb951bcf2",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://gateway-clean.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://gateway-clean.example/llms.txt",
+          "finalUrl": "https://gateway-clean.example/llms.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 276,
+          "bodySha256": "5cc2bac382101bc072bd94f4e602e134ee519c1fad4adb975754a54955ac6c80",
+          "body": "# Foundry Goods\n\nA small-batch kitchen and camp goods store in Columbus, Ohio.\n\n- [Product feed](https://gateway-clean.example/feed.json)\n- [Drinkware](https://gateway-clean.example/collections/drinkware)\n- [Shipping and returns](https://gateway-clean.example/pages/shipping)\n",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://gateway-clean.example/.well-known/ucp",
+          "finalUrl": "https://gateway-clean.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

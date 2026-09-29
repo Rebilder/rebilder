@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://ledger-review.example/2026/07/the-repairability-index",
+    "origin": "https://ledger-review.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://ledger-review.example/2026/07/the-repairability-index",
+          "finalUrl": "https://ledger-review.example/2026/07/the-repairability-index",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=300"
+            ],
+            "etag": [
+              "\"a41f0c9b\""
+            ],
+            "last-modified": [
+              "Wed, 15 Jul 2026 11:02:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "vary": [
+              "Cookie"
+            ]
+          },
+          "bytes": 2589,
+          "bodySha256": "58e9720ffbb19eb38ed98ef90b30bb13c45e3df7d2a4ebd99fcdcc8b96cfb2d5",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>The Repairability Index — The Ledger Review</title>\n<link rel=\"canonical\" href=\"https://ledger-review.example/2026/07/the-repairability-index\">\n<meta name=\"description\" content=\"Four years of teardown data, and what it says about who is actually building repairable hardware.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"The Repairability Index\",\"description\":\"Four years of teardown data, and what it says about who is actually building repairable hardware.\",\"author\":{\"@type\":\"Person\",\"name\":\"Marguerite Okonjo\"},\"datePublished\":\"2026-07-14\",\"dateModified\":\"2026-07-15\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"The Ledger Review\"},\"isAccessibleForFree\":false,\"hasPart\":{\"@type\":\"WebPageElement\",\"isAccessibleForFree\":false,\"cssSelector\":\".paywalled-body\"}}</script>\n</head>\n<body>\n<article>\n<h1>The Repairability Index</h1>\n<p class=\"byline\">By Marguerite Okonjo · <time datetime=\"2026-07-14\">14 July 2026</time></p>\n<p class=\"standfirst\">Four years of teardown data, and what it says about who is actually building repairable hardware.</p>\n<p>We have taken apart 612 consumer devices since 2022. The pattern that survives every cut of the data is not the one the marketing departments would like.</p>\n<div class=\"paywalled-body\" data-paywall=\"subscriber\">\n<p class=\"paywall-notice\">This article is for subscribers. <a href=\"/subscribe\">Subscribe</a> to keep reading.</p>\n<p>Start with the fasteners. Of the devices we opened, the ones that came apart without heat, solvent or a spudger were overwhelmingly the ones built by companies that also sell spare parts, which is a duller finding than the one the press release promised and a more useful one.</p>\n<p>Adhesive is the variable that predicts everything else. Once a battery is glued rather than tabbed, the service manual stops being written, the parts catalogue stops being published, and the third-party repair market stops forming. None of those are consequences of the glue. They are consequences of the decision the glue records.</p>\n<p>The second pattern is quieter and harder to argue with: the firms whose scores improved did so in the year after a regulator published a scoring rule of its own, and not before. Voluntary disclosure moved nothing we can measure in four years of teardowns.</p>\n<p>What follows is the device-by-device table, the scoring rubric we used, and the three cases where we changed a score after the manufacturer wrote to us.</p>\n</div>\n</article>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://ledger-review.example/2026/07/the-repairability-index",
+          "finalUrl": "https://ledger-review.example/2026/07/the-repairability-index",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=300"
+            ],
+            "etag": [
+              "\"a41f0c9b\""
+            ],
+            "last-modified": [
+              "Wed, 15 Jul 2026 11:02:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "vary": [
+              "Cookie"
+            ]
+          },
+          "bytes": 2589,
+          "bodySha256": "58e9720ffbb19eb38ed98ef90b30bb13c45e3df7d2a4ebd99fcdcc8b96cfb2d5",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>The Repairability Index — The Ledger Review</title>\n<link rel=\"canonical\" href=\"https://ledger-review.example/2026/07/the-repairability-index\">\n<meta name=\"description\" content=\"Four years of teardown data, and what it says about who is actually building repairable hardware.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"NewsArticle\",\"headline\":\"The Repairability Index\",\"description\":\"Four years of teardown data, and what it says about who is actually building repairable hardware.\",\"author\":{\"@type\":\"Person\",\"name\":\"Marguerite Okonjo\"},\"datePublished\":\"2026-07-14\",\"dateModified\":\"2026-07-15\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"The Ledger Review\"},\"isAccessibleForFree\":false,\"hasPart\":{\"@type\":\"WebPageElement\",\"isAccessibleForFree\":false,\"cssSelector\":\".paywalled-body\"}}</script>\n</head>\n<body>\n<article>\n<h1>The Repairability Index</h1>\n<p class=\"byline\">By Marguerite Okonjo · <time datetime=\"2026-07-14\">14 July 2026</time></p>\n<p class=\"standfirst\">Four years of teardown data, and what it says about who is actually building repairable hardware.</p>\n<p>We have taken apart 612 consumer devices since 2022. The pattern that survives every cut of the data is not the one the marketing departments would like.</p>\n<div class=\"paywalled-body\" data-paywall=\"subscriber\">\n<p class=\"paywall-notice\">This article is for subscribers. <a href=\"/subscribe\">Subscribe</a> to keep reading.</p>\n<p>Start with the fasteners. Of the devices we opened, the ones that came apart without heat, solvent or a spudger were overwhelmingly the ones built by companies that also sell spare parts, which is a duller finding than the one the press release promised and a more useful one.</p>\n<p>Adhesive is the variable that predicts everything else. Once a battery is glued rather than tabbed, the service manual stops being written, the parts catalogue stops being published, and the third-party repair market stops forming. None of those are consequences of the glue. They are consequences of the decision the glue records.</p>\n<p>The second pattern is quieter and harder to argue with: the firms whose scores improved did so in the year after a regulator published a scoring rule of its own, and not before. Voluntary disclosure moved nothing we can measure in four years of teardowns.</p>\n<p>What follows is the device-by-device table, the scoring rubric we used, and the three cases where we changed a score after the manufacturer wrote to us.</p>\n</div>\n</article>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://ledger-review.example/robots.txt",
+          "finalUrl": "https://ledger-review.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 74,
+          "bodySha256": "1402d30caab24975bb3fa31dbd5cb9890e9bc81f0d58e07600ef75bc8d316588",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://ledger-review.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://ledger-review.example/llms.txt",
+          "finalUrl": "https://ledger-review.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://ledger-review.example/.well-known/ucp",
+          "finalUrl": "https://ledger-review.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

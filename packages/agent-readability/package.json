@@ -1,0 +1,103 @@
+{
+  "name": "@rebilder/agent-readability",
+  "version": "0.3.0",
+  "private": false,
+  "description": "Score how well AI agents can read a web page. The reference implementation of the Rebilder Agent Readability Spec (ARS): deterministic, no dependencies, with a safe fetcher for live pages.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rebilder/rebilder.git",
+    "directory": "packages/agent-readability"
+  },
+  "homepage": "https://rebilder.com/spec/ars",
+  "bugs": {
+    "url": "https://github.com/rebilder/rebilder/issues",
+    "email": "support@rebilder.com"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "ai-agents",
+    "agent-readability",
+    "ars",
+    "seo",
+    "llms-txt",
+    "markdown",
+    "structured-data",
+    "audit"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "probe": [
+        "./dist/probe/index.d.ts"
+      ],
+      "probe/local": [
+        "./dist/probe/local.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./probe": {
+      "import": {
+        "types": "./dist/probe/index.d.ts",
+        "default": "./dist/probe/index.js"
+      },
+      "require": {
+        "types": "./dist/probe/index.d.cts",
+        "default": "./dist/probe/index.cjs"
+      }
+    },
+    "./probe/local": {
+      "import": {
+        "types": "./dist/probe/local.d.ts",
+        "default": "./dist/probe/local.js"
+      },
+      "require": {
+        "types": "./dist/probe/local.d.cts",
+        "default": "./dist/probe/local.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-security": "^4.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.62.1",
+    "vitest": "^2.1.4"
+  }
+}

@@ -1,0 +1,111 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshots > catalog markdown 1`] = `
+"# Catalog
+
+| Title | Price | Availability |
+| --- | --- | --- |
+| [Trail Runner 2](https://store.example.com/products/trail-runner-2) | $89.00 | In stock |
+| [Basic Tee](https://store.example.com/products/basic) | $19.00 | Preorder |
+| [Wool Socks (3-pack)](https://store.example.com/products/wool-socks) | $24.00 | Backorder |"
+`;
+
+exports[`snapshots > full PDP JSON-LD 1`] = `
+"{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Trail Runner 2",
+  "url": "https://store.example.com/products/trail-runner-2",
+  "brand": {
+    "@type": "Brand",
+    "name": "Acme Outdoors"
+  },
+  "description": "The Trail Runner 2 is built for long days on technical terrain.\\n\\nA recycled mesh upper keeps weight down while the 6 mm drop keeps your\\nstride natural. Lugs are re-profiled from the original Trail Runner for\\nbetter grip in mud without collecting debris on hardpack.",
+  "image": [
+    "https://cdn.example.com/tr2-hero.jpg",
+    "https://cdn.example.com/tr2-sole.jpg"
+  ],
+  "offers": [
+    {
+      "@type": "Offer",
+      "price": "89.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "sku": "TR2-8",
+      "name": "Size 8"
+    },
+    {
+      "@type": "Offer",
+      "price": "89.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "sku": "TR2-9",
+      "name": "Size 9"
+    },
+    {
+      "@type": "Offer",
+      "price": "94.00",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/OutOfStock",
+      "sku": "TR2-10",
+      "name": "Size 10"
+    }
+  ]
+}"
+`;
+
+exports[`snapshots > full PDP markdown 1`] = `
+"# [Trail Runner 2](https://store.example.com/products/trail-runner-2)
+
+- **Brand:** Acme Outdoors
+- **Price:** ~~$120.00~~ $89.00
+- **Availability:** In stock
+- **Shipping:** Free standard shipping on orders over $50. Standard shipping is $5.95.
+  - Free shipping threshold: $50.00
+  - Ships to: US, CA
+  - Delivery estimate: 3-5 days
+- **Returns:** 30-day returns on unworn shoes in original packaging.
+  - Return window: 30 days
+  - Policy: https://store.example.com/policies/returns
+
+## Variants
+
+| ID | Title | Options | Price | Availability |
+| --- | --- | --- | --- | --- |
+| v-8 | Size 8 | size: 8 | $89.00 | In stock |
+| v-9 | Size 9 | size: 9 | $89.00 | In stock |
+| v-10 | Size 10 | size: 10 | $94.00 | Out of stock |
+
+## Description
+
+The Trail Runner 2 is built for long days on technical terrain.
+
+A recycled mesh upper keeps weight down while the 6 mm drop keeps your
+stride natural. Lugs are re-profiled from the original Trail Runner for
+better grip in mud without collecting debris on hardpack.
+
+## Details
+
+- **Material:** Recycled mesh upper
+- **Drop:** 6 mm
+- **Weight:** 280 g (size 9)
+
+## Images
+
+- [Trail Runner 2, side view](https://cdn.example.com/tr2-hero.jpg)
+- [https://cdn.example.com/tr2-sole.jpg](https://cdn.example.com/tr2-sole.jpg)"
+`;
+
+exports[`snapshots > policies markdown 1`] = `
+"# [Shipping Policy](https://store.example.com/policies/shipping)
+
+Orders placed before 2pm ET ship the same business day. Free standard shipping on orders over $50; otherwise standard shipping is $5.95 flat.
+
+# [Returns Policy](https://store.example.com/policies/returns)
+
+Returns are accepted within 30 days of delivery for unworn items in original packaging. Refunds are issued to the original payment method within 5 business days of receipt.
+
+# [Privacy Policy](https://store.example.com/policies/privacy)
+
+We collect only the information required to fulfil your order. We never sell customer data."
+`;

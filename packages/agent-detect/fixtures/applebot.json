@@ -1,0 +1,32 @@
+{
+  "name": "applebot",
+  "description": "Apple's search crawler, which powers Spotlight, Siri and Safari suggestions. It classifies as a crawler, like Googlebot, so the gateway always serves it canonical HTML. User-Agent strings are transcribed from Apple's published documentation (https://support.apple.com/en-us/119829, fetched 2026-09-28), not captured from our own traffic; the other headers are illustrative. Applebot-Extended has no sample on purpose: Apple documents it as a robots.txt token that does not crawl, so it never arrives as a User-Agent. It only decides whether Applebot's crawl may train Apple's models.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/olive-oil-500ml",
+      "expected": { "kind": "crawler", "platform": "applebot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4.1 Mobile/15E148 Safari/604.1 (Applebot/0.1; +http://www.apple.com/go/applebot)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/",
+      "expected": { "kind": "crawler", "platform": "applebot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/markdown, text/html;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15 (Applebot/0.1; +http://www.apple.com/go/applebot)"
+      },
+      "url": "/products/olive-oil-500ml",
+      "expected": { "kind": "crawler", "platform": "applebot", "acceptsMarkdown": true }
+    }
+  ]
+}

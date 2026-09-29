@@ -1,0 +1,65 @@
+{
+  "id": "product",
+  "version": "0.1.0",
+  "label": "Product page",
+  "required": [
+    {
+      "name": "title",
+      "label": "Product name",
+      "types": ["text"],
+      "why": "The agent has to name the item back to the user and match it against what they asked for."
+    },
+    {
+      "name": "price",
+      "label": "Price",
+      "types": ["money"],
+      "why": "Price is the most requested fact on a product page, and an agent that cannot find it either guesses or leaves."
+    },
+    {
+      "name": "currency",
+      "label": "Currency",
+      "types": ["text"],
+      "why": "A bare number is not a price, and the agent cannot compare it to anything without the ISO currency code."
+    },
+    {
+      "name": "availability",
+      "label": "Availability",
+      "types": ["text", "boolean"],
+      "why": "Tells the agent whether to recommend this item now or move on to one it can actually get."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "brand",
+      "label": "Brand",
+      "types": ["text"],
+      "why": "Lets the agent match the item to a brand the user named or already buys."
+    },
+    {
+      "name": "sku",
+      "label": "SKU",
+      "types": ["text"],
+      "why": "Gives the agent a stable identifier so it can re-find this exact variant on a later turn."
+    },
+    {
+      "name": "shipping",
+      "label": "Shipping",
+      "types": ["text", "money"],
+      "why": "Delivery cost and delivery date decide the purchase as often as the price does."
+    },
+    {
+      "name": "returns",
+      "label": "Returns",
+      "types": ["text"],
+      "why": "An agent is reluctant to recommend a purchase it cannot tell the user how to undo."
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "types": ["text"],
+      "why": "Gives the agent a sentence or two it can quote instead of inventing a summary."
+    }
+  ],
+  "actions": ["purchase", "contact"],
+  "jsonLdType": "Product"
+}

@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://cascade-credit-union.example/help/faq",
+    "origin": "https://cascade-credit-union.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://cascade-credit-union.example/help/faq",
+          "finalUrl": "https://cascade-credit-union.example/help/faq",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"ccu-faq-2026-06-30\""
+            ],
+            "last-modified": [
+              "Tue, 30 Jun 2026 18:00:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 5127,
+          "bodySha256": "412e3a37b23eb7f09d0d7b569d3be0cfb7ca294c820a1055e8eee774fe058424",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Frequently asked questions — Cascade Credit Union</title>\n<meta name=\"description\" content=\"Membership, accounts, cards and transfers at Cascade Credit Union.\">\n<link rel=\"canonical\" href=\"https://cascade-credit-union.example/help/faq\">\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/accounts\">Accounts</a> <a href=\"/help\">Help</a></nav></header>\n<main>\n<h1>Frequently asked questions</h1>\n<p>Membership, accounts, cards and transfers at Cascade Credit Union.</p>\n<details><summary>How do I open an account?</summary><p>Apply online with a government photo ID and proof of address. Most applications are decided the same working day.</p></details>\n<details><summary>What is the minimum opening deposit?</summary><p>Five dollars, which buys your share in the credit union and stays in the account while you are a member.</p></details>\n<details><summary>Do you charge monthly maintenance fees?</summary><p>No. Checking and savings accounts have no monthly maintenance fee and no minimum balance requirement.</p></details>\n<details><summary>Which ATMs can I use without a fee?</summary><p>Any machine in the CO-OP network, plus every machine at a Cascade branch. Out-of-network withdrawals cost two dollars.</p></details>\n<details><summary>How do I replace a lost card?</summary><p>Freeze the card in the mobile app, then order a replacement from the same screen. Replacement cards arrive in five to seven days.</p></details>\n<details><summary>Are my deposits insured?</summary><p>Yes. Deposits are federally insured to at least two hundred and fifty thousand dollars by the National Credit Union Administration.</p></details>\n<details><summary>Can I join if I live outside Oregon?</summary><p>You can join if you live, work, worship or attend school in one of the eleven counties we serve, or if a family member is already a member.</p></details>\n<details><summary>How long does a wire transfer take?</summary><p>Domestic wires sent before two in the afternoon settle the same business day. International wires take one to three business days.</p></details>\n<details><summary>What happens to my account if I move away?</summary><p>Once you are a member you stay a member. Nothing changes if you move out of the service area.</p></details>\n<details><summary>How do I close an account?</summary><p>Call the branch or send a secure message in online banking. We will move the remaining balance wherever you ask.</p></details>\n</main>\n<footer><p>Cascade Credit Union. Federally insured by NCUA.</p></footer>\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"name\":\"Frequently asked questions\",\"description\":\"Membership, accounts, cards and transfers at Cascade Credit Union.\",\"dateModified\":\"2026-06-30\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"How do I open an account?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Apply online with a government photo ID and proof of address. Most applications are decided the same working day.\"}},{\"@type\":\"Question\",\"name\":\"What is the minimum opening deposit?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Five dollars, which buys your share in the credit union and stays in the account while you are a member.\"}},{\"@type\":\"Question\",\"name\":\"Do you charge monthly maintenance fees?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Checking and savings accounts have no monthly maintenance fee and no minimum balance requirement.\"}},{\"@type\":\"Question\",\"name\":\"Which ATMs can I use without a fee?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Any machine in the CO-OP network, plus every machine at a Cascade branch. Out-of-network withdrawals cost two dollars.\"}},{\"@type\":\"Question\",\"name\":\"How do I replace a lost card?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Freeze the card in the mobile app, then order a replacement from the same screen. Replacement cards arrive in five to seven days.\"}},{\"@type\":\"Question\",\"name\":\"Are my deposits insured?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. Deposits are federally insured to at least two hundred and fifty thousand dollars by the National Credit Union Administration.\"}},{\"@type\":\"Question\",\"name\":\"Can I join if I live outside Oregon?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"You can join if you live, work, worship or attend school in one of the eleven counties we serve, or if a family member is already a member.\"}},{\"@type\":\"Question\",\"name\":\"How long does a wire transfer take?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Domestic wires sent before two in the afternoon settle the same business day. International wires take one to three business days.\"}},{\"@type\":\"Question\",\"name\":\"What happens to my account if I move away?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Once you are a member you stay a member. Nothing changes if you move out of the service area.\"}},{\"@type\":\"Question\",\"name\":\"How do I close an account?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Call the branch or send a secure message in online banking. We will move the remaining balance wherever you ask.\"}}]}</script>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://cascade-credit-union.example/help/faq",
+          "finalUrl": "https://cascade-credit-union.example/help/faq",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"ccu-faq-2026-06-30\""
+            ],
+            "last-modified": [
+              "Tue, 30 Jun 2026 18:00:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 5127,
+          "bodySha256": "412e3a37b23eb7f09d0d7b569d3be0cfb7ca294c820a1055e8eee774fe058424",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Frequently asked questions — Cascade Credit Union</title>\n<meta name=\"description\" content=\"Membership, accounts, cards and transfers at Cascade Credit Union.\">\n<link rel=\"canonical\" href=\"https://cascade-credit-union.example/help/faq\">\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/accounts\">Accounts</a> <a href=\"/help\">Help</a></nav></header>\n<main>\n<h1>Frequently asked questions</h1>\n<p>Membership, accounts, cards and transfers at Cascade Credit Union.</p>\n<details><summary>How do I open an account?</summary><p>Apply online with a government photo ID and proof of address. Most applications are decided the same working day.</p></details>\n<details><summary>What is the minimum opening deposit?</summary><p>Five dollars, which buys your share in the credit union and stays in the account while you are a member.</p></details>\n<details><summary>Do you charge monthly maintenance fees?</summary><p>No. Checking and savings accounts have no monthly maintenance fee and no minimum balance requirement.</p></details>\n<details><summary>Which ATMs can I use without a fee?</summary><p>Any machine in the CO-OP network, plus every machine at a Cascade branch. Out-of-network withdrawals cost two dollars.</p></details>\n<details><summary>How do I replace a lost card?</summary><p>Freeze the card in the mobile app, then order a replacement from the same screen. Replacement cards arrive in five to seven days.</p></details>\n<details><summary>Are my deposits insured?</summary><p>Yes. Deposits are federally insured to at least two hundred and fifty thousand dollars by the National Credit Union Administration.</p></details>\n<details><summary>Can I join if I live outside Oregon?</summary><p>You can join if you live, work, worship or attend school in one of the eleven counties we serve, or if a family member is already a member.</p></details>\n<details><summary>How long does a wire transfer take?</summary><p>Domestic wires sent before two in the afternoon settle the same business day. International wires take one to three business days.</p></details>\n<details><summary>What happens to my account if I move away?</summary><p>Once you are a member you stay a member. Nothing changes if you move out of the service area.</p></details>\n<details><summary>How do I close an account?</summary><p>Call the branch or send a secure message in online banking. We will move the remaining balance wherever you ask.</p></details>\n</main>\n<footer><p>Cascade Credit Union. Federally insured by NCUA.</p></footer>\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"name\":\"Frequently asked questions\",\"description\":\"Membership, accounts, cards and transfers at Cascade Credit Union.\",\"dateModified\":\"2026-06-30\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"How do I open an account?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Apply online with a government photo ID and proof of address. Most applications are decided the same working day.\"}},{\"@type\":\"Question\",\"name\":\"What is the minimum opening deposit?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Five dollars, which buys your share in the credit union and stays in the account while you are a member.\"}},{\"@type\":\"Question\",\"name\":\"Do you charge monthly maintenance fees?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"No. Checking and savings accounts have no monthly maintenance fee and no minimum balance requirement.\"}},{\"@type\":\"Question\",\"name\":\"Which ATMs can I use without a fee?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Any machine in the CO-OP network, plus every machine at a Cascade branch. Out-of-network withdrawals cost two dollars.\"}},{\"@type\":\"Question\",\"name\":\"How do I replace a lost card?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Freeze the card in the mobile app, then order a replacement from the same screen. Replacement cards arrive in five to seven days.\"}},{\"@type\":\"Question\",\"name\":\"Are my deposits insured?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes. Deposits are federally insured to at least two hundred and fifty thousand dollars by the National Credit Union Administration.\"}},{\"@type\":\"Question\",\"name\":\"Can I join if I live outside Oregon?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"You can join if you live, work, worship or attend school in one of the eleven counties we serve, or if a family member is already a member.\"}},{\"@type\":\"Question\",\"name\":\"How long does a wire transfer take?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Domestic wires sent before two in the afternoon settle the same business day. International wires take one to three business days.\"}},{\"@type\":\"Question\",\"name\":\"What happens to my account if I move away?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Once you are a member you stay a member. Nothing changes if you move out of the service area.\"}},{\"@type\":\"Question\",\"name\":\"How do I close an account?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Call the branch or send a secure message in online banking. We will move the remaining balance wherever you ask.\"}}]}</script>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://cascade-credit-union.example/robots.txt",
+          "finalUrl": "https://cascade-credit-union.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 81,
+          "bodySha256": "dad7988214e56efa50cabdba932a770349a24bc5bfdf64828a8282feb2d7e075",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://cascade-credit-union.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://cascade-credit-union.example/llms.txt",
+          "finalUrl": "https://cascade-credit-union.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://cascade-credit-union.example/.well-known/ucp",
+          "finalUrl": "https://cascade-credit-union.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://verrier-atelier.example/x/9f2",
+    "origin": "https://verrier-atelier.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://verrier-atelier.example/x/9f2",
+          "finalUrl": "https://verrier-atelier.example/x/9f2",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"vrr-9f2-14\""
+            ],
+            "last-modified": [
+              "Mon, 27 Jul 2026 16:40:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 850,
+          "bodySha256": "4ed5537ec1f461324cc1e119932316bd5202f3a55c072e2fa02fbb776ba2e384",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Copper cezve, 300 ml</title>\n<meta name=\"description\" content=\"A hand-hammered copper coffee pot with a brass handle, made in Lyon.\">\n<meta property=\"og:title\" content=\"Copper cezve, 300 ml\">\n<link rel=\"canonical\" href=\"https://verrier-atelier.example/x/9f2\">\n<script type=\"application/ld+json\">{\"@context\":\"https://verrier-atelier.example/ns/v1\",\"@type\":\"Widget\",\"name\":\"Copper cezve, 300 ml\",\"description\":\"A hand-hammered copper coffee pot with a brass handle, made in Lyon.\",\"price\":\"42.00\",\"currency\":\"EUR\",\"availability\":\"InStock\"}</script>\n</head>\n<body>\n<main>\n<h1>Copper cezve, 300 ml</h1>\n<p>A hand-hammered copper coffee pot with a brass handle, made in Lyon.</p>\n<p>€42.00 — In stock.</p>\n<p><a href=\"/cart/add?ref=9f2\">Add to cart</a></p>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://verrier-atelier.example/x/9f2",
+          "finalUrl": "https://verrier-atelier.example/x/9f2",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"vrr-9f2-14\""
+            ],
+            "last-modified": [
+              "Mon, 27 Jul 2026 16:40:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 850,
+          "bodySha256": "4ed5537ec1f461324cc1e119932316bd5202f3a55c072e2fa02fbb776ba2e384",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Copper cezve, 300 ml</title>\n<meta name=\"description\" content=\"A hand-hammered copper coffee pot with a brass handle, made in Lyon.\">\n<meta property=\"og:title\" content=\"Copper cezve, 300 ml\">\n<link rel=\"canonical\" href=\"https://verrier-atelier.example/x/9f2\">\n<script type=\"application/ld+json\">{\"@context\":\"https://verrier-atelier.example/ns/v1\",\"@type\":\"Widget\",\"name\":\"Copper cezve, 300 ml\",\"description\":\"A hand-hammered copper coffee pot with a brass handle, made in Lyon.\",\"price\":\"42.00\",\"currency\":\"EUR\",\"availability\":\"InStock\"}</script>\n</head>\n<body>\n<main>\n<h1>Copper cezve, 300 ml</h1>\n<p>A hand-hammered copper coffee pot with a brass handle, made in Lyon.</p>\n<p>€42.00 — In stock.</p>\n<p><a href=\"/cart/add?ref=9f2\">Add to cart</a></p>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://verrier-atelier.example/robots.txt",
+          "finalUrl": "https://verrier-atelier.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 76,
+          "bodySha256": "ad06327a4f289bbcad9e90544d0e9b5ca4a748c5d00c1fc7bf6ab5c280cdd225",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://verrier-atelier.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://verrier-atelier.example/llms.txt",
+          "finalUrl": "https://verrier-atelier.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://verrier-atelier.example/.well-known/ucp",
+          "finalUrl": "https://verrier-atelier.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

@@ -1,0 +1,40 @@
+{
+  "name": "meta",
+  "description": "Meta's AI fetchers: meta-externalagent (model training and indexing for Meta products) and meta-externalfetcher (fetches a link a user asked about). Both classify as agent/meta from the User-Agent alone, at medium confidence. User-Agent strings are transcribed verbatim from Meta's published crawler documentation (https://developers.facebook.com/documentation/sharing/webmasters/web-crawlers, fetched 2026-09-28), including the relative documentation path Meta prints; they are not captured from our own traffic, and the other headers are illustrative. Replace a sample with a real capture the first time one is observed.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "*/*",
+        "user-agent": "meta-externalagent/1.1 (+/documentation/sharing/webmasters/web-crawlers)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/linen-shirt",
+      "expected": { "kind": "agent", "platform": "meta", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "*/*",
+        "user-agent": "meta-externalagent/1.1"
+      },
+      "url": "/collections/all",
+      "expected": { "kind": "agent", "platform": "meta", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,*/*;q=0.8",
+        "user-agent": "meta-externalfetcher/1.1 (+/documentation/sharing/webmasters/web-crawlers)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/policies/returns",
+      "expected": { "kind": "agent", "platform": "meta", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "*/*",
+        "user-agent": "meta-externalfetcher/1.1"
+      },
+      "url": "/products/linen-shirt",
+      "expected": { "kind": "agent", "platform": "meta", "acceptsMarkdown": false }
+    }
+  ]
+}

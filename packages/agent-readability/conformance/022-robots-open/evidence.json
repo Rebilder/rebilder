@@ -1,0 +1,164 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://policy-shop.example/products/merino-throw-blanket",
+    "origin": "https://policy-shop.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://policy-shop.example/products/merino-throw-blanket",
+          "finalUrl": "https://policy-shop.example/products/merino-throw-blanket",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/markdown; charset=utf-8"
+            ],
+            "link": [
+              "<https://policy-shop.example/products/merino-throw-blanket.md>; rel=\"alternate\"; type=\"text/markdown\"",
+              "<https://policy-shop.example/products/merino-throw-blanket>; rel=\"canonical\"",
+              "<https://policy-shop.example/.well-known/ucp>; rel=\"service-desc\"; type=\"application/json\""
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=900"
+            ],
+            "etag": [
+              "\"9f14c2\""
+            ],
+            "last-modified": [
+              "Mon, 03 Aug 2026 11:40:00 GMT"
+            ]
+          },
+          "bytes": 334,
+          "bodySha256": "362da73c87bd37da8c1fec5e31d6c2d415024c16af2f9178787fb28da1b8ef1c",
+          "body": "# [Merino Throw Blanket](https://policy-shop.example/products/merino-throw-blanket)\n\n- **Brand:** Ravelston Mill\n- **Price:** $148.00\n- **Availability:** In stock\n- **Shipping:** Free shipping over $75\n- **Returns:** 60-day returns\n\n## Description\n\nA queen-size merino wool throw, woven in Nova Scotia. Undyed, machine washable cold.\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://policy-shop.example/products/merino-throw-blanket",
+          "finalUrl": "https://policy-shop.example/products/merino-throw-blanket",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "link": [
+              "<https://policy-shop.example/products/merino-throw-blanket.md>; rel=\"alternate\"; type=\"text/markdown\""
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=900"
+            ],
+            "etag": [
+              "\"3b07ae\""
+            ],
+            "last-modified": [
+              "Mon, 03 Aug 2026 11:40:00 GMT"
+            ]
+          },
+          "bytes": 899,
+          "bodySha256": "664e728f1fe44ef87ad76ac240c5761b2b998660f6ccfbea02d058c706d09f86",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Merino Throw Blanket — Ravelston Mill</title>\n<link rel=\"canonical\" href=\"https://policy-shop.example/products/merino-throw-blanket\">\n<link rel=\"alternate\" type=\"text/markdown\" href=\"https://policy-shop.example/products/merino-throw-blanket.md\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Merino Throw Blanket\",\"sku\":\"RM-THR-Q\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Ravelston Mill\"},\"description\":\"A queen-size merino wool throw, woven in Nova Scotia.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"148.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Merino Throw Blanket</h1>\n<p class=\"price\">$148.00</p>\n<p>In stock. Free shipping over $75. 60-day returns.</p>\n<a href=\"/cart/add?variant=1\">Add to cart</a>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://policy-shop.example/robots.txt",
+          "finalUrl": "https://policy-shop.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 73,
+          "bodySha256": "129ab6ca5f965645e50fb0021bacec40e2c08f28268ec1bc2ff900e660a4165d",
+          "body": "User-agent: *\nAllow: /\n\nSitemap: https://policy-shop.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://policy-shop.example/llms.txt",
+          "finalUrl": "https://policy-shop.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://policy-shop.example/.well-known/ucp",
+          "finalUrl": "https://policy-shop.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "chatgpt-agent",
+  "description": "OpenAI ChatGPT user-initiated browsing (ChatGPT-User), with and without Web Bot Auth Signature-Agent headers. Signature headers are parsed but NOT verified in Phase 0.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-encoding": "gzip, deflate, br",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/espresso-grinder",
+      "expected": { "kind": "agent", "platform": "chatgpt", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/2.0; +https://openai.com/bot",
+        "signature-agent": "\"https://chatgpt.com\"",
+        "signature-input": "sig1=(\"@authority\" \"signature-agent\");created=1754265600;expires=1754266200;keyid=\"JrQLj5C_-uusgQwmSFvHYK2PxYlbcO9zRMoDHIQdVRo\";tag=\"web-bot-auth\"",
+        "signature": "sig1=:TWFrZSBhZ2VudHMgZmlyc3QtY2xhc3MgY2l0aXplbnMgb2YgdGhlIHdlYi4=:",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/espresso-grinder",
+      "expected": { "kind": "agent", "platform": "chatgpt", "acceptsMarkdown": false }
+    }
+  ]
+}

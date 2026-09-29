@@ -1,0 +1,23 @@
+{
+  "name": "mistral",
+  "description": "Mistral's user-initiated fetcher, MistralAI-User, which visits a page when a user's question needs it and is not an automatic crawler. Classifies as agent/mistral from the User-Agent alone, at medium confidence. The User-Agent is transcribed verbatim from Mistral's published crawler documentation (https://docs.mistral.ai/robots, fetched 2026-09-28); it is not captured from our own traffic, and the other headers are illustrative.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-User/1.0; +https://docs.mistral.ai/robots)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/services/bike-fitting",
+      "expected": { "kind": "agent", "platform": "mistral", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/markdown, text/html;q=0.8",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; MistralAI-User/1.0; +https://docs.mistral.ai/robots)"
+      },
+      "url": "/services/bike-fitting",
+      "expected": { "kind": "agent", "platform": "mistral", "acceptsMarkdown": true }
+    }
+  ]
+}

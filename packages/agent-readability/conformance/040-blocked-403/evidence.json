@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://fortress-outfitters.example/products/ridgeline-shell-jacket",
+    "origin": "https://fortress-outfitters.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fortress-outfitters.example/products/ridgeline-shell-jacket",
+          "finalUrl": "https://fortress-outfitters.example/products/ridgeline-shell-jacket",
+          "redirects": [],
+          "status": 403,
+          "headers": {
+            "content-type": [
+              "text/html; charset=UTF-8"
+            ],
+            "cache-control": [
+              "private, max-age=0, no-store, no-cache, must-revalidate"
+            ],
+            "cf-mitigated": [
+              "challenge"
+            ],
+            "server": [
+              "cloudflare"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "cf-ray": [
+              "8d31c04a7b910f21-DEN"
+            ]
+          },
+          "bytes": 483,
+          "bodySha256": "8f933bbb78d253ee31d38548107ff0450eec59056be50e5297f83d106c836c7e",
+          "body": "<!doctype html>\n<html lang=\"en-US\">\n<head>\n<meta charset=\"utf-8\">\n<title>Just a moment...</title>\n<meta http-equiv=\"refresh\" content=\"390\">\n</head>\n<body>\n<div class=\"main-wrapper\">\n<h1>fortress-outfitters.example</h1>\n<h2>Verifying you are human. This may take a few seconds.</h2>\n<p>fortress-outfitters.example needs to review the security of your connection before proceeding.</p>\n<div id=\"challenge-running\">Enable JavaScript and cookies to continue</div>\n</div>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fortress-outfitters.example/products/ridgeline-shell-jacket",
+          "finalUrl": "https://fortress-outfitters.example/products/ridgeline-shell-jacket",
+          "redirects": [],
+          "status": 403,
+          "headers": {
+            "content-type": [
+              "text/html; charset=UTF-8"
+            ],
+            "cache-control": [
+              "private, max-age=0, no-store, no-cache, must-revalidate"
+            ],
+            "cf-mitigated": [
+              "challenge"
+            ],
+            "server": [
+              "cloudflare"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "cf-ray": [
+              "8d31c04a7b910f45-DEN"
+            ]
+          },
+          "bytes": 483,
+          "bodySha256": "8f933bbb78d253ee31d38548107ff0450eec59056be50e5297f83d106c836c7e",
+          "body": "<!doctype html>\n<html lang=\"en-US\">\n<head>\n<meta charset=\"utf-8\">\n<title>Just a moment...</title>\n<meta http-equiv=\"refresh\" content=\"390\">\n</head>\n<body>\n<div class=\"main-wrapper\">\n<h1>fortress-outfitters.example</h1>\n<h2>Verifying you are human. This may take a few seconds.</h2>\n<p>fortress-outfitters.example needs to review the security of your connection before proceeding.</p>\n<div id=\"challenge-running\">Enable JavaScript and cookies to continue</div>\n</div>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fortress-outfitters.example/robots.txt",
+          "finalUrl": "https://fortress-outfitters.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 80,
+          "bodySha256": "05c3ca59dea4d7b5863919080954a0bb8c596d755235b8b1854a54526fd36a2f",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://fortress-outfitters.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fortress-outfitters.example/llms.txt",
+          "finalUrl": "https://fortress-outfitters.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fortress-outfitters.example/.well-known/ucp",
+          "finalUrl": "https://fortress-outfitters.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

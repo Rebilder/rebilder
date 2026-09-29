@@ -1,0 +1,167 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://multi-header.example/products/enamel-mug-12oz",
+    "origin": "https://multi-header.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://multi-header.example/products/enamel-mug-12oz",
+          "finalUrl": "https://multi-header.example/products/enamel-mug-12oz",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/markdown; charset=utf-8"
+            ],
+            "link": [
+              "<https://multi-header.example/products/enamel-mug-12oz.md>; rel=\"alternate\"; type=\"text/markdown\"; title=\"Markdown, machine-readable\"",
+              "<https://multi-header.example/feed.json>; rel=\"alternate\"; type=\"application/feed+json\"",
+              "<https://multi-header.example/products/enamel-mug-12oz>; rel=\"canonical\", <https://multi-header.example/openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\""
+            ],
+            "vary": [
+              "Accept",
+              "Accept-Encoding"
+            ],
+            "cache-control": [
+              "public, max-age=900"
+            ],
+            "last-modified": [
+              "Tue, 04 Aug 2026 18:02:11 GMT"
+            ]
+          },
+          "bytes": 321,
+          "bodySha256": "b8750b33167f8597dfd9e59f2f29f7b2ed405364b3a2ec7f36157d48ec0be7d7",
+          "body": "# [Enamel Mug 12oz](https://multi-header.example/products/enamel-mug-12oz)\n\n- **Brand:** Foundry Goods\n- **Price:** $24.00\n- **Availability:** In stock\n- **Shipping:** Free shipping over $50\n- **Returns:** 30-day returns\n\n## Description\n\nA 12-ounce speckled enamel mug with a rolled steel rim. Camp-safe, dishwasher-shy.\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://multi-header.example/products/enamel-mug-12oz",
+          "finalUrl": "https://multi-header.example/products/enamel-mug-12oz",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "link": [
+              "<https://multi-header.example/products/enamel-mug-12oz>; rel=\"canonical\"",
+              "<https://multi-header.example/products/enamel-mug-12oz.md>; rel=\"alternate\"; type=\"text/markdown\""
+            ],
+            "vary": [
+              "Accept",
+              "Accept-Encoding"
+            ],
+            "cache-control": [
+              "public, max-age=900"
+            ],
+            "last-modified": [
+              "Tue, 04 Aug 2026 18:02:11 GMT"
+            ]
+          },
+          "bytes": 1074,
+          "bodySha256": "35a693ba760d8d0a9cff95cd02e405bd11c67b1f9d97df6c320ff04bec6d40d5",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Enamel Mug 12oz — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://multi-header.example/products/enamel-mug-12oz\">\n<link rel=\"alternate\" type=\"text/markdown\" href=\"https://multi-header.example/products/enamel-mug-12oz.md\">\n<link rel=\"alternate\" type=\"application/feed+json\" href=\"https://multi-header.example/feed.json\">\n<link rel=\"alternate\" hreflang=\"fr\" href=\"https://multi-header.example/fr/products/enamel-mug-12oz\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Enamel Mug 12oz\",\"sku\":\"FG-MUG-12\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A 12-ounce speckled enamel mug with a rolled steel rim.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"24.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Enamel Mug 12oz</h1>\n<p class=\"price\">$24.00</p>\n<p>In stock. Free shipping over $50. 30-day returns.</p>\n<a href=\"/cart/add?variant=1\">Add to cart</a>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://multi-header.example/robots.txt",
+          "finalUrl": "https://multi-header.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 73,
+          "bodySha256": "49b2db6698a7f426109332243bbf21d1bab762950843ca3c52fe6fb6ce1dc504",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://multi-header.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://multi-header.example/llms.txt",
+          "finalUrl": "https://multi-header.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://multi-header.example/.well-known/ucp",
+          "finalUrl": "https://multi-header.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

@@ -1,0 +1,12 @@
+# Store and check out text as LF on every platform. Several suites compare
+# file content byte for byte (README examples, the ARS conformance corpus), and
+# CRLF checkouts on Windows would fail them for no real reason.
+* text=auto eol=lf
+
+*.png  binary
+*.jpg  binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+
+pnpm-lock.yaml -diff linguist-generated=true

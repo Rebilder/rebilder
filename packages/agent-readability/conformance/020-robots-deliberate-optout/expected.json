@@ -1,0 +1,259 @@
+{
+  "outcome": {
+    "kind": "opt-out",
+    "audience": "assistant",
+    "wellFormed": true
+  },
+  "score": null,
+  "grade": null,
+  "bandLabel": null,
+  "pageKind": "unknown",
+  "pageKindBasis": "heuristic",
+  "pageKindConfidence": "low",
+  "factProfile": {
+    "pageKind": "unknown",
+    "core": [
+      "title",
+      "description",
+      "primary-action-url"
+    ],
+    "extended": [
+      "updated",
+      "org-name"
+    ],
+    "byteReference": 16384
+  },
+  "facts": [],
+  "dimensions": [
+    {
+      "id": "retrievability",
+      "weight": 28,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "retrievability.reachable",
+          "basis": "measured",
+          "weight": 11,
+          "earned": 0
+        },
+        {
+          "id": "retrievability.robots-policy",
+          "basis": "measured",
+          "weight": 10,
+          "earned": 0
+        },
+        {
+          "id": "retrievability.render-independence",
+          "basis": "heuristic",
+          "weight": 7,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "machine-representation",
+      "weight": 18,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "machine-representation.negotiated-response",
+          "basis": "measured",
+          "weight": 9,
+          "earned": 0
+        },
+        {
+          "id": "machine-representation.declared-alternates",
+          "basis": "measured",
+          "weight": 3,
+          "earned": 0
+        },
+        {
+          "id": "machine-representation.vary-accept",
+          "basis": "measured",
+          "weight": 3,
+          "earned": 0
+        },
+        {
+          "id": "machine-representation.substance-parity",
+          "basis": "heuristic",
+          "weight": 3,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "fact-coverage",
+      "weight": 20,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "fact-coverage.core-facts",
+          "basis": "heuristic",
+          "weight": 14,
+          "earned": 0
+        },
+        {
+          "id": "fact-coverage.context-cost",
+          "basis": "measured",
+          "weight": 6,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "fact-position",
+      "weight": 10,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "fact-position.first-core-fact-offset",
+          "basis": "heuristic",
+          "weight": 5,
+          "earned": 0
+        },
+        {
+          "id": "fact-position.front-window",
+          "basis": "heuristic",
+          "weight": 5,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "structured-data",
+      "weight": 6,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "structured-data.present",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 0
+        },
+        {
+          "id": "structured-data.required-properties",
+          "basis": "measured",
+          "weight": 3,
+          "earned": 0
+        },
+        {
+          "id": "structured-data.text-agreement",
+          "basis": "heuristic",
+          "weight": 1,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "contract-discovery",
+      "weight": 10,
+      "earned": 0,
+      "basis": "measured",
+      "checks": [
+        {
+          "id": "contract-discovery.canonical",
+          "basis": "measured",
+          "weight": 4,
+          "earned": 0
+        },
+        {
+          "id": "contract-discovery.cache-validators",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 0
+        },
+        {
+          "id": "contract-discovery.llms-txt",
+          "basis": "measured",
+          "weight": 1,
+          "earned": 0
+        },
+        {
+          "id": "contract-discovery.sitemap",
+          "basis": "measured",
+          "weight": 1,
+          "earned": 0
+        },
+        {
+          "id": "contract-discovery.machine-endpoint",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "evidence-density",
+      "weight": 8,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "evidence-density.quantities",
+          "basis": "measured",
+          "weight": 4,
+          "earned": 0
+        },
+        {
+          "id": "evidence-density.definitions",
+          "basis": "heuristic",
+          "weight": 2,
+          "earned": 0
+        },
+        {
+          "id": "evidence-density.comparisons",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 0
+        }
+      ]
+    }
+  ],
+  "flags": [
+    {
+      "id": "assistant-opt-out",
+      "severity": "info",
+      "basis": "measured"
+    }
+  ],
+  "policy": {
+    "robotsTxtStatus": "ok",
+    "audiences": {
+      "assistant": {
+        "decision": "disallow",
+        "matchedGroup": "perplexity-user",
+        "matchedRule": "Disallow: /"
+      },
+      "training": {
+        "decision": "allow",
+        "matchedGroup": "*",
+        "matchedRule": "Allow: /"
+      },
+      "search": {
+        "decision": "allow",
+        "matchedGroup": "*",
+        "matchedRule": "Allow: /"
+      }
+    },
+    "deliberateOptOut": true,
+    "trainingOptOut": false,
+    "sitemapDeclared": true
+  },
+  "cost": {
+    "htmlBytes": 899,
+    "negotiatedBytes": null,
+    "approxHtmlTokens": 224,
+    "approxNegotiatedTokens": null,
+    "reductionRatio": null,
+    "firstCoreFactOffset": null,
+    "truncated": false
+  },
+  "recommendations": [],
+  "measuredWeight": 63,
+  "heuristicWeight": 37
+}

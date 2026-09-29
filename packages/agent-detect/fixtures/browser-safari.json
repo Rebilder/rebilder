@@ -1,0 +1,25 @@
+{
+  "name": "browser-safari",
+  "description": "Human visitor on macOS Safari.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-encoding": "gzip, deflate, br",
+        "accept-language": "en-US,en;q=0.9",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/collections/pantry",
+      "expected": { "kind": "human", "platform": null, "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1"
+      },
+      "url": "/products/olive-oil-500ml",
+      "expected": { "kind": "human", "platform": null, "acceptsMarkdown": false }
+    }
+  ]
+}

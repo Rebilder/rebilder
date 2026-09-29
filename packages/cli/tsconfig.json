@@ -1,0 +1,9 @@
+{
+  "extends": "../../tooling/tsconfig.package.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "types": ["node"]
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "vitest.config.ts"],
+  "exclude": ["node_modules"]
+}

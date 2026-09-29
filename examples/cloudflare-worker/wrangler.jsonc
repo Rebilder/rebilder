@@ -1,0 +1,44 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // Rename this to something recognisable in your Cloudflare dashboard.
+  "name": "rebilder-gateway",
+
+  "main": "src/index.ts",
+
+  // Pinned deliberately. A compatibility date is how a Worker keeps behaving
+  // the way it did the day you deployed it; bump it when you have re-tested,
+  // not because it looks old.
+  "compatibility_date": "2026-08-01",
+
+  // ---------------------------------------------------------------------
+  // ROUTES — the one thing you must edit before this does anything.
+  // ---------------------------------------------------------------------
+  //
+  // Uncomment and set to the zone you want the gateway in front of. The
+  // Worker must be on the SAME hostname as your site: it decides per request
+  // whether to render markdown or forward to your origin, so it has to see
+  // the request first.
+  //
+  //   "routes": [
+  //     { "pattern": "example.com/*", "zone_name": "example.com" },
+  //     { "pattern": "www.example.com/*", "zone_name": "example.com" }
+  //   ],
+  //
+  // Deploying with no routes gives you a *.workers.dev URL, which is enough
+  // to see markdown come out but is not in front of anything. Pair it with
+  // the ORIGIN var below if you want the pass-through to work there too.
+
+  "vars": {
+    // Optional. Leave empty on a route-mounted Worker — the pass-through
+    // reaches your origin on its own. Set it to your origin hostname (no
+    // scheme, e.g. "origin.example.com") when the Worker is not mounted
+    // directly in front of the site it forwards to.
+    "ORIGIN": ""
+  },
+
+  // Logs from `onEvent` land in `wrangler tail` and in the dashboard.
+  "observability": {
+    "enabled": true
+  }
+}

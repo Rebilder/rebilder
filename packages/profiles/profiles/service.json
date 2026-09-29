@@ -1,0 +1,59 @@
+{
+  "id": "service",
+  "version": "0.1.0",
+  "label": "Service page",
+  "required": [
+    {
+      "name": "title",
+      "label": "Service name",
+      "types": ["text"],
+      "why": "The agent has to name the service to match it against the job the user described."
+    },
+    {
+      "name": "price",
+      "label": "Price",
+      "types": ["money", "text"],
+      "why": "The agent needs a number, a range, or an explicit \"no published price\" — silence it has to read as unaffordable."
+    },
+    {
+      "name": "primary-action-url",
+      "label": "Booking or enquiry link",
+      "types": ["url"],
+      "why": "Gives the agent one link to hand over when the user commits, instead of a form it has to go hunting for."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "duration",
+      "label": "Duration",
+      "types": ["text", "number"],
+      "why": "Lets the agent check the service against the time the user actually has."
+    },
+    {
+      "name": "eligibility",
+      "label": "Eligibility",
+      "types": ["text", "list"],
+      "why": "Stops the agent recommending something the user cannot qualify for, which is worse than recommending nothing."
+    },
+    {
+      "name": "service-area",
+      "label": "Service area",
+      "types": ["text", "list"],
+      "why": "Tells the agent whether the user's location is somewhere this service is offered at all."
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "types": ["text"],
+      "why": "Gives the agent your own account of what is included, so it does not infer the scope from the price."
+    },
+    {
+      "name": "updated",
+      "label": "Last updated",
+      "types": ["date"],
+      "why": "Tells the agent how much to trust a price and a scope that may have moved since they were written."
+    }
+  ],
+  "actions": ["book", "quote", "apply", "contact"],
+  "jsonLdType": "Service"
+}

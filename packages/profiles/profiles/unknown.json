@@ -1,0 +1,40 @@
+{
+  "id": "unknown",
+  "version": "0.1.0",
+  "label": "Unclassified page",
+  "required": [
+    {
+      "name": "title",
+      "label": "Page title",
+      "types": ["text"],
+      "why": "Without a title the agent has nothing to call the page and nothing to match a query against."
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "types": ["text"],
+      "why": "One sentence of your own is what stops the agent describing the page from whatever text it found first."
+    },
+    {
+      "name": "primary-action-url",
+      "label": "Primary link",
+      "types": ["url"],
+      "why": "Tells the agent the one thing this page wants someone to do, which is the only intent it can infer reliably."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "updated",
+      "label": "Last updated",
+      "types": ["date"],
+      "why": "Lets the agent weigh this page against a dated source that contradicts it."
+    },
+    {
+      "name": "org-name",
+      "label": "Organisation",
+      "types": ["text"],
+      "why": "Names who is speaking, which an unclassified page rarely makes obvious from its content alone."
+    }
+  ],
+  "actions": ["contact"]
+}

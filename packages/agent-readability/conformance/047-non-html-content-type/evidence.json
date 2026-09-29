@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://spec-sheets.example/datasheets/vantage-pump-v2.pdf",
+    "origin": "https://spec-sheets.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spec-sheets.example/datasheets/vantage-pump-v2.pdf",
+          "finalUrl": "https://spec-sheets.example/datasheets/vantage-pump-v2.pdf",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "application/pdf"
+            ],
+            "content-disposition": [
+              "inline; filename=\"vantage-pump-v2.pdf\""
+            ],
+            "cache-control": [
+              "public, max-age=86400"
+            ],
+            "etag": [
+              "\"pdf-3c17a9\""
+            ],
+            "last-modified": [
+              "Mon, 09 Mar 2026 08:41:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 971,
+          "bodySha256": "7f67070d0299acb3bd5638352fa51272fe8645ff80deaf44652a858b340aa7a7",
+          "body": "%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\nendobj\n4 0 obj\n<< /Length 427 >>\nstream\nBT /F1 18 Tf 72 720 Td (Vantage Pump V2 - Technical Datasheet) Tj ET\nBT /F1 11 Tf 72 690 Td (Model VP-2000 / Fluid Dynamics Works) Tj ET\nBT /F1 11 Tf 72 672 Td (List price: $1,240.00 USD) Tj ET\nBT /F1 11 Tf 72 654 Td (Availability: in stock, ships from Hamilton, ON) Tj ET\nBT /F1 11 Tf 72 636 Td (Max flow 240 L/min - Max head 38 m - 3-phase 400 V) Tj ET\nBT /F1 11 Tf 72 618 Td (Wetted parts: 316L stainless, EPDM seals) Tj ET\nendstream\nendobj\n5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\nxref\n0 6\n0000000000 65535 f \n0000000009 00000 n \n0000000058 00000 n \n0000000115 00000 n \n0000000241 00000 n \n0000000718 00000 n \ntrailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n788\n%%EOF\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spec-sheets.example/datasheets/vantage-pump-v2.pdf",
+          "finalUrl": "https://spec-sheets.example/datasheets/vantage-pump-v2.pdf",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "application/pdf"
+            ],
+            "content-disposition": [
+              "inline; filename=\"vantage-pump-v2.pdf\""
+            ],
+            "cache-control": [
+              "public, max-age=86400"
+            ],
+            "etag": [
+              "\"pdf-3c17a9\""
+            ],
+            "last-modified": [
+              "Mon, 09 Mar 2026 08:41:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 971,
+          "bodySha256": "7f67070d0299acb3bd5638352fa51272fe8645ff80deaf44652a858b340aa7a7",
+          "body": "%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 5 0 R >> >> /Contents 4 0 R >>\nendobj\n4 0 obj\n<< /Length 427 >>\nstream\nBT /F1 18 Tf 72 720 Td (Vantage Pump V2 - Technical Datasheet) Tj ET\nBT /F1 11 Tf 72 690 Td (Model VP-2000 / Fluid Dynamics Works) Tj ET\nBT /F1 11 Tf 72 672 Td (List price: $1,240.00 USD) Tj ET\nBT /F1 11 Tf 72 654 Td (Availability: in stock, ships from Hamilton, ON) Tj ET\nBT /F1 11 Tf 72 636 Td (Max flow 240 L/min - Max head 38 m - 3-phase 400 V) Tj ET\nBT /F1 11 Tf 72 618 Td (Wetted parts: 316L stainless, EPDM seals) Tj ET\nendstream\nendobj\n5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>\nendobj\nxref\n0 6\n0000000000 65535 f \n0000000009 00000 n \n0000000058 00000 n \n0000000115 00000 n \n0000000241 00000 n \n0000000718 00000 n \ntrailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n788\n%%EOF\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spec-sheets.example/robots.txt",
+          "finalUrl": "https://spec-sheets.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 72,
+          "bodySha256": "696097bbd90670ae3920bcc5a4975d02e4b88728afa65b99242526e70e6fb980",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://spec-sheets.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spec-sheets.example/llms.txt",
+          "finalUrl": "https://spec-sheets.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spec-sheets.example/.well-known/ucp",
+          "finalUrl": "https://spec-sheets.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

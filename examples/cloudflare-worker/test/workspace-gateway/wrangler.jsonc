@@ -1,0 +1,17 @@
+// Test-only config, used by test/workerd.test.ts inside the Rebilder monorepo.
+// It runs this template's own src/index.ts against the WORKSPACE source of
+// @rebilder/gateway and its three runtime dependencies, so an unreleased
+// change to the gateway's edge adapter is exercised in workerd before it is
+// published. Outside the monorepo these paths do not exist and the test that
+// uses this file is skipped. Deploy with ../../wrangler.jsonc, never this one.
+{
+  "name": "rebilder-gateway-workspace-test",
+  "main": "../../src/index.ts",
+  "compatibility_date": "2026-08-01",
+  "alias": {
+    "@rebilder/gateway/edge": "../../../../packages/gateway/src/adapters/edge/index.ts",
+    "@rebilder/agent-detect": "../../../../packages/agent-detect/src/index.ts",
+    "@rebilder/render-md": "../../../../packages/render-md/src/index.ts",
+    "@rebilder/events": "../../../../packages/events/src/index.ts"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://control-store.example/products/copper-kettle-1l",
+    "origin": "https://control-store.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://control-store.example/products/copper-kettle-1l",
+          "finalUrl": "https://control-store.example/products/copper-kettle-1l",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"k1-128\""
+            ],
+            "link": [
+              "<https://control-store.example/products/copper-kettle-1l>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 995,
+          "bodySha256": "7b2a6e77aa3ed7f0e5dea51b64f51cf4fd9ac42216a5d4b854233c6ec950776d",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Copper Kettle 1L — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://control-store.example/products/copper-kettle-1l\">\n<meta name=\"description\" content=\"A 1-litre hammered copper stovetop kettle with a walnut handle.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Copper Kettle 1L\",\"sku\":\"FG-KET-1L\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A 1-litre hammered copper stovetop kettle with a walnut handle.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"128.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Copper Kettle 1L</h1>\n<p class=\"price\">$128.00</p>\n<p class=\"stock\">In stock</p>\n<p>Hammered copper, walnut handle, 1-litre capacity. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://control-store.example/products/copper-kettle-1l",
+          "finalUrl": "https://control-store.example/products/copper-kettle-1l",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"k1-128\""
+            ],
+            "link": [
+              "<https://control-store.example/products/copper-kettle-1l>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 995,
+          "bodySha256": "7b2a6e77aa3ed7f0e5dea51b64f51cf4fd9ac42216a5d4b854233c6ec950776d",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Copper Kettle 1L — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://control-store.example/products/copper-kettle-1l\">\n<meta name=\"description\" content=\"A 1-litre hammered copper stovetop kettle with a walnut handle.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Copper Kettle 1L\",\"sku\":\"FG-KET-1L\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A 1-litre hammered copper stovetop kettle with a walnut handle.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"128.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Copper Kettle 1L</h1>\n<p class=\"price\">$128.00</p>\n<p class=\"stock\">In stock</p>\n<p>Hammered copper, walnut handle, 1-litre capacity. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://control-store.example/robots.txt",
+          "finalUrl": "https://control-store.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 74,
+          "bodySha256": "86502c9f7119212cb70c9d40447078dd3edbc6e321fc0e6edc7570ce5e21ac7b",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://control-store.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://control-store.example/llms.txt",
+          "finalUrl": "https://control-store.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://control-store.example/.well-known/ucp",
+          "finalUrl": "https://control-store.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

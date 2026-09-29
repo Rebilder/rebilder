@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    // The README examples in examples/ import the package by its public name,
+    // exactly as a merchant would. These paths resolve those imports to the
+    // source, so `tsc` checks the examples against the current API without a
+    // build step first.
+    "paths": {
+      "@rebilder/gateway": ["./index.ts"],
+      "@rebilder/gateway/*": ["./adapters/*/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "examples/**/*.ts", "vitest.config.ts"],
+  "exclude": ["node_modules"]
+}

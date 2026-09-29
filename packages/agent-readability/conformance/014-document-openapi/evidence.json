@@ -1,0 +1,165 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://api.harborlight.example/docs/reference",
+    "origin": "https://api.harborlight.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://api.harborlight.example/docs/reference",
+          "finalUrl": "https://api.harborlight.example/docs/reference",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"hl-docs-2026-07-14\""
+            ],
+            "last-modified": [
+              "Tue, 14 Jul 2026 09:02:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "link": [
+              "<https://api.harborlight.example/openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\""
+            ]
+          },
+          "bytes": 1676,
+          "bodySha256": "fe571f88bd7a57c550d74ec497c15fad115213a058833f6e2819a263b8dfc85a",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Harborlight Shipping API — reference</title>\n<meta name=\"description\" content=\"REST endpoints for booking container freight, tracking shipments and retrieving rate cards.\">\n<link rel=\"canonical\" href=\"https://api.harborlight.example/docs/reference\">\n<link rel=\"service-desc\" type=\"application/openapi+json\" href=\"/openapi.json\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"APIReference\",\"name\":\"Harborlight Shipping API — reference\",\"description\":\"REST endpoints for booking container freight, tracking shipments and retrieving rate cards.\",\"dateModified\":\"2026-07-14\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"Harborlight Logistics\"},\"genre\":\"Reference\",\"url\":\"https://api.harborlight.example/docs/reference\"}</script>\n</head>\n<body>\n<header><nav><a href=\"/docs\">Docs</a> <a href=\"/docs/changelog\">Changelog</a> <a href=\"/status\">Status</a></nav></header>\n<main>\n<h1>Harborlight Shipping API — reference</h1>\n<p>REST endpoints for booking container freight, tracking shipments and retrieving rate cards. Every endpoint is described in the OpenAPI document; this page is generated from it.</p>\n<p>Last updated: <time itemprop=\"dateModified\" datetime=\"2026-07-14\">14 July 2026</time></p>\n<p><a href=\"/openapi.json\">Download the OpenAPI document</a></p>\n<h2>Resources</h2>\n<ul>\n<li><code>POST /v2/bookings</code> — create a booking</li>\n<li><code>GET /v2/shipments/{id}</code> — retrieve a shipment</li>\n<li><code>GET /v2/rates</code> — retrieve the current rate card</li>\n</ul>\n</main>\n<footer><p>Harborlight Logistics. Rotterdam.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://api.harborlight.example/docs/reference",
+          "finalUrl": "https://api.harborlight.example/docs/reference",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"hl-docs-2026-07-14\""
+            ],
+            "last-modified": [
+              "Tue, 14 Jul 2026 09:02:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "link": [
+              "<https://api.harborlight.example/openapi.json>; rel=\"service-desc\"; type=\"application/openapi+json\""
+            ]
+          },
+          "bytes": 1676,
+          "bodySha256": "fe571f88bd7a57c550d74ec497c15fad115213a058833f6e2819a263b8dfc85a",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Harborlight Shipping API — reference</title>\n<meta name=\"description\" content=\"REST endpoints for booking container freight, tracking shipments and retrieving rate cards.\">\n<link rel=\"canonical\" href=\"https://api.harborlight.example/docs/reference\">\n<link rel=\"service-desc\" type=\"application/openapi+json\" href=\"/openapi.json\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"APIReference\",\"name\":\"Harborlight Shipping API — reference\",\"description\":\"REST endpoints for booking container freight, tracking shipments and retrieving rate cards.\",\"dateModified\":\"2026-07-14\",\"publisher\":{\"@type\":\"Organization\",\"name\":\"Harborlight Logistics\"},\"genre\":\"Reference\",\"url\":\"https://api.harborlight.example/docs/reference\"}</script>\n</head>\n<body>\n<header><nav><a href=\"/docs\">Docs</a> <a href=\"/docs/changelog\">Changelog</a> <a href=\"/status\">Status</a></nav></header>\n<main>\n<h1>Harborlight Shipping API — reference</h1>\n<p>REST endpoints for booking container freight, tracking shipments and retrieving rate cards. Every endpoint is described in the OpenAPI document; this page is generated from it.</p>\n<p>Last updated: <time itemprop=\"dateModified\" datetime=\"2026-07-14\">14 July 2026</time></p>\n<p><a href=\"/openapi.json\">Download the OpenAPI document</a></p>\n<h2>Resources</h2>\n<ul>\n<li><code>POST /v2/bookings</code> — create a booking</li>\n<li><code>GET /v2/shipments/{id}</code> — retrieve a shipment</li>\n<li><code>GET /v2/rates</code> — retrieve the current rate card</li>\n</ul>\n</main>\n<footer><p>Harborlight Logistics. Rotterdam.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://api.harborlight.example/robots.txt",
+          "finalUrl": "https://api.harborlight.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 76,
+          "bodySha256": "2cd04fccd4af5734e4670978b4f04af1f67c5e49d05dc29e44b8e8e00c4cd16d",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://api.harborlight.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://api.harborlight.example/llms.txt",
+          "finalUrl": "https://api.harborlight.example/llms.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 326,
+          "bodySha256": "d995bf8f8b54a568c5c4082fd1a67d826e3b5640a67d55253ad492fad4e7cd32",
+          "body": "# Harborlight Shipping API\n\n> REST API for booking container freight, tracking shipments and retrieving rate cards.\n\n## Reference\n\n- [API reference](https://api.harborlight.example/docs/reference)\n- [OpenAPI document](https://api.harborlight.example/openapi.json)\n- [Changelog](https://api.harborlight.example/docs/changelog)\n",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://api.harborlight.example/.well-known/ucp",
+          "finalUrl": "https://api.harborlight.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

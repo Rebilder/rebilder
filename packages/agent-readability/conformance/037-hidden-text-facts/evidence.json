@@ -1,0 +1,156 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://hidden-facts.example/products/cedar-cutting-board",
+    "origin": "https://hidden-facts.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://hidden-facts.example/products/cedar-cutting-board",
+          "finalUrl": "https://hidden-facts.example/products/cedar-cutting-board",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"cb-64\""
+            ],
+            "link": [
+              "<https://hidden-facts.example/products/cedar-cutting-board>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 719,
+          "bodySha256": "0ecbe768dcfdf116966d6057e183ea0811f6de68b1cb419e8b075d773ced23f3",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Cedar Cutting Board — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://hidden-facts.example/products/cedar-cutting-board\">\n<style>.price:after{content:\"Sold out\"}</style>\n</head>\n<body>\n<main>\n<h1>Cedar Cutting Board</h1>\n<p class=\"price\">$64.00</p>\n<div hidden>In stock. Brand: Foundry Goods. Free shipping over $50. 30-day returns.</div>\n<span style=\"display:none\">Price: $9.00</span>\n<template><p>Currently unavailable. SKU: FG-CCB-01</p></template>\n<script>var meta = {price: \"$1.00\", availability: \"In stock\"};</script>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://hidden-facts.example/products/cedar-cutting-board",
+          "finalUrl": "https://hidden-facts.example/products/cedar-cutting-board",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"cb-64\""
+            ],
+            "link": [
+              "<https://hidden-facts.example/products/cedar-cutting-board>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 719,
+          "bodySha256": "0ecbe768dcfdf116966d6057e183ea0811f6de68b1cb419e8b075d773ced23f3",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Cedar Cutting Board — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://hidden-facts.example/products/cedar-cutting-board\">\n<style>.price:after{content:\"Sold out\"}</style>\n</head>\n<body>\n<main>\n<h1>Cedar Cutting Board</h1>\n<p class=\"price\">$64.00</p>\n<div hidden>In stock. Brand: Foundry Goods. Free shipping over $50. 30-day returns.</div>\n<span style=\"display:none\">Price: $9.00</span>\n<template><p>Currently unavailable. SKU: FG-CCB-01</p></template>\n<script>var meta = {price: \"$1.00\", availability: \"In stock\"};</script>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://hidden-facts.example/robots.txt",
+          "finalUrl": "https://hidden-facts.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 73,
+          "bodySha256": "6b3a1631432f8441756f618414ff93d1a17193ad9ceae6069dc7a42818f1bb9f",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://hidden-facts.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://hidden-facts.example/llms.txt",
+          "finalUrl": "https://hidden-facts.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://hidden-facts.example/.well-known/ucp",
+          "finalUrl": "https://hidden-facts.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

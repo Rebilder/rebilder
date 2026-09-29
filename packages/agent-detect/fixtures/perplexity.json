@@ -1,0 +1,25 @@
+{
+  "name": "perplexity",
+  "description": "Perplexity AI: PerplexityBot (index crawler for answers) and Perplexity-User (user-initiated fetch). Both classified as agent traffic on the Perplexity platform.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-encoding": "gzip, deflate, br",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/trail-shoe",
+      "expected": { "kind": "agent", "platform": "perplexity", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/trail-shoe",
+      "expected": { "kind": "agent", "platform": "perplexity", "acceptsMarkdown": false }
+    }
+  ]
+}

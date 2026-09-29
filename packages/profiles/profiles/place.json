@@ -1,0 +1,59 @@
+{
+  "id": "place",
+  "version": "0.1.0",
+  "label": "Place or location page",
+  "required": [
+    {
+      "name": "org-name",
+      "label": "Name",
+      "types": ["text"],
+      "why": "The agent needs the name of the business at this location, not the name of the chain that owns it."
+    },
+    {
+      "name": "address",
+      "label": "Address",
+      "types": ["text", "list"],
+      "why": "An address is what turns an answer into a visit, and it is the fact most often left as an image on a map."
+    },
+    {
+      "name": "hours",
+      "label": "Opening hours",
+      "types": ["hours"],
+      "why": "The agent answers \"are they open\" from the hours table; a graphic of the same hours answers nothing."
+    },
+    {
+      "name": "phone",
+      "label": "Phone",
+      "types": ["text"],
+      "why": "The phone number is the fallback path for everything the page does not cover, and the user will ask for it."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "email",
+      "label": "Email",
+      "types": ["text"],
+      "why": "Gives the agent a written channel for requests that a phone call cannot leave a record of."
+    },
+    {
+      "name": "service-area",
+      "label": "Service area",
+      "types": ["text", "list"],
+      "why": "Tells the agent whether the user's address is somewhere this location will actually travel to."
+    },
+    {
+      "name": "primary-action-url",
+      "label": "Booking or contact link",
+      "types": ["url"],
+      "why": "Gives the agent one link to hand over when the user says yes, instead of a homepage to search."
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "types": ["text"],
+      "why": "Says what this location does, so the agent can rule it in or out before reading any further."
+    }
+  ],
+  "actions": ["book", "contact"],
+  "jsonLdType": "LocalBusiness"
+}

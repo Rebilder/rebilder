@@ -1,0 +1,60 @@
+{
+  "name": "bingbot",
+  "description": "Microsoft's crawler family: bingbot (desktop, mobile, and the evergreen Chrome-clause form), adidxbot (Bing Ads landing-page quality), and MicrosoftPreview (link unfurling in Microsoft products). ALL classify as crawler — the gateway serves them canonical HTML, never markdown (cloaking guardrail). This is also the Copilot path: Copilot answers from Bing's index and has no user agent of its own, so a merchant who wants to reach Copilot allows bingbot. UA strings here are transcribed from Microsoft's published crawler documentation rather than captured from our own traffic; replace a sample with a real capture the first time one is observed.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "accept-encoding": "gzip, deflate, br",
+        "user-agent": "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/olive-oil-500ml",
+      "expected": { "kind": "crawler", "platform": "bingbot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm) Chrome/116.0.1938.76 Safari/537.36",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/",
+      "expected": { "kind": "crawler", "platform": "bingbot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/collections/all",
+      "expected": { "kind": "crawler", "platform": "bingbot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/markdown, text/html;q=0.9",
+        "user-agent": "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)"
+      },
+      "url": "/products/olive-oil-500ml",
+      "expected": { "kind": "crawler", "platform": "bingbot", "acceptsMarkdown": true }
+    },
+    {
+      "headers": {
+        "accept": "*/*",
+        "user-agent": "Mozilla/5.0 (compatible; adidxbot/2.0; +http://www.bing.com/bingbot.htm)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/linen-shirt",
+      "expected": { "kind": "crawler", "platform": "bingbot", "acceptsMarkdown": false }
+    },
+    {
+      "headers": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "Mozilla/5.0 (compatible; MicrosoftPreview/2.0; +https://aka.ms/MicrosoftPreview)",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/linen-shirt",
+      "expected": { "kind": "crawler", "platform": "microsoft-preview", "acceptsMarkdown": false }
+    }
+  ]
+}

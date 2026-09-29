@@ -1,0 +1,28 @@
+{
+  "name": "@rebilder/example-cloudflare-worker",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deployable Cloudflare Worker that puts @rebilder/gateway in front of an existing site. Copy the directory, edit src/content.ts, run wrangler deploy.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@rebilder/gateway": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "eslint": "^9.14.0",
+    "eslint-plugin-security": "^4.0.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.62.1",
+    "vitest": "^2.1.4",
+    "wrangler": "^4.0.0"
+  }
+}

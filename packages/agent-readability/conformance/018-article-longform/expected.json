@@ -1,0 +1,346 @@
+{
+  "outcome": {
+    "kind": "scored",
+    "grade": "C",
+    "score": 70
+  },
+  "score": 70,
+  "grade": "C",
+  "bandLabel": "Readable with effort",
+  "pageKind": "article",
+  "pageKindBasis": "heuristic",
+  "pageKindConfidence": "high",
+  "factProfile": {
+    "pageKind": "article",
+    "core": [
+      "title",
+      "author",
+      "published"
+    ],
+    "extended": [
+      "updated",
+      "section",
+      "description"
+    ],
+    "byteReference": 40960
+  },
+  "facts": [
+    {
+      "kind": "title",
+      "normalized": "the quarry that became a battery",
+      "source": "html-text",
+      "offset": 66,
+      "corroborated": true
+    },
+    {
+      "kind": "description",
+      "normalized": "half a century after the last slate was cut, the terraces above llanberis store enough electricity to hold the grid together for six hours.",
+      "source": "meta",
+      "offset": 131,
+      "corroborated": true
+    },
+    {
+      "kind": "author",
+      "normalized": "ffion rhys",
+      "source": "meta",
+      "offset": 307,
+      "corroborated": true
+    },
+    {
+      "kind": "published",
+      "normalized": "2026-05-11",
+      "source": "meta",
+      "offset": 349,
+      "corroborated": true
+    },
+    {
+      "kind": "updated",
+      "normalized": "2026-06-02",
+      "source": "meta",
+      "offset": 411,
+      "corroborated": true
+    },
+    {
+      "kind": "section",
+      "normalized": "infrastructure",
+      "source": "meta",
+      "offset": 472,
+      "corroborated": true
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "retrievability",
+      "weight": 28,
+      "earned": 28,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "retrievability.reachable",
+          "basis": "measured",
+          "weight": 11,
+          "earned": 11
+        },
+        {
+          "id": "retrievability.robots-policy",
+          "basis": "measured",
+          "weight": 10,
+          "earned": 10
+        },
+        {
+          "id": "retrievability.render-independence",
+          "basis": "heuristic",
+          "weight": 7,
+          "earned": 7
+        }
+      ]
+    },
+    {
+      "id": "machine-representation",
+      "weight": 18,
+      "earned": 3,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "machine-representation.negotiated-response",
+          "basis": "measured",
+          "weight": 9,
+          "earned": 0
+        },
+        {
+          "id": "machine-representation.declared-alternates",
+          "basis": "measured",
+          "weight": 3,
+          "earned": 3
+        },
+        {
+          "id": "machine-representation.vary-accept",
+          "basis": "measured",
+          "weight": 3,
+          "earned": 0
+        },
+        {
+          "id": "machine-representation.substance-parity",
+          "basis": "heuristic",
+          "weight": 3,
+          "earned": 0
+        }
+      ]
+    },
+    {
+      "id": "fact-coverage",
+      "weight": 20,
+      "earned": 13,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "fact-coverage.core-facts",
+          "basis": "heuristic",
+          "weight": 14,
+          "earned": 7
+        },
+        {
+          "id": "fact-coverage.context-cost",
+          "basis": "measured",
+          "weight": 6,
+          "earned": 6
+        }
+      ]
+    },
+    {
+      "id": "fact-position",
+      "weight": 10,
+      "earned": 10,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "fact-position.first-core-fact-offset",
+          "basis": "heuristic",
+          "weight": 5,
+          "earned": 5
+        },
+        {
+          "id": "fact-position.front-window",
+          "basis": "heuristic",
+          "weight": 5,
+          "earned": 5
+        }
+      ]
+    },
+    {
+      "id": "structured-data",
+      "weight": 6,
+      "earned": 6,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "structured-data.present",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 2
+        },
+        {
+          "id": "structured-data.required-properties",
+          "basis": "measured",
+          "weight": 3,
+          "earned": 3
+        },
+        {
+          "id": "structured-data.text-agreement",
+          "basis": "heuristic",
+          "weight": 1,
+          "earned": 1
+        }
+      ]
+    },
+    {
+      "id": "contract-discovery",
+      "weight": 10,
+      "earned": 10,
+      "basis": "measured",
+      "checks": [
+        {
+          "id": "contract-discovery.canonical",
+          "basis": "measured",
+          "weight": 4,
+          "earned": 4
+        },
+        {
+          "id": "contract-discovery.cache-validators",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 2
+        },
+        {
+          "id": "contract-discovery.llms-txt",
+          "basis": "measured",
+          "weight": 1,
+          "earned": 1
+        },
+        {
+          "id": "contract-discovery.sitemap",
+          "basis": "measured",
+          "weight": 1,
+          "earned": 1
+        },
+        {
+          "id": "contract-discovery.machine-endpoint",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 2
+        }
+      ]
+    },
+    {
+      "id": "evidence-density",
+      "weight": 8,
+      "earned": 0,
+      "basis": "heuristic",
+      "checks": [
+        {
+          "id": "evidence-density.quantities",
+          "basis": "measured",
+          "weight": 4,
+          "earned": 0
+        },
+        {
+          "id": "evidence-density.definitions",
+          "basis": "heuristic",
+          "weight": 2,
+          "earned": 0
+        },
+        {
+          "id": "evidence-density.comparisons",
+          "basis": "measured",
+          "weight": 2,
+          "earned": 0
+        }
+      ]
+    }
+  ],
+  "flags": [],
+  "policy": {
+    "robotsTxtStatus": "ok",
+    "audiences": {
+      "assistant": {
+        "decision": "allow",
+        "matchedGroup": "*",
+        "matchedRule": "Allow: /"
+      },
+      "training": {
+        "decision": "allow",
+        "matchedGroup": "*",
+        "matchedRule": "Allow: /"
+      },
+      "search": {
+        "decision": "allow",
+        "matchedGroup": "*",
+        "matchedRule": "Allow: /"
+      }
+    },
+    "deliberateOptOut": false,
+    "trainingOptOut": false,
+    "sitemapDeclared": true
+  },
+  "cost": {
+    "htmlBytes": 14284,
+    "negotiatedBytes": null,
+    "approxHtmlTokens": 3571,
+    "approxNegotiatedTokens": null,
+    "reductionRatio": null,
+    "firstCoreFactOffset": 66,
+    "truncated": false
+  },
+  "recommendations": [
+    {
+      "id": "serve-machine-representation",
+      "pointsAvailable": 15,
+      "effort": "config",
+      "checks": [
+        "machine-representation.negotiated-response"
+      ],
+      "unlocks": [
+        "machine-representation.vary-accept",
+        "machine-representation.substance-parity"
+      ]
+    },
+    {
+      "id": "add-core-facts",
+      "pointsAvailable": 7,
+      "effort": "template",
+      "checks": [
+        "fact-coverage.core-facts"
+      ],
+      "unlocks": []
+    },
+    {
+      "id": "state-quantities",
+      "pointsAvailable": 4,
+      "effort": "template",
+      "checks": [
+        "evidence-density.quantities"
+      ],
+      "unlocks": []
+    },
+    {
+      "id": "label-facts",
+      "pointsAvailable": 2,
+      "effort": "template",
+      "checks": [
+        "evidence-density.definitions"
+      ],
+      "unlocks": []
+    },
+    {
+      "id": "add-comparison-rows",
+      "pointsAvailable": 2,
+      "effort": "template",
+      "checks": [
+        "evidence-density.comparisons"
+      ],
+      "unlocks": []
+    }
+  ],
+  "measuredWeight": 63,
+  "heuristicWeight": 37
+}

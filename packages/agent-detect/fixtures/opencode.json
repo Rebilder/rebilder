@@ -1,0 +1,23 @@
+{
+  "name": "opencode",
+  "description": "OpenCode (SST) terminal coding agent fetching web content. Sends Accept: text/markdown like Claude Code.",
+  "samples": [
+    {
+      "headers": {
+        "accept": "text/markdown, text/html;q=0.9, */*;q=0.8",
+        "accept-encoding": "gzip, br",
+        "user-agent": "opencode/0.5.29",
+        "host": "store.example.com"
+      },
+      "url": "https://store.example.com/products/wool-runner",
+      "expected": { "kind": "agent", "platform": "opencode", "acceptsMarkdown": true }
+    },
+    {
+      "headers": {
+        "accept": "text/markdown",
+        "user-agent": "opencode/1.0.2 (linux; x64)"
+      },
+      "expected": { "kind": "agent", "platform": "opencode", "acceptsMarkdown": true }
+    }
+  ]
+}

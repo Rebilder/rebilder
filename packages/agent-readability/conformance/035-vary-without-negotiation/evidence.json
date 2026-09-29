@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://vary-only.example/products/oak-rolling-pin",
+    "origin": "https://vary-only.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://vary-only.example/products/oak-rolling-pin",
+          "finalUrl": "https://vary-only.example/products/oak-rolling-pin",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "vary": [
+              "Accept, Accept-Encoding"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"rp-36\""
+            ],
+            "link": [
+              "<https://vary-only.example/products/oak-rolling-pin>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 928,
+          "bodySha256": "d1e062c0cabb8c20cea75b58e7afd60b3e6b337a87ee46892a6a61ae548b5df8",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Oak Rolling Pin — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://vary-only.example/products/oak-rolling-pin\">\n<meta name=\"description\" content=\"A French-style tapered oak rolling pin.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Oak Rolling Pin\",\"sku\":\"FG-PIN-OAK\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A French-style tapered oak rolling pin.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"36.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Oak Rolling Pin</h1>\n<p class=\"price\">$36.00</p>\n<p class=\"stock\">In stock</p>\n<p>Tapered French style, solid oak, 50 cm. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://vary-only.example/products/oak-rolling-pin",
+          "finalUrl": "https://vary-only.example/products/oak-rolling-pin",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "vary": [
+              "Accept, Accept-Encoding"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"rp-36\""
+            ],
+            "link": [
+              "<https://vary-only.example/products/oak-rolling-pin>; rel=\"canonical\""
+            ]
+          },
+          "bytes": 928,
+          "bodySha256": "d1e062c0cabb8c20cea75b58e7afd60b3e6b337a87ee46892a6a61ae548b5df8",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Oak Rolling Pin — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://vary-only.example/products/oak-rolling-pin\">\n<meta name=\"description\" content=\"A French-style tapered oak rolling pin.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Oak Rolling Pin\",\"sku\":\"FG-PIN-OAK\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A French-style tapered oak rolling pin.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"36.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Oak Rolling Pin</h1>\n<p class=\"price\">$36.00</p>\n<p class=\"stock\">In stock</p>\n<p>Tapered French style, solid oak, 50 cm. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://vary-only.example/robots.txt",
+          "finalUrl": "https://vary-only.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 70,
+          "bodySha256": "1930ecb9ff3b32042da356e54188d70bf89cf15700dabe53334aa135f453316b",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://vary-only.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://vary-only.example/llms.txt",
+          "finalUrl": "https://vary-only.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://vary-only.example/.well-known/ucp",
+          "finalUrl": "https://vary-only.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

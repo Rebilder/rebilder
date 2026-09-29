@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://loomworks.example/collections/handwoven-rugs",
+    "origin": "https://loomworks.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://loomworks.example/collections/handwoven-rugs",
+          "finalUrl": "https://loomworks.example/collections/handwoven-rugs",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"lw-rugs-2026-08-02\""
+            ],
+            "last-modified": [
+              "Sun, 02 Aug 2026 07:20:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 3523,
+          "bodySha256": "2bbcdb58659ab1a38d069256c0717dfaeb281ffc5bb5df86458372ce60f1032d",
+          "body": "<!doctype html>\n<html lang=\"en-GB\">\n<head>\n<meta charset=\"utf-8\">\n<title>Handwoven rugs — Loomworks</title>\n<meta name=\"description\" content=\"Twelve handwoven rugs, made on Welsh double-cloth looms in Machynlleth.\">\n<link rel=\"canonical\" href=\"https://loomworks.example/collections/handwoven-rugs\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"ItemList\",\"name\":\"Handwoven rugs\",\"description\":\"Twelve handwoven rugs, made on Welsh double-cloth looms in Machynlleth.\",\"numberOfItems\":12,\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"url\":\"https://loomworks.example/products/ardal-flatweave-160x230\"},{\"@type\":\"ListItem\",\"position\":2,\"url\":\"https://loomworks.example/products/brecon-wool-runner\"},{\"@type\":\"ListItem\",\"position\":3,\"url\":\"https://loomworks.example/products/cadair-kilim-120x180\"},{\"@type\":\"ListItem\",\"position\":4,\"url\":\"https://loomworks.example/products/dyfi-jute-200x300\"},{\"@type\":\"ListItem\",\"position\":5,\"url\":\"https://loomworks.example/products/elan-rag-rug-90x150\"},{\"@type\":\"ListItem\",\"position\":6,\"url\":\"https://loomworks.example/products/ffestiniog-slateweave\"},{\"@type\":\"ListItem\",\"position\":7,\"url\":\"https://loomworks.example/products/glaslyn-wool-140x200\"},{\"@type\":\"ListItem\",\"position\":8,\"url\":\"https://loomworks.example/products/hafren-hemp-120x180\"},{\"@type\":\"ListItem\",\"position\":9,\"url\":\"https://loomworks.example/products/idwal-undyed-160x230\"},{\"@type\":\"ListItem\",\"position\":10,\"url\":\"https://loomworks.example/products/llyn-stripe-runner\"},{\"@type\":\"ListItem\",\"position\":11,\"url\":\"https://loomworks.example/products/mawddach-flatweave\"},{\"@type\":\"ListItem\",\"position\":12,\"url\":\"https://loomworks.example/products/nant-wool-90x150\"}]}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/collections\">Collections</a> <a href=\"/about\">About</a> <a href=\"/stockists\">Stockists</a></nav></header>\n<main>\n<h1>Handwoven rugs</h1>\n<p>Twelve handwoven rugs, made on Welsh double-cloth looms in Machynlleth. In stock and ready to ship.</p>\n<ul class=\"grid\">\n<li><a href=\"/products/ardal-flatweave-160x230\">Ardal flatweave, 160 × 230</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/brecon-wool-runner\">Brecon wool runner, 70 × 240</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/cadair-kilim-120x180\">Cadair kilim, 120 × 180</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/dyfi-jute-200x300\">Dyfi jute, 200 × 300</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/elan-rag-rug-90x150\">Elan rag rug, 90 × 150</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/ffestiniog-slateweave\">Ffestiniog slateweave, 160 × 230</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/glaslyn-wool-140x200\">Glaslyn wool, 140 × 200</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/hafren-hemp-120x180\">Hafren hemp, 120 × 180</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/idwal-undyed-160x230\">Idwal undyed, 160 × 230</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/llyn-stripe-runner\">Llyn stripe runner, 70 × 200</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/mawddach-flatweave\">Mawddach flatweave, 200 × 300</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/nant-wool-90x150\">Nant wool, 90 × 150</a><span class=\"price\">From £180</span></li>\n</ul>\n</main>\n<footer><p>Loomworks, Machynlleth, Powys.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://loomworks.example/collections/handwoven-rugs",
+          "finalUrl": "https://loomworks.example/collections/handwoven-rugs",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"lw-rugs-2026-08-02\""
+            ],
+            "last-modified": [
+              "Sun, 02 Aug 2026 07:20:00 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 3523,
+          "bodySha256": "2bbcdb58659ab1a38d069256c0717dfaeb281ffc5bb5df86458372ce60f1032d",
+          "body": "<!doctype html>\n<html lang=\"en-GB\">\n<head>\n<meta charset=\"utf-8\">\n<title>Handwoven rugs — Loomworks</title>\n<meta name=\"description\" content=\"Twelve handwoven rugs, made on Welsh double-cloth looms in Machynlleth.\">\n<link rel=\"canonical\" href=\"https://loomworks.example/collections/handwoven-rugs\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"ItemList\",\"name\":\"Handwoven rugs\",\"description\":\"Twelve handwoven rugs, made on Welsh double-cloth looms in Machynlleth.\",\"numberOfItems\":12,\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"url\":\"https://loomworks.example/products/ardal-flatweave-160x230\"},{\"@type\":\"ListItem\",\"position\":2,\"url\":\"https://loomworks.example/products/brecon-wool-runner\"},{\"@type\":\"ListItem\",\"position\":3,\"url\":\"https://loomworks.example/products/cadair-kilim-120x180\"},{\"@type\":\"ListItem\",\"position\":4,\"url\":\"https://loomworks.example/products/dyfi-jute-200x300\"},{\"@type\":\"ListItem\",\"position\":5,\"url\":\"https://loomworks.example/products/elan-rag-rug-90x150\"},{\"@type\":\"ListItem\",\"position\":6,\"url\":\"https://loomworks.example/products/ffestiniog-slateweave\"},{\"@type\":\"ListItem\",\"position\":7,\"url\":\"https://loomworks.example/products/glaslyn-wool-140x200\"},{\"@type\":\"ListItem\",\"position\":8,\"url\":\"https://loomworks.example/products/hafren-hemp-120x180\"},{\"@type\":\"ListItem\",\"position\":9,\"url\":\"https://loomworks.example/products/idwal-undyed-160x230\"},{\"@type\":\"ListItem\",\"position\":10,\"url\":\"https://loomworks.example/products/llyn-stripe-runner\"},{\"@type\":\"ListItem\",\"position\":11,\"url\":\"https://loomworks.example/products/mawddach-flatweave\"},{\"@type\":\"ListItem\",\"position\":12,\"url\":\"https://loomworks.example/products/nant-wool-90x150\"}]}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/collections\">Collections</a> <a href=\"/about\">About</a> <a href=\"/stockists\">Stockists</a></nav></header>\n<main>\n<h1>Handwoven rugs</h1>\n<p>Twelve handwoven rugs, made on Welsh double-cloth looms in Machynlleth. In stock and ready to ship.</p>\n<ul class=\"grid\">\n<li><a href=\"/products/ardal-flatweave-160x230\">Ardal flatweave, 160 × 230</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/brecon-wool-runner\">Brecon wool runner, 70 × 240</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/cadair-kilim-120x180\">Cadair kilim, 120 × 180</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/dyfi-jute-200x300\">Dyfi jute, 200 × 300</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/elan-rag-rug-90x150\">Elan rag rug, 90 × 150</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/ffestiniog-slateweave\">Ffestiniog slateweave, 160 × 230</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/glaslyn-wool-140x200\">Glaslyn wool, 140 × 200</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/hafren-hemp-120x180\">Hafren hemp, 120 × 180</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/idwal-undyed-160x230\">Idwal undyed, 160 × 230</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/llyn-stripe-runner\">Llyn stripe runner, 70 × 200</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/mawddach-flatweave\">Mawddach flatweave, 200 × 300</a><span class=\"price\">From £180</span></li>\n<li><a href=\"/products/nant-wool-90x150\">Nant wool, 90 × 150</a><span class=\"price\">From £180</span></li>\n</ul>\n</main>\n<footer><p>Loomworks, Machynlleth, Powys.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://loomworks.example/robots.txt",
+          "finalUrl": "https://loomworks.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 70,
+          "bodySha256": "070fba0486ec18ffdee7193aceec015c31e079f57e625e6f8444a10f3a5bd5bb",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://loomworks.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://loomworks.example/llms.txt",
+          "finalUrl": "https://loomworks.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://loomworks.example/.well-known/ucp",
+          "finalUrl": "https://loomworks.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

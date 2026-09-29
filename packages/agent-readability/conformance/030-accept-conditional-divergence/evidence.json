@@ -1,0 +1,196 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://divergent.example/products/field-notebook-a5",
+    "origin": "https://divergent.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://divergent.example/products/field-notebook-a5",
+          "finalUrl": "https://divergent.example/products/field-notebook-a5",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/markdown; charset=utf-8"
+            ],
+            "link": [
+              "<https://divergent.example/products/field-notebook-a5>; rel=\"canonical\"",
+              "<https://divergent.example/products/field-notebook-a5>; rel=\"alternate\"; type=\"text/html\""
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=300"
+            ],
+            "etag": [
+              "\"n1-99\""
+            ]
+          },
+          "bytes": 286,
+          "bodySha256": "536f73e9811ae5088237dfaa639ba3022e11b0ab11ebd37c518223287a8bb49b",
+          "body": "# [Field Notebook A5](https://divergent.example/products/field-notebook-a5)\n\n- **Brand:** Foundry Goods\n- **Price:** $99.00\n- **Availability:** In stock\n- **Shipping:** Free shipping over $50\n- **Returns:** 30-day returns\n\n## Description\n\nA5 dot-grid notebook, 192 pages, sewn binding.\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://divergent.example/products/field-notebook-a5",
+          "finalUrl": "https://divergent.example/products/field-notebook-a5",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=300"
+            ],
+            "etag": [
+              "\"n1-148\""
+            ]
+          },
+          "bytes": 1053,
+          "bodySha256": "81343fc31c6a4a67390316c1be7d24a6120aa67245b7ef04db3bef83977df6c1",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Field Notebook A5 — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://divergent.example/products/field-notebook-a5\">\n<link rel=\"alternate\" type=\"text/markdown\" href=\"https://divergent.example/products/field-notebook-a5.md\">\n<meta name=\"description\" content=\"A5 dot-grid notebook, 192 pages, sewn binding.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Field Notebook A5\",\"sku\":\"FG-NBK-A5\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A5 dot-grid notebook, 192 pages, sewn binding.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"148.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Field Notebook A5</h1>\n<p class=\"price\">$148.00</p>\n<p class=\"stock\">In stock</p>\n<p>Sewn binding, 192 pages, dot grid. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://divergent.example/products/field-notebook-a5",
+          "finalUrl": "https://divergent.example/products/field-notebook-a5",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/markdown; charset=utf-8"
+            ],
+            "link": [
+              "<https://divergent.example/products/field-notebook-a5>; rel=\"canonical\"",
+              "<https://divergent.example/products/field-notebook-a5>; rel=\"alternate\"; type=\"text/html\""
+            ],
+            "vary": [
+              "Accept"
+            ],
+            "cache-control": [
+              "public, max-age=300"
+            ],
+            "etag": [
+              "\"n1-99\""
+            ]
+          },
+          "bytes": 286,
+          "bodySha256": "536f73e9811ae5088237dfaa639ba3022e11b0ab11ebd37c518223287a8bb49b",
+          "body": "# [Field Notebook A5](https://divergent.example/products/field-notebook-a5)\n\n- **Brand:** Foundry Goods\n- **Price:** $99.00\n- **Availability:** In stock\n- **Shipping:** Free shipping over $50\n- **Returns:** 30-day returns\n\n## Description\n\nA5 dot-grid notebook, 192 pages, sewn binding.\n",
+          "truncated": false
+        }
+      }
+    },
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://divergent.example/robots.txt",
+          "finalUrl": "https://divergent.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 70,
+          "bodySha256": "5db45344b8cb35a46cf5b6b1609bf80514e54ed39ec492e91851367c5c60b523",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://divergent.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://divergent.example/llms.txt",
+          "finalUrl": "https://divergent.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://divergent.example/.well-known/ucp",
+          "finalUrl": "https://divergent.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

@@ -1,0 +1,89 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://slow-origin.example/products/field-kettle-1l",
+    "origin": "https://slow-origin.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": false,
+        "error": "timeout",
+        "detail": "no response headers within 5000ms"
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": false,
+        "error": "timeout",
+        "detail": "no response headers within 5000ms"
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://slow-origin.example/robots.txt",
+          "finalUrl": "https://slow-origin.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=3600"
+            ],
+            "cf-cache-status": [
+              "HIT"
+            ],
+            "age": [
+              "2841"
+            ]
+          },
+          "bytes": 72,
+          "bodySha256": "eba11a353c4452ba767375fb79ca2c91c08a6e22d00d187c9591b2e13c33fde7",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://slow-origin.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": false,
+        "error": "timeout",
+        "detail": "no response headers within 5000ms"
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": false,
+        "error": "timeout",
+        "detail": "no response headers within 5000ms"
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

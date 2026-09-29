@@ -1,0 +1,47 @@
+{
+  "id": "article",
+  "version": "0.1.0",
+  "label": "Article or post",
+  "required": [
+    {
+      "name": "title",
+      "label": "Headline",
+      "types": ["text"],
+      "why": "The agent cites the piece by name, and a headline lifted from the wrong heading gets attributed wrongly."
+    },
+    {
+      "name": "author",
+      "label": "Author",
+      "types": ["text", "url"],
+      "why": "Attribution is how the agent tells the user whose claim this is, which is most of what it is judging."
+    },
+    {
+      "name": "published",
+      "label": "Published date",
+      "types": ["date"],
+      "why": "Lets the agent say how old the claim is, and rank it against a fresher source on the same question."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "updated",
+      "label": "Last updated",
+      "types": ["date"],
+      "why": "Tells the agent whether a piece it read months ago has changed enough to be worth refetching."
+    },
+    {
+      "name": "section",
+      "label": "Section",
+      "types": ["text"],
+      "why": "Places the piece in the publication so the agent can tell reporting from opinion from a press release."
+    },
+    {
+      "name": "description",
+      "label": "Summary",
+      "types": ["text"],
+      "why": "Gives the agent the author's own summary to quote instead of compressing the body itself."
+    }
+  ],
+  "actions": ["subscribe", "contact"],
+  "jsonLdType": "Article"
+}

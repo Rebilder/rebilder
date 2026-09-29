@@ -1,0 +1,15 @@
+{
+  "extends": "../../tooling/tsconfig.package.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    // The README example in examples/ imports the package by its public name.
+    // These paths resolve it to the source, so `tsc` checks the example
+    // against the current API without a build step first.
+    "paths": {
+      "@rebilder/agent-readability": ["./index.ts"],
+      "@rebilder/agent-readability/probe": ["./probe/index.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "tests/**/*.ts", "examples/**/*.ts", "vitest.config.ts"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,176 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://three-hops.example/product/trail-mug-350",
+    "origin": "https://three-hops.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://three-hops.example/product/trail-mug-350",
+          "finalUrl": "https://three-hops.example/en-us/products/trail-mug-350",
+          "redirects": [
+            {
+              "status": 301,
+              "location": "https://three-hops.example/products/trail-mug-350"
+            },
+            {
+              "status": 301,
+              "location": "https://three-hops.example/en/products/trail-mug-350"
+            },
+            {
+              "status": 302,
+              "location": "https://three-hops.example/en-us/products/trail-mug-350"
+            }
+          ],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"7b3c9a01\""
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 937,
+          "bodySha256": "37747174d46dbbc7218dc13841049331692ee2edefe0b70593b721532b23e8cb",
+          "body": "<!doctype html>\n<html lang=\"en-US\">\n<head>\n<meta charset=\"utf-8\">\n<title>Trail Mug 350ml — Kettleworks</title>\n<link rel=\"canonical\" href=\"https://three-hops.example/en-us/products/trail-mug-350\">\n<meta property=\"og:title\" content=\"Trail Mug 350ml\">\n<meta name=\"description\" content=\"A 350ml double-walled titanium trail mug with a folding handle.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Trail Mug 350ml\",\"sku\":\"KW-TM-350\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Kettleworks\"},\"description\":\"A 350ml double-walled titanium trail mug with a folding handle.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"39.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Trail Mug 350ml</h1>\n<p class=\"price\">$39.00</p>\n<p>In stock. Ships in 1–2 business days. 30-day returns.</p>\n<a href=\"/cart/add?variant=350\">Add to cart</a>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://three-hops.example/product/trail-mug-350",
+          "finalUrl": "https://three-hops.example/en-us/products/trail-mug-350",
+          "redirects": [
+            {
+              "status": 301,
+              "location": "https://three-hops.example/products/trail-mug-350"
+            },
+            {
+              "status": 301,
+              "location": "https://three-hops.example/en/products/trail-mug-350"
+            },
+            {
+              "status": 302,
+              "location": "https://three-hops.example/en-us/products/trail-mug-350"
+            }
+          ],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"7b3c9a01\""
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 937,
+          "bodySha256": "37747174d46dbbc7218dc13841049331692ee2edefe0b70593b721532b23e8cb",
+          "body": "<!doctype html>\n<html lang=\"en-US\">\n<head>\n<meta charset=\"utf-8\">\n<title>Trail Mug 350ml — Kettleworks</title>\n<link rel=\"canonical\" href=\"https://three-hops.example/en-us/products/trail-mug-350\">\n<meta property=\"og:title\" content=\"Trail Mug 350ml\">\n<meta name=\"description\" content=\"A 350ml double-walled titanium trail mug with a folding handle.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Trail Mug 350ml\",\"sku\":\"KW-TM-350\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Kettleworks\"},\"description\":\"A 350ml double-walled titanium trail mug with a folding handle.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"39.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Trail Mug 350ml</h1>\n<p class=\"price\">$39.00</p>\n<p>In stock. Ships in 1–2 business days. 30-day returns.</p>\n<a href=\"/cart/add?variant=350\">Add to cart</a>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://three-hops.example/robots.txt",
+          "finalUrl": "https://three-hops.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 71,
+          "bodySha256": "6b242e14ab046c68cd8690139a4a1418106081d0bd0c6dc2b4d6b08fa84a79d7",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://three-hops.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://three-hops.example/llms.txt",
+          "finalUrl": "https://three-hops.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://three-hops.example/.well-known/ucp",
+          "finalUrl": "https://three-hops.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

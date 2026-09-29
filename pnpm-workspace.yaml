@@ -1,0 +1,6 @@
+packages:
+  - 'packages/*'
+  # Deployable templates you can copy out of the repository. They depend on the
+  # PUBLISHED gateway with a caret range rather than `workspace:*`, so pnpm
+  # installs them from npm and their tests check the artifact a site installs.
+  - 'examples/*'

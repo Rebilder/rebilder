@@ -1,0 +1,155 @@
+{
+  "name": "@rebilder/gateway",
+  "version": "0.5.0",
+  "private": false,
+  "description": "Serve clean markdown of your pages to AI agents that ask for it, while browsers keep your HTML. Middleware for Next.js, Express, Fastify, Cloudflare Workers, Shopify and any fetch-based framework.",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rebilder/rebilder.git",
+    "directory": "packages/gateway"
+  },
+  "homepage": "https://rebilder.com/docs/quickstart",
+  "bugs": {
+    "url": "https://github.com/rebilder/rebilder/issues",
+    "email": "support@rebilder.com"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "ai-agents",
+    "markdown",
+    "content-negotiation",
+    "llms-txt",
+    "seo",
+    "agent-readability",
+    "middleware",
+    "next",
+    "nextjs",
+    "express",
+    "fastify",
+    "cloudflare-workers",
+    "hono",
+    "sveltekit",
+    "astro",
+    "shopify"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "next": [
+        "./dist/next.d.ts"
+      ],
+      "node": [
+        "./dist/node.d.ts"
+      ],
+      "edge": [
+        "./dist/edge.d.ts"
+      ],
+      "shopify": [
+        "./dist/shopify.d.ts"
+      ],
+      "fetch": [
+        "./dist/fetch.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./next": {
+      "import": {
+        "types": "./dist/next.d.ts",
+        "default": "./dist/next.js"
+      },
+      "require": {
+        "types": "./dist/next.d.cts",
+        "default": "./dist/next.cjs"
+      }
+    },
+    "./node": {
+      "import": {
+        "types": "./dist/node.d.ts",
+        "default": "./dist/node.js"
+      },
+      "require": {
+        "types": "./dist/node.d.cts",
+        "default": "./dist/node.cjs"
+      }
+    },
+    "./edge": {
+      "import": {
+        "types": "./dist/edge.d.ts",
+        "default": "./dist/edge.js"
+      },
+      "require": {
+        "types": "./dist/edge.d.cts",
+        "default": "./dist/edge.cjs"
+      }
+    },
+    "./shopify": {
+      "import": {
+        "types": "./dist/shopify.d.ts",
+        "default": "./dist/shopify.js"
+      },
+      "require": {
+        "types": "./dist/shopify.d.cts",
+        "default": "./dist/shopify.cjs"
+      }
+    },
+    "./fetch": {
+      "import": {
+        "types": "./dist/fetch.d.ts",
+        "default": "./dist/fetch.js"
+      },
+      "require": {
+        "types": "./dist/fetch.d.cts",
+        "default": "./dist/fetch.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@rebilder/agent-detect": "workspace:*",
+    "@rebilder/events": "workspace:*",
+    "@rebilder/render-md": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "eslint": "^9.14.0",
+    "eslint-plugin-security": "^4.0.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.62.1",
+    "vitest": "^2.1.4"
+  }
+}

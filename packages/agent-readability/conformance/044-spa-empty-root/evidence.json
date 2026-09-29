@@ -1,0 +1,150 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://spa-store.example/products/lumen-headlamp-300",
+    "origin": "https://spa-store.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spa-store.example/products/lumen-headlamp-300",
+          "finalUrl": "https://spa-store.example/products/lumen-headlamp-300",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=0, must-revalidate"
+            ],
+            "etag": [
+              "\"shell-9f2c1a\""
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 460,
+          "bodySha256": "856e4b7585cacd24afddd2a9f7ec606718b3bf6de048acaa36a034517ebacd60",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title></title>\n<link rel=\"canonical\" href=\"https://spa-store.example/products/lumen-headlamp-300\">\n<link rel=\"modulepreload\" href=\"/assets/index-9f2c1a.js\">\n<link rel=\"stylesheet\" href=\"/assets/index-4d0be7.css\">\n<script type=\"module\" src=\"/assets/index-9f2c1a.js\"></script>\n</head>\n<body>\n<div id=\"app\"></div>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spa-store.example/products/lumen-headlamp-300",
+          "finalUrl": "https://spa-store.example/products/lumen-headlamp-300",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=0, must-revalidate"
+            ],
+            "etag": [
+              "\"shell-9f2c1a\""
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 460,
+          "bodySha256": "856e4b7585cacd24afddd2a9f7ec606718b3bf6de048acaa36a034517ebacd60",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title></title>\n<link rel=\"canonical\" href=\"https://spa-store.example/products/lumen-headlamp-300\">\n<link rel=\"modulepreload\" href=\"/assets/index-9f2c1a.js\">\n<link rel=\"stylesheet\" href=\"/assets/index-4d0be7.css\">\n<script type=\"module\" src=\"/assets/index-9f2c1a.js\"></script>\n</head>\n<body>\n<div id=\"app\"></div>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spa-store.example/robots.txt",
+          "finalUrl": "https://spa-store.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 70,
+          "bodySha256": "f6fa21009fde3f2d5c8538d28dd282ef6c859648840478c2b42ca908cbee5c55",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://spa-store.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spa-store.example/llms.txt",
+          "finalUrl": "https://spa-store.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://spa-store.example/.well-known/ucp",
+          "finalUrl": "https://spa-store.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

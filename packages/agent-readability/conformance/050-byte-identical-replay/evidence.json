@@ -1,0 +1,177 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://replay-shop.example/products/cast-iron-skillet-10in",
+    "origin": "https://replay-shop.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://replay-shop.example/products/cast-iron-skillet-10in",
+          "finalUrl": "https://replay-shop.example/products/cast-iron-skillet-10in",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"c1a2b3\""
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ],
+            "age": [
+              "41"
+            ],
+            "set-cookie": [
+              "sid=8f3c1a; Path=/; HttpOnly"
+            ],
+            "x-request-id": [
+              "0d3e5f71-1c2a-4c8e-9d55-2b7a1e6f0c94"
+            ],
+            "cf-ray": [
+              "8d2f1a4b9c3e2000-ORD"
+            ],
+            "report-to": [
+              "{\"group\":\"cf-nel\",\"max_age\":604800}"
+            ]
+          },
+          "bytes": 991,
+          "bodySha256": "91f46be0b04091f46987da1daa2f3a1aa3b2d32ffd950e9e6ae50a8c8f42c797",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Cast Iron Skillet 10\" — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://replay-shop.example/products/cast-iron-skillet-10in\">\n<meta name=\"description\" content=\"A pre-seasoned 10-inch cast iron skillet, made in Ohio.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Cast Iron Skillet 10\\\"\",\"sku\":\"FG-CIS-10\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A pre-seasoned 10-inch cast iron skillet, made in Ohio.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"64.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Cast Iron Skillet 10\"</h1>\n<p class=\"price\">$64.00</p>\n<p class=\"stock\">In stock</p>\n<p>Pre-seasoned, made in Ohio, ships in a day. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://replay-shop.example/products/cast-iron-skillet-10in",
+          "finalUrl": "https://replay-shop.example/products/cast-iron-skillet-10in",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"c1a2b3\""
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:02 GMT"
+            ],
+            "age": [
+              "0"
+            ],
+            "x-request-id": [
+              "b7f2c0a9-77aa-4f31-8f0d-9e1c4a2b3d55"
+            ]
+          },
+          "bytes": 991,
+          "bodySha256": "91f46be0b04091f46987da1daa2f3a1aa3b2d32ffd950e9e6ae50a8c8f42c797",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Cast Iron Skillet 10\" — Foundry Goods</title>\n<link rel=\"canonical\" href=\"https://replay-shop.example/products/cast-iron-skillet-10in\">\n<meta name=\"description\" content=\"A pre-seasoned 10-inch cast iron skillet, made in Ohio.\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":\"Product\",\"name\":\"Cast Iron Skillet 10\\\"\",\"sku\":\"FG-CIS-10\",\"brand\":{\"@type\":\"Brand\",\"name\":\"Foundry Goods\"},\"description\":\"A pre-seasoned 10-inch cast iron skillet, made in Ohio.\",\"offers\":{\"@type\":\"Offer\",\"price\":\"64.00\",\"priceCurrency\":\"USD\",\"availability\":\"https://schema.org/InStock\"}}</script>\n</head>\n<body>\n<main>\n<h1>Cast Iron Skillet 10\"</h1>\n<p class=\"price\">$64.00</p>\n<p class=\"stock\">In stock</p>\n<p>Pre-seasoned, made in Ohio, ships in a day. Free shipping over $50. 30-day returns.</p>\n<form action=\"/cart/add\" method=\"post\"><button type=\"submit\">Add to cart</button></form>\n</main>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://replay-shop.example/robots.txt",
+          "finalUrl": "https://replay-shop.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 72,
+          "bodySha256": "216257e433dc19f0c0339236cb2579358f232a69b42808eb336506dd0b78f7fd",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://replay-shop.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://replay-shop.example/llms.txt",
+          "finalUrl": "https://replay-shop.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://replay-shop.example/.well-known/ucp",
+          "finalUrl": "https://replay-shop.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}

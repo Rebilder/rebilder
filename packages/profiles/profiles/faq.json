@@ -1,0 +1,35 @@
+{
+  "id": "faq",
+  "version": "0.1.0",
+  "label": "FAQ page",
+  "required": [
+    {
+      "name": "title",
+      "label": "Page title",
+      "types": ["text"],
+      "why": "Tells the agent what this set of answers is about before it decides to read all of them."
+    },
+    {
+      "name": "question-answer",
+      "label": "Question and answer pairs",
+      "types": ["list", "text"],
+      "why": "The pairing is the whole content — an agent that cannot tell which answer belongs to which question will attach the wrong one."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "updated",
+      "label": "Last updated",
+      "types": ["date"],
+      "why": "FAQ answers go stale silently, and the date is the only signal the agent has that one has."
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "types": ["text"],
+      "why": "Says who these answers are for, so the agent does not quote the reseller FAQ to a retail customer."
+    }
+  ],
+  "actions": ["contact"],
+  "jsonLdType": "FAQPage"
+}

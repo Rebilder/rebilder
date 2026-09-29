@@ -1,0 +1,47 @@
+{
+  "id": "document",
+  "version": "0.1.0",
+  "label": "Reference document",
+  "required": [
+    {
+      "name": "title",
+      "label": "Document title",
+      "types": ["text"],
+      "why": "The agent cites the document by name, and reference material is quoted far more often than it is summarised."
+    },
+    {
+      "name": "updated",
+      "label": "Last updated",
+      "types": ["date"],
+      "why": "A policy, spec, or procedure is only usable if the agent can say which version of it the user is being told about."
+    },
+    {
+      "name": "authority",
+      "label": "Published by",
+      "types": ["text", "url"],
+      "why": "The agent has to say whose rule this is, because a document with no named publisher is not evidence of anything."
+    }
+  ],
+  "recommended": [
+    {
+      "name": "description",
+      "label": "Summary",
+      "types": ["text"],
+      "why": "Gives the agent your framing of what the document covers instead of the first paragraph it happens to hit."
+    },
+    {
+      "name": "primary-action-url",
+      "label": "Apply, download, or start link",
+      "types": ["url"],
+      "why": "Most reference documents exist to send someone somewhere; the link is the step the agent is trying to find."
+    },
+    {
+      "name": "section",
+      "label": "Section",
+      "types": ["text"],
+      "why": "Places the document in its collection so the agent can find the sibling it actually needed."
+    }
+  ],
+  "actions": ["download", "contact"],
+  "jsonLdType": "WebPage"
+}

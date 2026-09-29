@@ -1,0 +1,16 @@
+{
+  "extends": "../../tooling/tsconfig.package.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "noEmit": true,
+    // Workers run web-standard APIs. `WebWorker` is what gives `fetch`,
+    // `Request`, `Response` and `URL` their types without pulling in
+    // @cloudflare/workers-types — this template has no Cloudflare-specific
+    // imports at all, which is also why the same code runs on Vercel Edge or
+    // Deno Deploy unchanged.
+    "lib": ["ES2022", "WebWorker"],
+    "types": []
+  },
+  "include": ["src/**/*.ts", "test/**/*.ts", "vitest.config.ts"],
+  "exclude": ["node_modules"]
+}

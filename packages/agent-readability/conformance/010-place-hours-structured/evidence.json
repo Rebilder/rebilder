@@ -1,0 +1,162 @@
+{
+  "evidenceVersion": "0.1.0",
+  "target": {
+    "url": "https://fern-street-dental.example/",
+    "origin": "https://fern-street-dental.example"
+  },
+  "probes": {
+    "agent": {
+      "requestHeaders": {
+        "accept": "text/markdown;q=1.0, text/html;q=0.8, text/plain;q=0.5, */*;q=0.1",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fern-street-dental.example/",
+          "finalUrl": "https://fern-street-dental.example/",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"fsd-2026-08-01-a\""
+            ],
+            "last-modified": [
+              "Sat, 01 Aug 2026 11:04:22 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 1909,
+          "bodySha256": "1f7623f330d3b300b345fa449993829ce80650ca9be0f8a4e1767228fc3d8338",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Fern Street Dental — Portland, Oregon</title>\n<meta name=\"description\" content=\"Fern Street Dental is a family dental practice in the Pearl District of Portland, Oregon.\">\n<meta property=\"og:site_name\" content=\"Fern Street Dental\">\n<link rel=\"canonical\" href=\"https://fern-street-dental.example/\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":[\"Dentist\",\"LocalBusiness\"],\"name\":\"Fern Street Dental\",\"description\":\"Fern Street Dental is a family dental practice in the Pearl District of Portland, Oregon.\",\"url\":\"https://fern-street-dental.example/\",\"telephone\":\"+1 503-555-0142\",\"email\":\"hello@fern-street-dental.example\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"128 NW Fern Street\",\"addressLocality\":\"Portland\",\"addressRegion\":\"OR\",\"postalCode\":\"97209\",\"addressCountry\":\"US\"},\"openingHours\":[\"Mo-Th 08:00-17:00\",\"Fr 08:00-13:00\"],\"areaServed\":\"Portland metropolitan area\",\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://fern-street-dental.example/book\"}}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/team\">Our team</a> <a href=\"/treatments\">Treatments</a></nav></header>\n<main>\n<h1>Fern Street Dental</h1>\n<p>Fern Street Dental is a family dental practice in the Pearl District of Portland, Oregon. Serving Portland, Beaverton and Lake Oswego.</p>\n<address>128 NW Fern Street, Portland, OR 97209</address>\n<p>Phone: <a href=\"tel:+15035550142\">+1 503-555-0142</a></p>\n<p>Email: <a href=\"mailto:hello@fern-street-dental.example\">hello@fern-street-dental.example</a></p>\n<h2>Opening hours</h2>\n<ul>\n<li>Monday to Thursday: 08:00 – 17:00</li>\n<li>Friday: 08:00 – 13:00</li>\n<li>Saturday and Sunday: closed</li>\n</ul>\n<p><a href=\"/book\">Book an appointment</a></p>\n</main>\n<footer><p>© 2026 Fern Street Dental. Portland, Oregon.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "browser": {
+      "requestHeaders": {
+        "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fern-street-dental.example/",
+          "finalUrl": "https://fern-street-dental.example/",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "cache-control": [
+              "public, max-age=600"
+            ],
+            "etag": [
+              "\"fsd-2026-08-01-a\""
+            ],
+            "last-modified": [
+              "Sat, 01 Aug 2026 11:04:22 GMT"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:00 GMT"
+            ]
+          },
+          "bytes": 1909,
+          "bodySha256": "1f7623f330d3b300b345fa449993829ce80650ca9be0f8a4e1767228fc3d8338",
+          "body": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Fern Street Dental — Portland, Oregon</title>\n<meta name=\"description\" content=\"Fern Street Dental is a family dental practice in the Pearl District of Portland, Oregon.\">\n<meta property=\"og:site_name\" content=\"Fern Street Dental\">\n<link rel=\"canonical\" href=\"https://fern-street-dental.example/\">\n<script type=\"application/ld+json\">{\"@context\":\"https://schema.org\",\"@type\":[\"Dentist\",\"LocalBusiness\"],\"name\":\"Fern Street Dental\",\"description\":\"Fern Street Dental is a family dental practice in the Pearl District of Portland, Oregon.\",\"url\":\"https://fern-street-dental.example/\",\"telephone\":\"+1 503-555-0142\",\"email\":\"hello@fern-street-dental.example\",\"address\":{\"@type\":\"PostalAddress\",\"streetAddress\":\"128 NW Fern Street\",\"addressLocality\":\"Portland\",\"addressRegion\":\"OR\",\"postalCode\":\"97209\",\"addressCountry\":\"US\"},\"openingHours\":[\"Mo-Th 08:00-17:00\",\"Fr 08:00-13:00\"],\"areaServed\":\"Portland metropolitan area\",\"potentialAction\":{\"@type\":\"ReserveAction\",\"target\":\"https://fern-street-dental.example/book\"}}</script>\n</head>\n<body>\n<header><nav><a href=\"/\">Home</a> <a href=\"/team\">Our team</a> <a href=\"/treatments\">Treatments</a></nav></header>\n<main>\n<h1>Fern Street Dental</h1>\n<p>Fern Street Dental is a family dental practice in the Pearl District of Portland, Oregon. Serving Portland, Beaverton and Lake Oswego.</p>\n<address>128 NW Fern Street, Portland, OR 97209</address>\n<p>Phone: <a href=\"tel:+15035550142\">+1 503-555-0142</a></p>\n<p>Email: <a href=\"mailto:hello@fern-street-dental.example\">hello@fern-street-dental.example</a></p>\n<h2>Opening hours</h2>\n<ul>\n<li>Monday to Thursday: 08:00 – 17:00</li>\n<li>Friday: 08:00 – 13:00</li>\n<li>Saturday and Sunday: closed</li>\n</ul>\n<p><a href=\"/book\">Book an appointment</a></p>\n</main>\n<footer><p>© 2026 Fern Street Dental. Portland, Oregon.</p></footer>\n</body>\n</html>\n",
+          "truncated": false
+        }
+      }
+    },
+    "parityConfirm": null,
+    "robotsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fern-street-dental.example/robots.txt",
+          "finalUrl": "https://fern-street-dental.example/robots.txt",
+          "redirects": [],
+          "status": 200,
+          "headers": {
+            "content-type": [
+              "text/plain; charset=utf-8"
+            ]
+          },
+          "bytes": 79,
+          "bodySha256": "c5efa8c4eec8ac2eaddd583d7ace244bd583c966593960287b437bf17774ed9e",
+          "body": "User-agent: *\nAllow: /\nSitemap: https://fern-street-dental.example/sitemap.xml\n",
+          "truncated": false
+        }
+      }
+    },
+    "llmsTxt": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fern-street-dental.example/llms.txt",
+          "finalUrl": "https://fern-street-dental.example/llms.txt",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    },
+    "wellKnownUcp": {
+      "requestHeaders": {
+        "accept": "text/plain, */*;q=0.5",
+        "user-agent": "rebilder-ars/0.1 (+https://rebilder.com/bots)"
+      },
+      "result": {
+        "ok": true,
+        "capture": {
+          "requestedUrl": "https://fern-street-dental.example/.well-known/ucp",
+          "finalUrl": "https://fern-street-dental.example/.well-known/ucp",
+          "redirects": [],
+          "status": 404,
+          "headers": {
+            "content-type": [
+              "text/html; charset=utf-8"
+            ],
+            "date": [
+              "Wed, 05 Aug 2026 09:15:01 GMT"
+            ]
+          },
+          "bytes": 43,
+          "bodySha256": "ccc9492998e20792aae947a83f1774a1fa3bb2ef33731deabb664cc279a8e75f",
+          "body": "<!doctype html><title>404 Not Found</title>",
+          "truncated": false
+        }
+      }
+    }
+  },
+  "vantage": "public",
+  "capturedAt": "2026-08-05T09:15:00.000Z"
+}
