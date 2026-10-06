@@ -25,8 +25,10 @@
  *
  * The budget is a SOFT cap: one MCP session is one "run", and a session that
  * scans five cold URLs is doing normal work. 20 requests is roughly four cold
- * scans (§3.3 sends five requests per URL), so the default is low enough to
- * bound an accident and the error message says exactly how to raise it.
+ * scans (§3.3 sends five requests per URL, six since ARS 0.3 when the page
+ * links a Markdown copy instead of sending one), so the default is low enough
+ * to bound an accident and the error message says exactly how to raise it. The
+ * floor is one cold scan of the larger kind.
  */
 
 import {
@@ -44,7 +46,7 @@ export interface Scanner {
 
 /** The limiter default in `@rebilder/agent-readability` — about four cold URLs. */
 export const DEFAULT_PROBE_BUDGET = 20
-export const MIN_PROBE_BUDGET = 5
+export const MIN_PROBE_BUDGET = 6
 export const MAX_PROBE_BUDGET = 500
 export const PROBE_BUDGET_ENV = 'REBILDER_MCP_PROBE_BUDGET'
 

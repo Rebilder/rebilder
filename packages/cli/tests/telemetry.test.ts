@@ -162,8 +162,10 @@ describe('no command reaches the network except through the probe', () => {
 
   it('the probe budget is sized to the URL count, not left at the single-shot floor', async () => {
     const { budgetFor } = await import('../src/runtime')
+    // Seven per URL: five §3.3 requests, the ARS 0.3 linked Markdown copy, and
+    // the robots retry.
     expect(budgetFor(1)).toBe(20)
-    expect(budgetFor(10)).toBe(64)
-    expect(budgetFor(50)).toBe(304)
+    expect(budgetFor(10)).toBe(74)
+    expect(budgetFor(50)).toBe(354)
   })
 })

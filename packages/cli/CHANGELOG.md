@@ -4,6 +4,12 @@ Notable changes to the `rebilder` command-line tool. Exit codes are a stable con
 
 ## Unreleased
 
+## 0.4.0 (2026-10-06)
+
+- **Scores against ARS 0.3.** Weights and check ids are unchanged. When a page does not send a Markdown copy but links one on the same site, `check` fetches that one copy. A copy that loads earns 6 of the Markdown check's 9 points. More action words count as a page's main action, such as "shop", "free trial", "get a demo" and "talk to sales". Evidence lines and fixes are written in plain language.
+- When a page's linked Markdown copy works, **Your next steps** says so and shows how to earn the rest: send the copy from the page address too. `diff` says when its parity check compared the linked copy rather than the two requests.
+- `rebilder init` gives the Markdown check its real weight, 9 points. It said 10.
+- The probe budget allows seven requests per URL instead of six, so a multi-URL run has room for linked copies.
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/cli. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.3.0 (2026-09-28)

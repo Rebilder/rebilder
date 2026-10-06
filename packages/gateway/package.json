@@ -1,6 +1,6 @@
 {
   "name": "@rebilder/gateway",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": false,
   "description": "Serve clean markdown of your pages to AI agents that ask for it, while browsers keep your HTML. Middleware for Next.js, Express, Fastify, Cloudflare Workers, Shopify and any fetch-based framework.",
   "license": "Apache-2.0",

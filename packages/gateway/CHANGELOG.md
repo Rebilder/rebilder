@@ -4,6 +4,8 @@ Notable changes to `@rebilder/gateway`. Versions follow semantic versioning. Dat
 
 ## Unreleased
 
+## 0.5.1 (2026-10-06)
+
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/gateway. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.5.0 (2026-09-28)

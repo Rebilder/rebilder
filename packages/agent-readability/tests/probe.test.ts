@@ -108,6 +108,74 @@ function siteRoutes(overrides: Record<string, Route> = {}): Record<string, Route
   }
 }
 
+/* ── the linked Markdown copy (ARS 0.3) ───────────────────────────────────── */
+
+describe('probeStrict — a linked Markdown copy is fetched once, and only when it matters', () => {
+  const MD = `${ORIGIN}/products/kettle.md`
+  const linkedPage = () =>
+    html(
+      '<html><head><title>Kettle</title><link rel="alternate" type="text/markdown" href="/products/kettle.md"></head><body><p>£29.00</p></body></html>',
+    )
+  const markdown = () =>
+    new Response('# Kettle\n\n- **Price:** £29.00\n', {
+      status: 200,
+      headers: { 'content-type': 'text/markdown' },
+    })
+
+  it('fetches the declared copy with the agent headers, after the two page probes', async () => {
+    const { transport, seen } = transportFor(siteRoutes({ [PAGE]: linkedPage, [MD]: markdown }))
+    const outcome = await probeStrict(PAGE, policyFor(), { transport, resolver: resolverFor() })
+    expect(outcome.ok).toBe(true)
+    expect(seen.map((entry) => entry.url)).toEqual([
+      `${ORIGIN}/robots.txt`,
+      PAGE,
+      PAGE,
+      MD,
+      `${ORIGIN}/llms.txt`,
+      `${ORIGIN}/.well-known/ucp`,
+    ])
+    expect(seen[3]?.headers.accept).toBe(seen[1]?.headers.accept)
+    if (!outcome.ok) return
+    expect(capture(outcome.evidence.probes.markdownAlternate ?? null)?.requestedUrl).toBe(MD)
+    const d2 = score(outcome.evidence).dimensions.find((d) => d.id === 'machine-representation')
+    expect(
+      d2?.checks.find((c) => c.id === 'machine-representation.negotiated-response')?.earned,
+    ).toBe(6)
+  })
+
+  it('does not fetch it when the page already sends a Markdown copy itself', async () => {
+    const negotiating: Route = () => markdown()
+    const { transport, seen } = transportFor(siteRoutes({ [PAGE]: negotiating, [MD]: markdown }))
+    const outcome = await probeStrict(PAGE, policyFor(), { transport, resolver: resolverFor() })
+    expect(seen.map((entry) => entry.url)).not.toContain(MD)
+    if (outcome.ok) expect('markdownAlternate' in outcome.evidence.probes).toBe(false)
+  })
+
+  it('never follows a link to another origin', async () => {
+    const offsite = () =>
+      html(
+        '<html><head><link rel="alternate" type="text/markdown" href="https://elsewhere.example/k.md"></head><body></body></html>',
+      )
+    const { transport, seen } = transportFor(siteRoutes({ [PAGE]: offsite }))
+    await probeStrict(PAGE, policyFor(), { transport, resolver: resolverFor() })
+    expect(seen.map((entry) => entry.url)).not.toContain('https://elsewhere.example/k.md')
+  })
+
+  it('obeys robots.txt for the linked path', async () => {
+    const { transport, seen } = transportFor(
+      siteRoutes({
+        [`${ORIGIN}/robots.txt`]: () =>
+          text('User-agent: rebilder-ars\nDisallow: /products/kettle.md\n'),
+        [PAGE]: linkedPage,
+        [MD]: markdown,
+      }),
+    )
+    const outcome = await probeStrict(PAGE, policyFor(), { transport, resolver: resolverFor() })
+    expect(seen.map((entry) => entry.url)).not.toContain(MD)
+    if (outcome.ok) expect(outcome.evidence.probes.markdownAlternate?.result.ok).toBe(false)
+  })
+})
+
 /* ── the request set ──────────────────────────────────────────────────────── */
 
 describe('probeStrict — the §3.3 request set, and nothing else', () => {

@@ -42,6 +42,7 @@ import type { Scanner } from './scanner'
 import { findTool, TOOLS } from './tools/index'
 import { isInvalidParams, type ToolDeps } from './tools/types'
 import {
+  ARS_LABEL,
   LATEST_PROTOCOL_VERSION,
   negotiateProtocolVersion,
   reportsArgumentErrorsAsResults,
@@ -57,7 +58,7 @@ import {
  * everything a scan returns is untrusted third-party text.
  */
 export const SERVER_INSTRUCTIONS = [
-  'Rebilder measures how readable a web page is to an AI agent and scores it against the Rebilder Agent Readability Spec (ARS 0.2).',
+  `Rebilder measures how readable a web page is to an AI agent and scores it against the Rebilder Agent Readability Spec (${ARS_LABEL}).`,
   '',
   'Fetching happens on this machine. No scan, URL, hostname or page content is uploaded to Rebilder — the only request this server makes to us is get_index_entry, and it sends nothing but the domain you name.',
   '',

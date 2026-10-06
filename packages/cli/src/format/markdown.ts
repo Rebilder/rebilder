@@ -15,6 +15,7 @@ import { nextSteps } from '../next-steps'
 
 import type { ArsResult } from '@rebilder/agent-readability'
 import { ARS_NOTICE_LINES } from '../disclosure'
+import { LINKED_PARITY_NOTE, markdownCopyOf } from '../markdown-copy'
 import type { DiffPayload, Payload } from '../payload'
 import { outcomeSummary, statusOf, type UrlReport } from '../report'
 import {
@@ -151,6 +152,9 @@ function diffSection(diff: DiffPayload): string {
       'Compared on price, currency, availability and title only — never description or free text.',
       '',
     )
+    if (diff.result !== null && markdownCopyOf(diff.result) === 'linked') {
+      out.push(LINKED_PARITY_NOTE, '')
+    }
     for (const evidence of diff.parity.evidence) {
       out.push(
         `- ${escapeCell(evidence.label)}: ${escapeCell(evidence.value)} (${basisLabel(evidence.basis)})`,

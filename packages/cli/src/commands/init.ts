@@ -30,6 +30,7 @@
  * The mounting snippets mirror the recipes at rebilder.com/docs/adapters/*.
  */
 
+import { DEFAULT_RULESET } from '@rebilder/agent-readability'
 import { UsageError } from '../exit'
 import type { InitCommand } from '../args'
 import type { Scaffold } from '../payload'
@@ -216,7 +217,7 @@ export async function runInit(command: InitCommand, runtime: CliRuntime): Promis
 const SHARED_NOTES: readonly string[] = [
   'The resolvers return your source of truth. Every substantive value — price, stock, hours, policy text — comes from these fields; the gateway never invents one.',
   'The Apache-2.0 SDK serves without a Rebilder account or subscription. Configure reporting separately.',
-  'Run `rebilder check <url>` before and after to see what changed. Content negotiation is D2.1 (10 points) and unlocks D2.3 and D2.4.',
+  `Run \`rebilder check <url>\` before and after to see what changed. Sending a Markdown copy from the page address is D2.1 (${DEFAULT_RULESET.weights['machine-representation.negotiated-response'] ?? 0} points) and unlocks D2.3 and D2.4.`,
 ]
 
 const CONFIG_BODY = `import type { GatewayConfig } from '@rebilder/gateway'

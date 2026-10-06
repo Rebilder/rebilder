@@ -31,10 +31,14 @@ const CORPUS = resolve(HERE, '..', '..', 'agent-readability', 'conformance')
 
 /** Fixture ids used across the suite AND in the README. Keep the two in step. */
 export const FIXTURES = {
-  /** A 90 — gateway-installed PDP with markdown negotiation and JSON-LD. */
+  /** A 93 — gateway-installed PDP with markdown negotiation and JSON-LD. */
   gatewayMd: '001-pdp-gateway-md',
-  /** D 54 — the same PDP as raw HTML. The honest before/after pair. */
+  /** D 59 — the same PDP as raw HTML. The honest before/after pair. */
   rawHtml: '002-pdp-raw-html',
+  /** C 71 — no negotiation, but a linked Markdown copy that loads (ARS 0.3, 6 of 9 on D2.1). */
+  linkedCopy: '064-linked-markdown-copy',
+  /** D 59 — the same page, whose linked Markdown copy does not load. */
+  linkedCopyBroken: '065-linked-markdown-copy-broken',
   /** opt-out — a deliberate, well-formed assistant disallow. */
   optOut: '020-robots-deliberate-optout',
   /** unscored / robots-disallow-scanner. */

@@ -1,6 +1,6 @@
 # @rebilder/agent-readability
 
-Score how well AI agents can read a web page. This is the reference implementation of the [Rebilder Agent Readability Spec](https://rebilder.com/spec/ars) (ARS 0.2): it checks whether the facts an agent needs for that kind of page are present, findable and cheap to read, and ranks the fixes.
+Score how well AI agents can read a web page. This is the reference implementation of the [Rebilder Agent Readability Spec](https://rebilder.com/spec/ars) (ARS 0.3): it checks whether the facts an agent needs for that kind of page are present, findable and cheap to read, and ranks the fixes.
 
 The scorer is a pure, deterministic function with no dependencies: no network, no clock, no randomness, no model. A separate entry point fetches live pages safely.
 
@@ -21,7 +21,8 @@ import { score } from '@rebilder/agent-readability'
 import { probeStrict, strictPolicyForRun } from '@rebilder/agent-readability/probe'
 
 // 1. Fetch the evidence: the page as an agent and as a browser, plus robots.txt,
-//    llms.txt and /.well-known/ucp. Public https hosts only.
+//    llms.txt, /.well-known/ucp and any Markdown copy the page links to.
+//    Public https hosts only.
 const outcome = await probeStrict('https://example.com/products/trail-pack', strictPolicyForRun())
 if (!outcome.ok) throw new Error(`${outcome.rejection}: ${outcome.detail}`)
 
@@ -44,7 +45,7 @@ for (const fix of result.recommendations) {
 | `@rebilder/agent-readability/probe` | `probeStrict()`: fetches evidence from a public https origin. DNS-validated and pinned against private addresses, 2 MiB streamed body cap, 3 redirects, 5 second timeout, robots.txt read first, a politeness limiter | Node.js servers |
 | `@rebilder/agent-readability/probe/local` | `probeLocal()`: also allows private hosts and plain http, for checking your own staging site | A terminal only. It refuses to load unless the process was started with `--allow-private`, and always in a hosted runtime |
 
-The probe identifies itself as `rebilder-ars/0.2 (+https://rebilder.com/bots)`, never as another company's crawler, and obeys a robots.txt group that disallows `rebilder-ars`.
+The probe identifies itself as `rebilder-ars/0.3 (+https://rebilder.com/bots)`, never as another company's crawler, and obeys a robots.txt group that disallows `rebilder-ars`.
 
 ## What the score measures
 

@@ -19,6 +19,12 @@
  * comparison is normative and narrow (price, currency, availability and title
  * only, post-normalisation, never free text); reimplementing it in a CLI would
  * produce a second opinion with no fixture behind it.
+ *
+ * ARS 0.3: when the page does not negotiate but links a Markdown copy that
+ * loaded, D2.4 compares THAT copy with the page, while the two columns above
+ * it still show the agent and browser requests, which then carry the same HTML.
+ * The formatters say so (`markdownCopyOf`), because "Values: match" under two
+ * identical HTML columns would otherwise read as a comparison of those columns.
  */
 
 import { score } from '@rebilder/agent-readability'

@@ -5,9 +5,18 @@
  * at all: clients log it and users quote it in bug reports.
  */
 
+import { ARS_SPEC_VERSION } from '@rebilder/agent-readability'
+
+/**
+ * The spec this server scores against, as prose names it: "ARS 0.3". Derived
+ * from the scorer it ships with, so a spec release cannot leave a tool
+ * description or the server instructions naming the previous version.
+ */
+export const ARS_LABEL = `ARS ${ARS_SPEC_VERSION.split('.').slice(0, 2).join('.')}`
+
 export const SERVER_NAME = '@rebilder/mcp-server'
 export const SERVER_TITLE = 'Rebilder — Agent Readability'
-export const SERVER_VERSION = '0.3.0'
+export const SERVER_VERSION = '0.4.0'
 
 /**
  * The newest MCP revision this server implements. `2025-06-18` introduced tool

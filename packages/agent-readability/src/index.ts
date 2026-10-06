@@ -78,6 +78,11 @@ export type { ArsCheckMeta } from './ruleset'
 /* ── the scorer ───────────────────────────────────────────────────────────── */
 
 /**
+ * `markdownAlternateTarget` (with `declaredMarkdownAlternates` and
+ * `isMachineCopy`) is exported so a probe other than `./probe`, such as the
+ * browser extension's, fetches the same linked Markdown copy the scorer will
+ * look for (ARS 0.3).
+ *
  * `score()` is the standard. `bandFor()` is the band lookup every renderer needs
  * (bands headline, integers are secondary). `SUBPOINTS` is the point split inside
  * the checks that score a conjunction rather than a band — published because a
@@ -93,7 +98,10 @@ export {
   SUBPOINTS,
   bandFor,
   canonicalJson,
+  declaredMarkdownAlternates,
   evidenceHash,
+  isMachineCopy,
+  markdownAlternateTarget,
   rulesetHash,
   score,
   sha256Hex,

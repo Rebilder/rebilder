@@ -4,6 +4,13 @@ Notable changes to `@rebilder/mcp-server`. Dates are the day each version reache
 
 ## Unreleased
 
+## 0.4.0 (2026-10-06)
+
+- **Scores against ARS 0.3.** Weights and check ids are unchanged. When a page does not send a Markdown copy but links one on the same site, `scan_url` and `compare_agent_view` fetch that one copy. A copy that loads earns 6 of D2.1's 9 points. More action words count as a page's main action, such as "shop", "free trial", "get a demo" and "talk to sales". Evidence lines and fixes are written in plain language.
+- **Fixed:** the `scan_url` report printed the byte reduction multiplied by 100, such as "8200% fewer bytes" for 82%. It now prints the percent the scorer computed.
+- `scan_url`, `compare_agent_view` and `explain_check` explain the linked-copy credit. `compare_agent_view` no longer says a page has no machine representation when its linked copy works.
+- Tool descriptions and server instructions take the ARS version from the bundled scorer.
+- The `REBILDER_MCP_PROBE_BUDGET` floor rises from 5 to 6, so the smallest budget still covers one scan of a page with a linked copy.
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/mcp-server. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.3.0 (2026-09-28)

@@ -12,8 +12,12 @@
  * control** that differ in the `Accept` header AND IN NOTHING ELSE — same User
  * Agent, same everything. That is what makes the D2.4 parity check meaningful and
  * what stops a correctly installed gateway, which negotiates on `Accept` and not
- * on UA, from being scored as a cloaker. Per origin: `/robots.txt` (first),
- * `/llms.txt`, `/.well-known/ucp`. Nothing else. No guessing `/sitemap.xml`,
+ * on UA, from being scored as a cloaker. ARS 0.3 adds one conditional request:
+ * when the agent probe got HTML and the page declares a Markdown copy at another
+ * same-origin address, that one address is fetched with the agent's headers
+ * (`markdownAlternateTarget` in `../score` decides which, for the probe and the
+ * scorer alike). Per origin: `/robots.txt` (first), `/llms.txt`,
+ * `/.well-known/ucp`. Nothing else. No guessing `/sitemap.xml`,
  * `/mcp`, `/acp` — credit for an endpoint comes from *declaring* it, because an
  * endpoint an agent cannot find is an endpoint that does not exist. The three
  * probed paths are the disclosed exception: published conventions at published
@@ -55,7 +59,7 @@ import { DEFAULT_RULESET } from '../ruleset'
 import { utf8Length } from '../extract'
 import { ARS_ROBOTS_TOKEN, robotsDisallowsScanner } from '../robots-policy'
 import { AGENT_ACCEPT, ASSET_ACCEPT, BROWSER_ACCEPT } from './headers'
-import { sha256Hex } from '../score'
+import { markdownAlternateTarget, sha256Hex } from '../score'
 import {
   createDnsResolver,
   createPinnedTransport,
@@ -114,7 +118,7 @@ export interface ProbeIdentity {
  * below and that string never moves. Versioning the refusal token would let a
  * spec bump quietly re-open sites that already said no.
  */
-export const ARS_USER_AGENT = 'rebilder-ars/0.2 (+https://rebilder.com/bots)'
+export const ARS_USER_AGENT = 'rebilder-ars/0.3 (+https://rebilder.com/bots)'
 
 /**
  * Re-exported, not defined here: the token and the refusal decision moved to
@@ -663,6 +667,21 @@ export async function probeWithHostPolicy(
     const agent = await run(url.toString(), agentHeaders)
     const browser = await run(url.toString(), browserHeaders)
 
+    // 3b — the Markdown copy the page links to, when it did not send one (ARS 0.3).
+    const linked = markdownAlternateTarget(
+      agent.result.ok ? agent.result.capture : null,
+      browser.result.ok ? browser.result.capture : null,
+      origin,
+    )
+    let markdownAlternate: ArsProbeRecord | null = null
+    if (linked !== null) {
+      const rule = disallowedFor(new URL(linked).pathname)
+      markdownAlternate =
+        rule !== null
+          ? skipped(agentHeaders, `robots.txt disallows ${ARS_ROBOTS_TOKEN} for ${linked}`)
+          : await run(linked, agentHeaders)
+    }
+
     // 4 — the two origin-level conventions, and nothing else.
     const fetchAsset = async (path: string): Promise<ArsProbeRecord | null> => {
       const rule = disallowedFor(path)
@@ -673,7 +692,17 @@ export async function probeWithHostPolicy(
     const llmsTxt = await fetchAsset('/llms.txt')
     const wellKnownUcp = await fetchAsset('/.well-known/ucp')
 
-    return evidenceOf({ agent, browser, parityConfirm: null, robotsTxt, llmsTxt, wellKnownUcp })
+    return evidenceOf({
+      agent,
+      browser,
+      parityConfirm: null,
+      // Omitted when not taken, so a page with no linked copy produces exactly
+      // the bundle (and the evidence hash) it produced under 0.2.
+      ...(markdownAlternate === null ? {} : { markdownAlternate }),
+      robotsTxt,
+      llmsTxt,
+      wellKnownUcp,
+    })
   } catch (error) {
     if (error instanceof ProbeBudgetExceededError) {
       return { ok: false, rejection: 'budget-exceeded', detail: error.message }

@@ -13,8 +13,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import { INDEX_BASE_URL_ENV } from '../src/index-client'
-import { PROBE_BUDGET_ENV } from '../src/scanner'
-import { LATEST_PROTOCOL_VERSION } from '../src/version'
+import { MAX_PROBE_BUDGET, MIN_PROBE_BUDGET, PROBE_BUDGET_ENV } from '../src/scanner'
+import { ARS_LABEL, LATEST_PROTOCOL_VERSION } from '../src/version'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const read = (file: string): unknown => JSON.parse(readFileSync(path.join(ROOT, file), 'utf8'))
@@ -85,6 +85,13 @@ describe('server.json', () => {
     }
   })
 
+  it('states the probe budget clamp the binary applies', () => {
+    const budget = server.packages[0]?.environmentVariables?.find(
+      (variable) => variable.name === PROBE_BUDGET_ENV,
+    )
+    expect(budget?.description).toContain(`Clamped to ${MIN_PROBE_BUDGET}-${MAX_PROBE_BUDGET}.`)
+  })
+
   it('names the public source repository that package.json names', () => {
     const repository = manifest.repository
     expect(repository?.url).toMatch(/^git\+https:\/\/github\.com\/[^/]+\/[^/]+\.git$/)
@@ -112,6 +119,17 @@ describe('README install one-liners', () => {
 
   it('names the MCP revision the server actually defaults to', () => {
     expect(readme).toContain(`\`${LATEST_PROTOCOL_VERSION}\` (the default)`)
+  })
+
+  it('names the ARS version the server scores against', () => {
+    // Hand-written prose. The tool descriptions derive theirs from the scorer.
+    const named = [...readme.matchAll(/\bARS (\d+\.\d+)/g)].map((match) => `ARS ${match[1]}`)
+    expect(named.length).toBeGreaterThan(0)
+    expect(new Set(named)).toEqual(new Set([ARS_LABEL]))
+  })
+
+  it('states the probe budget clamp the binary applies', () => {
+    expect(readme).toContain(`clamped to ${MIN_PROBE_BUDGET}–${MAX_PROBE_BUDGET}`)
   })
 
   it('uses absolute links only', () => {

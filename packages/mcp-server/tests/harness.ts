@@ -71,9 +71,18 @@ Allow: /
 Sitemap: https://example.com/sitemap.xml
 `
 
+/** Where `linksMarkdownCopy` puts the Markdown copy: same site, another address. */
+export const LINKED_COPY_URL = 'https://example.com/products/kettle.md'
+
 export interface SiteOptions {
   /** Serve markdown when the Accept header prefers it. */
   readonly negotiates?: boolean
+  /**
+   * Declare a Markdown copy at `LINKED_COPY_URL` with `<link rel="alternate">`
+   * and serve it there (ARS 0.3). The page address itself still sends HTML
+   * unless `negotiates` is also set.
+   */
+  readonly linksMarkdownCopy?: boolean
   /** Disallow the rebilder-ars token for everything. */
   readonly blocksScanner?: boolean
   /** Every request fails at the transport. */
@@ -117,6 +126,14 @@ function respond(url: string, accept: string, options: SiteOptions): ProbeHttpRe
   if (path === '/.well-known/ucp') {
     return fromWebResponse(new Response('not found', { status: 404 }))
   }
+  if (path === new URL(LINKED_COPY_URL).pathname && options.linksMarkdownCopy === true) {
+    return fromWebResponse(
+      new Response(MARKDOWN_PAGE, {
+        status: 200,
+        headers: { 'content-type': 'text/markdown; charset=utf-8' },
+      }),
+    )
+  }
   if (path === '/products/kettle') {
     const wantsMarkdown = accept.includes('text/markdown')
     if (options.negotiates === true && wantsMarkdown) {
@@ -131,8 +148,15 @@ function respond(url: string, accept: string, options: SiteOptions): ProbeHttpRe
         }),
       )
     }
+    const html =
+      options.linksMarkdownCopy === true
+        ? HTML_PAGE.replace(
+            '</head>',
+            `<link rel="alternate" type="text/markdown" href="${LINKED_COPY_URL}">\n</head>`,
+          )
+        : HTML_PAGE
     return fromWebResponse(
-      new Response(HTML_PAGE, {
+      new Response(html, {
         status: 200,
         headers: {
           'content-type': 'text/html; charset=utf-8',

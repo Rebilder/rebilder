@@ -15,6 +15,28 @@
 
 import type { ArsCheck, ArsResult } from '@rebilder/agent-readability'
 
+/**
+ * How the page gives an agent a Markdown copy, read off the result.
+ *
+ * ARS 0.3 pays part of D2.1 for a Markdown copy the page links to at another
+ * address, when that copy loads. So D2.1 above zero no longer means "the page
+ * address negotiates". `cost.negotiatedBytes` is still set only when the page
+ * address itself answered with a machine copy, and that is the test for it.
+ */
+export type MarkdownCopy = 'page-address' | 'linked' | 'none'
+
+export function markdownCopyOf(result: ArsResult): MarkdownCopy {
+  if (result.cost.negotiatedBytes !== null) return 'page-address'
+  const check = result.dimensions
+    .flatMap((dimension) => dimension.checks)
+    .find((entry) => entry.id === 'machine-representation.negotiated-response')
+  return check !== undefined && check.earned > 0 ? 'linked' : 'none'
+}
+
+/** Said wherever a result explains D2.1 for a page whose linked copy works. */
+export const LINKED_COPY_NOTE =
+  'The page links a Markdown copy that works. Sending it from the page address too earns full credit on D2.1.'
+
 export function formatInteger(value: number): string {
   return value.toLocaleString('en-US')
 }
@@ -107,14 +129,17 @@ function formatCost(result: ArsResult): string[] {
   )
   if (cost.negotiatedBytes === null) {
     lines.push(
-      '  Agent representation: none — the same HTML is served to an agent asking for text/markdown.',
+      markdownCopyOf(result) === 'linked'
+        ? '  Agent representation: none at the page address. The page links a Markdown copy that works (see D2.1).'
+        : '  Agent representation: none — the same HTML is served to an agent asking for text/markdown.',
     )
   } else {
     lines.push(
       `  Agent representation: ${formatBytes(cost.negotiatedBytes, cost.truncated)}, ${formatApproxTokens(cost.approxNegotiatedTokens ?? 0, cost.truncated)}`,
     )
+    // Already an integer percent (94 means 94% fewer bytes), not a fraction.
     if (cost.reductionRatio !== null) {
-      lines.push(`  Reduction: ${Math.round(cost.reductionRatio * 100)}% fewer bytes [measured]`)
+      lines.push(`  Reduction: ${cost.reductionRatio}% fewer bytes [measured]`)
     }
   }
   if (cost.firstCoreFactOffset !== null) {
@@ -147,15 +172,18 @@ export function formatBusinessReview(result: ArsResult): string[] {
   if (result.outcome.kind !== 'scored') return []
   const found = new Set(result.facts.map((fact) => fact.kind))
   const missing = result.factProfile.core.filter((kind) => !found.has(kind))
+  const copy = markdownCopyOf(result)
   return [
     'Business review and next steps',
     missing.length > 0
       ? `  Not detected in this capture (heuristic): ${missing.join(', ')}. Check the page and ask the owner for accurate details before proposing content.`
       : '  Expected core facts were detected (heuristic). Ask the owner to confirm their accuracy against current business information.',
     '  Use explain_check with a check id below to understand a finding before making changes.',
-    result.cost.negotiatedBytes === null
-      ? '  Use install_snippet after confirming the website framework to prepare a connection to existing business data. The snippet needs review and real data wiring; it does not install or deploy itself.'
-      : '  Use compare_agent_view to inspect whether customer and assistant responses carry equivalent business facts.',
+    copy === 'page-address'
+      ? '  Use compare_agent_view to inspect whether customer and assistant responses carry equivalent business facts.'
+      : copy === 'linked'
+        ? `  ${LINKED_COPY_NOTE} Use install_snippet after confirming the website framework to set that up. The snippet needs review and real data wiring; it does not install or deploy itself.`
+        : '  Use install_snippet after confirming the website framework to prepare a connection to existing business data. The snippet needs review and real data wiring; it does not install or deploy itself.',
     '  After the owner updates the website, run scan_url again to verify the change.',
     '  This scan measures readability, not customer demand, AI recommendations or sales. Do not fill missing details with invented prices, policies or services.',
   ]

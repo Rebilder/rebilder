@@ -1,5 +1,5 @@
 /**
- * score.ts — the ARS 0.2 scoring engine. The whole pure half comes together here.
+ * score.ts — the ARS 0.3 scoring engine. The whole pure half comes together here.
  *
  * THE CONTRACT. `score(evidence, ruleset)` is a pure function: same evidence,
  * same ruleset, same `ArsResult`, byte for byte, in any conformant
@@ -24,13 +24,20 @@
  * TWO GATES EXIST, AND THEY POINT THE SAFE WAY. D2.3 (`Vary: Accept`) and D2.4
  * (substance parity) are gated on D2.1 (a machine representation was served),
  * which is a MEASURED check gating others. That direction is fine and is what
- * makes the published ceiling provable: no content negotiation loses D2.1 (10) +
- * D2.3 (3) + D2.4 (3) → max 84 → capped at B. The forbidden direction — a
+ * makes the published ceiling provable: no content negotiation loses D2.1 (9) +
+ * D2.3 (3) + D2.4 (3) → max 85 → capped at B. The forbidden direction — a
  * heuristic that can zero measured points — appears nowhere. In particular D2.4
  * and D5.3 are SCORED CHECKS, NOT GATES: a parity failure loses its own 3 points
- * and raises a `warn`, and leaves D2's other 17 measured points alone. That is
- * the whole reason "measured 64 / heuristic 36" is an honest split rather than a
+ * and raises a `warn`, and leaves D2's other 15 measured points alone. That is
+ * the whole reason "measured 63 / heuristic 37" is an honest split rather than a
  * presentational one.
+ *
+ * EVIDENCE IS WRITTEN FOR THE SITE OWNER. Labels, values, remedies and flag
+ * messages are printed on the public scan page, so they use plain words and name
+ * a header or file only where a developer needs it to act. "Content
+ * negotiation" in particular is written as what it means to a merchant: the
+ * page sends AI assistants a Markdown copy when they ask for one. None of this
+ * text is in the conformance projection, so rewording it is a PATCH.
  *
  * WHICH REPRESENTATION SCORES WHAT (the decision `./extract` states in its own
  * header, repeated here because it is the reason the golden pair means anything):
@@ -212,8 +219,14 @@ export const SUBPOINTS = deepFreeze({
     band: [100, 7, 75, 5, 50, 3, 25, 1] as readonly number[],
     noscriptFloor: 1,
   },
-  /** D2.1, 9. All-or-nothing: a machine media type AND a body that is not HTML. */
-  negotiatedResponse: { full: 9 },
+  /**
+   * D2.1, 9 for a machine copy served at the page's own address on `Accept`
+   * negotiation: a machine media type AND a body that is not HTML. ARS 0.3: 6
+   * when the page does not negotiate but the Markdown copy it declares as an
+   * alternate was fetched and is real. Less than full because only agents that
+   * look for the link reach it, and they pay a second request to do so.
+   */
+  negotiatedResponse: { full: 9, linkedCopy: 6 },
   /** D2.2, 3. All-or-nothing. */
   declaredAlternates: { full: 3 },
   /** D2.3, 3. All-or-nothing, and 0 unless D2.1 > 0. */
@@ -460,17 +473,21 @@ export function evidenceHash(evidence: ArsEvidence): string {
         robotsTxt: redactProbe(evidence.probes.robotsTxt),
         llmsTxt: redactProbe(evidence.probes.llmsTxt),
         wellKnownUcp: redactProbe(evidence.probes.wellKnownUcp),
+        // ARS 0.3, and only when present, so a 0.2 bundle hashes as it did.
+        ...(evidence.probes.markdownAlternate === undefined
+          ? {}
+          : { markdownAlternate: redactProbe(evidence.probes.markdownAlternate) }),
       },
     }),
   )
 }
 
 /**
- * Version marker for the ARS 0.2 corpus (spec §2.4.3).
+ * Version marker for the ARS 0.3 corpus (spec §2.4.3).
  * This is the hash of the versioned marker string, not of fixture contents.
  * A corpus-content digest replaces it at corpus freeze in a MINOR release.
  */
-export const ARS_CORPUS_HASH = sha256Hex('ars-0.2-corpus-unfrozen')
+export const ARS_CORPUS_HASH = sha256Hex('ars-0.3-corpus-unfrozen')
 
 // ---------------------------------------------------------------------------
 // Header helpers
@@ -561,6 +578,17 @@ function headerTokens(value: string | null): string[] {
 // ---------------------------------------------------------------------------
 
 /** Everything the 22 checks read, computed exactly once. */
+/** The Markdown copy a page links to, as the probe found it (ARS 0.3). */
+interface LinkedCopy {
+  /** The declared URL the probe should have fetched. */
+  readonly url: string
+  /** `checked`: fetched and real. `broken`: fetched and not Markdown. `unchecked`: not in the bundle. */
+  readonly status: 'checked' | 'broken' | 'unchecked'
+  readonly representation: ArsRepresentation | null
+  /** Why a broken copy failed, in plain words. */
+  readonly reason: string | null
+}
+
 interface ScoreContext {
   readonly evidence: ArsEvidence
   readonly ruleset: ArsRuleset
@@ -579,6 +607,10 @@ interface ScoreContext {
   readonly policy: ArsPolicyReport
   readonly robots: RobotsFile | null
   readonly flags: ArsFlag[]
+  /** True when the agent probe itself received a machine copy (negotiation). */
+  readonly negotiated: boolean
+  /** The declared Markdown copy, when the page links to one and does not negotiate. */
+  readonly linkedCopy: LinkedCopy | null
 }
 
 interface CheckOutcome {
@@ -599,6 +631,68 @@ function heuristic(label: string, value: string): ArsCheckEvidence {
   return { label, value, basis: 'heuristic' }
 }
 
+/**
+ * Plain names for fact kinds, for evidence and remedies a site owner reads. The
+ * kind ids stay the published vocabulary; this is only how they are printed.
+ */
+const FACT_NAMES: Readonly<Record<ArsFactKind, string>> = {
+  title: 'name or title',
+  description: 'description',
+  updated: 'last-updated date',
+  published: 'publish date',
+  price: 'price',
+  currency: 'currency',
+  availability: 'availability',
+  brand: 'brand',
+  sku: 'SKU',
+  shipping: 'shipping details',
+  returns: 'returns policy',
+  'org-name': 'business name',
+  address: 'address',
+  hours: 'opening hours',
+  phone: 'phone number',
+  email: 'email address',
+  'service-area': 'service area',
+  author: 'author',
+  section: 'section',
+  authority: 'publisher',
+  'primary-action-url': 'main action link (such as Buy, Book, Contact or Install)',
+  eligibility: 'eligibility',
+  duration: 'duration',
+  'question-answer': 'questions and answers',
+  'item-count': 'number of items',
+  'item-link': 'links to the items',
+}
+
+function factName(kind: ArsFactKind): string {
+  return FACT_NAMES[kind] ?? kind
+}
+
+function factList(kinds: readonly ArsFactKind[]): string {
+  return kinds.map(factName).join(', ')
+}
+
+/**
+ * Bytes as a reader says them. Integer arithmetic only, so the string is the
+ * same in every implementation: under 1 KB prints bytes, above it prints whole
+ * kilobytes (1 KB = 1024 bytes), rounded half-up.
+ */
+function plainBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} bytes`
+  return `${divRoundHalfUp(bytes, 1024)} KB`
+}
+
+/** Plain words for a robots.txt status. */
+const ROBOTS_STATUS: Readonly<Record<ArsPolicyReport['robotsTxtStatus'], string>> = {
+  ok: 'found',
+  missing: 'not found (nothing is blocked)',
+  error: 'the server returned an error',
+  unparseable: 'found, but it could not be read',
+}
+
+/** The gated D2 checks' evidence while no Markdown copy is served. */
+const COUNTS_ONCE_COPY = 'only once the page sends AI assistants a Markdown copy, so 0 for now'
+
 // ---------------------------------------------------------------------------
 // D1 — Retrievability
 // ---------------------------------------------------------------------------
@@ -617,12 +711,12 @@ function checkReachable(context: ScoreContext): CheckOutcome {
     (sameFinalUrl ? split.noAcceptConditionalRedirect : 0)
 
   const evidence = [
-    measured('HTTP status on the agent path', String(agentCapture.status)),
-    measured('Redirect hops', `${hops} (limit ${ruleset.maxRedirects})`),
+    measured('Status code AI assistants got', String(agentCapture.status)),
+    measured('Redirects on the way', `${hops} (up to ${ruleset.maxRedirects} allowed)`),
     measured(
-      'Both probes resolved to the same URL',
+      'Same address for AI assistants and browsers',
       browserCapture === null
-        ? 'not comparable — no browser-control capture in this bundle'
+        ? 'not checked, because this scan has no browser request to compare'
         : yesNo(sameFinalUrl),
     ),
   ]
@@ -632,7 +726,7 @@ function checkReachable(context: ScoreContext): CheckOutcome {
         earned,
         evidence,
         remedy:
-          'Serve the same URL to both Accept headers. An Accept-conditional redirect sends the agent somewhere the browser never goes, and caches key on the URL.',
+          'Send AI assistants and browsers to the same address. A redirect that depends on the Accept header sends assistants to a page browsers never see.',
       }
 }
 
@@ -643,25 +737,31 @@ function checkRobotsPolicy(context: ScoreContext): CheckOutcome {
   const parsesClean = robots === null || robots.malformedLines === 0
   const noOrphanRules = robots === null || robots.orphanRules === 0
 
+  const rule =
+    decision.matchedGroup === null
+      ? ''
+      : ` (User-agent: ${decision.matchedGroup}${
+          decision.matchedRule === null ? '' : `, ${decision.matchedRule}`
+        })`
   const evidence = [
-    measured('robots.txt', policy.robotsTxtStatus),
+    measured('robots.txt', ROBOTS_STATUS[policy.robotsTxtStatus]),
     measured(
-      'Assistant audience',
-      decision.matchedGroup === null
-        ? `${decision.decision} (no matching group)`
-        : `${decision.decision} via User-agent: ${decision.matchedGroup}${
-            decision.matchedRule === null ? '' : ` / ${decision.matchedRule}`
-          }`,
+      'AI assistants allowed',
+      decision.decision === 'disallow'
+        ? `no${rule}`
+        : decision.matchedGroup === null
+          ? 'yes, no rule mentions them'
+          : `yes${rule}`,
     ),
-    measured('Malformed lines', robots === null ? 'n/a' : String(robots.malformedLines)),
+    measured('Lines that could not be read', robots === null ? 'none' : String(robots.malformedLines)),
     measured(
-      'Rules before any User-agent line',
-      robots === null ? 'n/a' : String(robots.orphanRules),
+      'Rules outside a User-agent group',
+      robots === null ? 'none' : String(robots.orphanRules),
     ),
-    measured('Sitemap: declared', yesNo(policy.sitemapDeclared)),
+    measured('Sitemap listed', yesNo(policy.sitemapDeclared)),
     measured(
-      'Training-crawler policy (never scored)',
-      policy.trainingOptOut ? 'blocked — neutral, no effect on this score' : 'allowed',
+      'AI training crawlers',
+      policy.trainingOptOut ? 'blocked, which does not affect this score' : 'allowed',
     ),
   ]
 
@@ -674,14 +774,14 @@ function checkRobotsPolicy(context: ScoreContext): CheckOutcome {
       severity: 'warn',
       basis: 'measured',
       message:
-        'robots.txt disallows assistant crawlers through a group that does not name one, so it reads as a blanket rule rather than a deliberate choice. Assistant traffic is blocked as a side effect.',
-      evidence: [evidence[1] ?? measured('Assistant audience', decision.decision)],
+        'Your robots.txt blocks AI assistants with a rule written for all crawlers. That looks accidental, and it keeps assistants out.',
+      evidence: [evidence[1] ?? measured('AI assistants allowed', 'no')],
     })
     return {
       earned: 0,
       evidence,
       remedy:
-        'Name the assistant crawlers you mean to allow or block in their own robots.txt group. A blanket disallow blocks assistant fetches that users triggered on purpose.',
+        'Your robots.txt blocks AI assistants with a rule meant for all crawlers. If you want assistants to read your pages, give them their own group that allows them, such as ChatGPT-User and Claude-User.',
     }
   }
 
@@ -696,7 +796,7 @@ function checkRobotsPolicy(context: ScoreContext): CheckOutcome {
     evidence,
     remedy: policy.sitemapDeclared
       ? undefined
-      : 'Add a `Sitemap:` line to robots.txt. It is the one place an agent looks to find the rest of the site.',
+      : 'Add a `Sitemap:` line to robots.txt so assistants can find the rest of your pages.',
   }
 }
 
@@ -708,7 +808,7 @@ function checkRenderIndependence(context: ScoreContext): CheckOutcome {
   if (structural === null || structural.doc === null) {
     return {
       earned: 0,
-      evidence: [heuristic('HTML representation', 'none in this bundle — not evaluated')],
+      evidence: [heuristic('HTML page', 'not checked, because no HTML was returned')],
     }
   }
 
@@ -733,25 +833,25 @@ function checkRenderIndependence(context: ScoreContext): CheckOutcome {
       id: 'render-dependent',
       severity: 'info',
       basis: 'heuristic',
-      message: `${found.size} of ${coreSize} core facts for this page kind were present in the HTML without running JavaScript. A caller that does not execute scripts sees the rest as missing.`,
-      evidence: [heuristic('Core facts in the served HTML', `${found.size}/${coreSize}`)],
+      message: `${found.size} of ${coreSize} key facts for this kind of page were in the HTML before any JavaScript ran. An assistant that does not run scripts sees the rest as missing.`,
+      evidence: [heuristic('Key facts in the HTML', `${found.size} of ${coreSize}`)],
     })
   }
 
   return {
     earned,
     evidence: [
-      heuristic('Core facts present without JavaScript', `${found.size}/${coreSize}`),
-      heuristic('<noscript> fallback with content', yesNo(hasNoscript)),
+      heuristic('Key facts in the HTML before JavaScript runs', `${found.size} of ${coreSize}`),
+      heuristic('Fallback text for visitors without JavaScript', yesNo(hasNoscript)),
       heuristic(
-        'Basis',
-        'inferred — ARS never executes JavaScript, so this measures the served HTML, not what a browser would render',
+        'How we checked',
+        'we read the HTML your server sends and do not run JavaScript, so facts added by scripts count as missing',
       ),
     ],
     remedy:
       earned === full
         ? undefined
-        : 'Render the core facts for this page kind into the HTML the server sends. Agents do not run your JavaScript.',
+        : 'Put the key facts in the HTML your server sends. Most AI assistants do not run JavaScript, so facts added by scripts are invisible to them.',
   }
 }
 
@@ -762,31 +862,180 @@ function checkRenderIndependence(context: ScoreContext): CheckOutcome {
 /** Media types that count as a machine representation for D2.1 (§3.4). */
 const MACHINE_KINDS: ReadonlySet<ArsRepresentation['kind']> = new Set(['markdown', 'text', 'json'])
 
+/** Whether a capture is a machine copy: a machine media type and a body that is not HTML. */
+export function isMachineCopy(capture: ArsHttpCapture): boolean {
+  const representation = buildRepresentation(capture)
+  return (
+    representation !== null &&
+    MACHINE_KINDS.has(representation.kind) &&
+    !representation.looksLikeHtml
+  )
+}
+
+const MARKDOWN_MEDIA: ReadonlySet<string> = new Set(['text/markdown', 'text/x-markdown'])
+
+function isMarkdownType(type: string | null): boolean {
+  return type !== null && MARKDOWN_MEDIA.has((type.split(';')[0] ?? '').trim().toLowerCase())
+}
+
+/**
+ * The Markdown copies a page declares as alternates, as absolute URLs without a
+ * fragment, deduplicated, in a fixed order: `Link` headers on each capture, then
+ * `<link rel="alternate" type="text/markdown">` in each capture's HTML.
+ */
+export function declaredMarkdownAlternates(captures: readonly (ArsHttpCapture | null)[]): string[] {
+  const out: string[] = []
+  const add = (raw: string, base: string): void => {
+    try {
+      const url = new URL(raw, base)
+      url.hash = ''
+      const href = url.toString()
+      if (!out.includes(href)) out.push(href)
+    } catch {
+      // An unparseable href declares nothing.
+    }
+  }
+  for (const capture of captures) {
+    if (capture === null) continue
+    for (const link of parseLinkHeaders(headerAll(capture.headers, 'link'))) {
+      if (link.rel.includes('alternate') && isMarkdownType(link.type)) add(link.url, capture.finalUrl)
+    }
+  }
+  for (const capture of captures) {
+    if (capture === null) continue
+    const representation = buildRepresentation(capture)
+    if (representation === null || representation.doc === null) continue
+    for (const link of representation.doc.links) {
+      if (!link.rel.includes('alternate') || link.href === null) continue
+      if (isMarkdownType(link.type)) add(link.href, capture.finalUrl)
+    }
+  }
+  return out
+}
+
+/**
+ * THE ONE MARKDOWN ALTERNATE ARS FETCHES (§3.3, ARS 0.3), shared by the probe and
+ * the scorer so the two cannot disagree about which URL was meant. The first
+ * declared Markdown copy that is on the target's origin and is not the page's
+ * own address; null when the agent probe already received a machine copy, when
+ * it did not get a 2xx, or when nothing qualifies. One extra request at most.
+ */
+export function markdownAlternateTarget(
+  agent: ArsHttpCapture | null,
+  browser: ArsHttpCapture | null,
+  origin: string,
+): string | null {
+  if (agent === null || agent.status < 200 || agent.status >= 300) return null
+  if (isMachineCopy(agent)) return null
+  const own = new Set([agent.finalUrl, agent.requestedUrl])
+  for (const href of declaredMarkdownAlternates([browser, agent])) {
+    let sameOrigin = false
+    try {
+      sameOrigin = new URL(href).origin === origin
+    } catch {
+      sameOrigin = false
+    }
+    if (sameOrigin && !own.has(href)) return href
+  }
+  return null
+}
+
+/** What the bundle says about the linked Markdown copy, checked against the declaration. */
+function linkedCopyOf(
+  evidence: ArsEvidence,
+  agent: ArsHttpCapture,
+  browser: ArsHttpCapture | null,
+): LinkedCopy | null {
+  const url = markdownAlternateTarget(agent, browser, evidence.target.origin)
+  if (url === null) return null
+  const record = evidence.probes.markdownAlternate ?? null
+  if (record === null) return { url, status: 'unchecked', representation: null, reason: null }
+  if (!record.result.ok) {
+    // A refusal is not an observation. robots.txt telling rebilder-ars to stay
+    // off the file, or our own safety policy, means we never saw it, and a
+    // measured check never deducts for what we did not see.
+    if (record.result.error === 'policy-rejected') {
+      return { url, status: 'unchecked', representation: null, reason: null }
+    }
+    return { url, status: 'broken', representation: null, reason: record.result.error }
+  }
+  const capture = record.result.capture
+  // A record for some other URL is not evidence about this declaration.
+  if (capture.requestedUrl !== url) {
+    return { url, status: 'unchecked', representation: null, reason: null }
+  }
+  if (capture.status < 200 || capture.status >= 300) {
+    return { url, status: 'broken', representation: null, reason: `HTTP ${capture.status}` }
+  }
+  if (!isMachineCopy(capture)) {
+    return { url, status: 'broken', representation: null, reason: 'it returned HTML, not Markdown' }
+  }
+  return { url, status: 'checked', representation: buildRepresentation(capture), reason: null }
+}
+
+/** Plain names for the media types the probe asks for, in the order it asks. */
+const MEDIA_NAMES: Readonly<Record<string, string>> = {
+  'text/markdown': 'Markdown',
+  'text/x-markdown': 'Markdown',
+  'text/html': 'HTML',
+  'text/plain': 'plain text',
+  'application/json': 'JSON',
+  '*/*': 'anything else',
+}
+
+/** `text/markdown;q=1.0, text/html;q=0.8` → `Markdown first, then HTML`. */
+function acceptSummary(accept: string): string {
+  const names: string[] = []
+  for (const entry of accept.split(',')) {
+    const type = (entry.split(';')[0] ?? '').trim().toLowerCase()
+    if (type === '') continue
+    const name = MEDIA_NAMES[type] ?? type
+    if (!names.includes(name)) names.push(name)
+  }
+  const [first, ...rest] = names
+  if (first === undefined) return accept
+  return rest.length === 0 ? first : `${first} first, then ${rest.join(', ')}`
+}
+
 function checkNegotiatedResponse(context: ScoreContext): CheckOutcome {
-  const { agent } = context
+  const { agent, linkedCopy } = context
   const typeIsMachine = MACHINE_KINDS.has(agent.kind)
   const bodyIsHtml = agent.looksLikeHtml
-  const earned = typeIsMachine && !bodyIsHtml ? SUBPOINTS.negotiatedResponse.full : 0
+  const linkedWorks = linkedCopy !== null && linkedCopy.status === 'checked'
+  const earned = context.negotiated
+    ? SUBPOINTS.negotiatedResponse.full
+    : linkedWorks
+      ? SUBPOINTS.negotiatedResponse.linkedCopy
+      : 0
 
+  const asked =
+    context.evidence.probes.agent.requestHeaders['accept'] ??
+    context.evidence.probes.agent.requestHeaders['Accept'] ??
+    null
   return {
     earned,
     evidence: [
-      measured('Content-Type on the agent probe', agent.contentType ?? 'absent'),
-      measured('Body is HTML', yesNo(bodyIsHtml)),
-      measured(
-        'Request Accept header',
-        context.evidence.probes.agent.requestHeaders['accept'] ??
-          context.evidence.probes.agent.requestHeaders['Accept'] ??
-          'not recorded',
-      ),
+      measured('We asked for', asked === null ? 'not recorded' : acceptSummary(asked)),
+      measured('Format we got', agent.contentType ?? 'not stated'),
+      measured('Content was HTML', yesNo(bodyIsHtml)),
+      ...(linkedCopy === null ? [] : [measured('Linked Markdown copy', linkedCopyLine(linkedCopy))]),
     ],
-    remedy:
-      earned > 0
-        ? undefined
+    remedy: context.negotiated
+      ? undefined
+      : linkedWorks
+        ? 'Your linked Markdown copy works. For full credit, also send it from the page address when an AI assistant asks for Markdown, so assistants get it without a second request.'
         : typeIsMachine
-          ? 'The response declared a machine media type but the body is HTML. Send the representation the Content-Type promises.'
-          : 'Return a machine representation — Markdown, plain text or JSON — when the request Accept header asks for one, with a matching Content-Type.',
+          ? 'Your server labels this response as Markdown, text or JSON but sends HTML. Send the format the Content-Type header names.'
+          : 'When an AI assistant asks for Markdown, answer from the same address with a Markdown copy of the page and `Content-Type: text/markdown`. Assistants get your facts without the menus, scripts and styling, which are usually most of the page.',
   }
+}
+
+function linkedCopyLine(copy: LinkedCopy): string {
+  if (copy.status === 'checked') {
+    return `loaded as Markdown from ${copy.url} (${plainBytes(copy.representation?.bytes ?? 0)})`
+  }
+  if (copy.status === 'broken') return `did not load as Markdown from ${copy.url} (${copy.reason ?? 'error'})`
+  return `linked at ${copy.url}, not checked in this scan`
 }
 
 function checkDeclaredAlternates(context: ScoreContext): CheckOutcome {
@@ -807,33 +1056,42 @@ function checkDeclaredAlternates(context: ScoreContext): CheckOutcome {
     for (const link of structural.doc.links) {
       if (!link.rel.includes('alternate')) continue
       if (link.type === null || link.href === null) continue
-      documentAlternates.push(`${link.type} → ${link.href}`)
+      documentAlternates.push(`${link.type} at ${link.href}`)
     }
   }
 
   const total = headerAlternates.length + documentAlternates.length
+  const broken = context.linkedCopy !== null && context.linkedCopy.status === 'broken'
+  if (broken && context.linkedCopy !== null) {
+    return {
+      earned: 0,
+      evidence: [measured('Linked Markdown copy', linkedCopyLine(context.linkedCopy))],
+      remedy: `The Markdown copy this page links to did not load (${context.linkedCopy.reason ?? 'error'}). Fix the file or the link.`,
+    }
+  }
   return {
     earned: total > 0 ? SUBPOINTS.declaredAlternates.full : 0,
     evidence: [
       measured(
-        'Link: rel="alternate" (typed)',
+        'Link header pointing to the Markdown copy',
         headerAlternates.length === 0
           ? 'none'
-          : headerAlternates.map((link) => `${link.type ?? '?'} → ${link.url}`).join(', '),
+          : headerAlternates.map((link) => `${link.type ?? '?'} at ${link.url}`).join(', '),
       ),
       measured(
-        '<link rel="alternate"> (typed)',
+        'Link tag in the page pointing to the Markdown copy',
         documentAlternates.length === 0 ? 'none' : documentAlternates.join(', '),
       ),
     ],
     remedy:
       total > 0
         ? undefined
-        : 'Declare the machine representation: `Link: <…>; rel="alternate"; type="text/markdown"` or a `<link rel="alternate">` in the HTML. An endpoint an agent cannot find is an endpoint that does not exist.',
+        : 'Tell assistants where the Markdown copy is. Add `<link rel="alternate" type="text/markdown" href="…">` to the page, or send the same thing as a `Link` header.',
   }
 }
 
-function checkVaryAccept(context: ScoreContext, negotiated: number): CheckOutcome {
+function checkVaryAccept(context: ScoreContext): CheckOutcome {
+  const negotiated = context.negotiated
   const { agentCapture, browserCapture } = context
   const agentVary = headerTokens(header(agentCapture.headers, 'vary'))
   const browserVary =
@@ -841,25 +1099,27 @@ function checkVaryAccept(context: ScoreContext, negotiated: number): CheckOutcom
   const declared = agentVary.includes('accept') || browserVary.includes('accept')
 
   const evidence = [
-    measured('Vary on the agent response', header(agentCapture.headers, 'vary') ?? 'absent'),
+    measured('Vary header sent to AI assistants', header(agentCapture.headers, 'vary') ?? 'not sent'),
     measured(
-      'Vary on the browser response',
+      'Vary header sent to browsers',
       browserCapture === null
-        ? 'no browser capture'
-        : (header(browserCapture.headers, 'vary') ?? 'absent'),
+        ? 'not checked'
+        : (header(browserCapture.headers, 'vary') ?? 'not sent'),
     ),
   ]
 
   // Gated on D2.1: `Vary: Accept` on a response that does not vary by Accept is
   // a claim about caching that is not true. Fixture 035 pins it.
-  if (negotiated === 0) {
+  if (!negotiated) {
     return {
       earned: 0,
       evidence: [
         ...evidence,
         measured(
-          'Scored',
-          'no — this check is 0 unless a machine representation was served (D2.1)',
+          'Counts',
+          context.linkedCopy?.status === 'checked'
+            ? 'only when the page address itself sends the Markdown copy, so 0 for now'
+            : COUNTS_ONCE_COPY,
         ),
       ],
     }
@@ -871,7 +1131,7 @@ function checkVaryAccept(context: ScoreContext, negotiated: number): CheckOutcom
       severity: 'warn',
       basis: 'measured',
       message:
-        'The same URL returns different representations by Accept but does not send `Vary: Accept`. A shared cache can serve the Markdown to a browser, or the HTML to an agent.',
+        'This address sends the Markdown copy or the HTML depending on what is asked for, but does not send `Vary: Accept`. A shared cache can hand the Markdown to a shopper, or the HTML to an assistant.',
       evidence,
     })
   }
@@ -881,7 +1141,7 @@ function checkVaryAccept(context: ScoreContext, negotiated: number): CheckOutcom
     evidence,
     remedy: declared
       ? undefined
-      : 'Send `Vary: Accept` on every response from a URL that negotiates on Accept.',
+      : 'Send `Vary: Accept` on every response from an address that serves a Markdown copy, so caches keep the two versions apart.',
   }
 }
 
@@ -904,6 +1164,18 @@ const PARITY_KINDS: readonly ArsFactKind[] = ['price', 'currency', 'availability
 interface FactView {
   readonly representative: Map<ArsFactKind, string>
   readonly observed: Map<ArsFactKind, Set<string>>
+}
+
+/** The facts in a linked Markdown copy, read with the page's own profile and currency. */
+function linkedCopyFacts(context: ScoreContext, copy: LinkedCopy): readonly ExtractedFact[] {
+  if (copy.representation === null) return []
+  return extractFacts(copy.representation, {
+    profile: context.profile,
+    ruleset: context.ruleset,
+    baseUrl: copy.representation.finalUrl,
+    origin: context.evidence.target.origin,
+    currencyHint: currencyHintOf(context.structural, context.agent),
+  })
 }
 
 function factView(facts: readonly ExtractedFact[]): FactView {
@@ -969,54 +1241,63 @@ function divergentKinds(
   return { compared, divergent }
 }
 
-function checkSubstanceParity(context: ScoreContext, negotiated: number): CheckOutcome {
+function checkSubstanceParity(context: ScoreContext): CheckOutcome {
   const { agentFacts, browserFacts, browser, evidence: bundle } = context
+  // ARS 0.3: a linked Markdown copy that loaded is compared the same way as a
+  // negotiated one. It has no confirming probe, so a difference costs the
+  // points and raises no flag, the conservative branch below.
+  const linked =
+    !context.negotiated && context.linkedCopy?.status === 'checked' ? context.linkedCopy : null
+  const htmlFacts = browser !== null ? browserFacts : agentFacts
 
-  if (negotiated === 0 || browser === null) {
+  if ((!context.negotiated && linked === null) || (linked === null && browser === null)) {
     return {
       earned: 0,
       evidence: [
         heuristic(
-          'Comparable',
-          negotiated === 0
-            ? 'no — there is one representation, so there is nothing to compare (this is the designed 84-point ceiling for a page with no content negotiation)'
-            : 'no — no browser-control capture in this bundle',
+          'Counts',
+          !context.negotiated
+            ? COUNTS_ONCE_COPY
+            : 'not checked, because this scan has no browser request to compare',
         ),
       ],
     }
   }
 
-  const agentValues = factView(agentFacts)
-  const browserValues = factView(browserFacts)
+  const agentValues = factView(linked === null ? agentFacts : linkedCopyFacts(context, linked))
+  const browserValues = factView(linked === null ? browserFacts : htmlFacts)
   const { compared, divergent } = divergentKinds(agentValues, browserValues, PARITY_KINDS)
 
   const evidenceLines = [
     heuristic(
-      'Compared facts',
-      compared.length === 0 ? 'none present in both representations' : compared.join(', '),
+      'Facts compared',
+      compared.length === 0
+        ? 'none appear in both the Markdown copy and the page'
+        : factList(compared),
     ),
-    heuristic(
-      'Values',
-      divergent.length === 0
-        ? 'agree'
-        : divergent
-            .map((entry) => `${entry.kind}: agent ${entry.left} / HTML ${entry.right}`)
-            .join('; '),
-    ),
+    ...(compared.length === 0
+      ? []
+      : [
+          heuristic(
+            'Values',
+            divergent.length === 0
+              ? 'match'
+              : divergent
+                  .map(
+                    (entry) =>
+                      `${factName(entry.kind)}: Markdown copy ${entry.left}, page ${entry.right}`,
+                  )
+                  .join('; '),
+          ),
+        ]),
   ]
 
   if (compared.length === 0) {
     return {
       earned: 0,
-      evidence: [
-        ...evidenceLines,
-        heuristic(
-          'Scored',
-          'no — a comparison needs at least one comparable fact in both representations',
-        ),
-      ],
+      evidence: evidenceLines,
       remedy:
-        'State the same core facts in both representations. ARS could not compare them, so it could not award the parity points.',
+        'State the same key facts, such as name and price, in the Markdown copy and in the page, so the two can be checked against each other.',
     }
   }
 
@@ -1026,7 +1307,8 @@ function checkSubstanceParity(context: ScoreContext, negotiated: number): CheckO
   // §3.8: divergence must REPRODUCE on a third confirming probe taken ≥30s later
   // before the flag is set. Inventory and price genuinely change between two
   // sequential requests, and a one-shot difference is not evidence of anything.
-  const confirm = bundle.probes.parityConfirm
+  // A linked copy never has one, so it always takes the unflagged branch.
+  const confirm = linked === null ? bundle.probes.parityConfirm : null
   const confirmCapture = confirm !== null && confirm.result.ok ? confirm.result.capture : null
   const confirmRep = confirmCapture === null ? null : buildRepresentation(confirmCapture)
   if (confirmRep === null) {
@@ -1034,10 +1316,10 @@ function checkSubstanceParity(context: ScoreContext, negotiated: number): CheckO
       earned: 0,
       evidence: [
         ...evidenceLines,
-        heuristic('Confirming probe', 'absent — divergence observed once and NOT flagged'),
+        heuristic('Second look', 'not taken, so this difference was seen once and is not flagged'),
       ],
       remedy:
-        'The two representations reported different values for a core fact. ARS did not flag it, because a single observation cannot distinguish a divergence from an inventory change.',
+        'The Markdown copy and the page showed different values for a key fact. That can happen when a price or stock level changes between requests. If it repeats, build both from the same source.',
     }
   }
 
@@ -1061,8 +1343,8 @@ function checkSubstanceParity(context: ScoreContext, negotiated: number): CheckO
       evidence: [
         ...evidenceLines,
         heuristic(
-          'Confirming probe',
-          'the difference did not reproduce — treated as a value that changed between requests',
+          'Second look',
+          'the difference was gone, so we treat it as a value that changed between requests',
         ),
       ],
     }
@@ -1075,7 +1357,7 @@ function checkSubstanceParity(context: ScoreContext, negotiated: number): CheckO
     message: reproduced.divergent
       .map(
         (entry) =>
-          `The agent representation reported ${entry.kind} ${entry.left}; the HTML representation reported ${entry.right} at capture time, on two captures taken apart.`,
+          `The Markdown copy showed ${factName(entry.kind)} ${entry.left}; the HTML page showed ${entry.right}. We saw the same difference on two requests taken apart.`,
       )
       .join(' '),
     evidence: evidenceLines,
@@ -1083,9 +1365,9 @@ function checkSubstanceParity(context: ScoreContext, negotiated: number): CheckO
 
   return {
     earned: 0,
-    evidence: [...evidenceLines, heuristic('Confirming probe', 'the difference reproduced')],
+    evidence: [...evidenceLines, heuristic('Second look', 'the difference was still there')],
     remedy:
-      'Serve the same values in both representations. ARS reports what each one said; it does not assert which is correct.',
+      'Show the same values in the Markdown copy and the page, ideally by building both from one source. We report what each version said and do not judge which is right.',
   }
 }
 
@@ -1153,22 +1435,34 @@ function checkCoreFacts(context: ScoreContext, math: CoverageMath): CheckOutcome
   return {
     earned,
     evidence: [
+      heuristic('Key facts for this kind of page', factList(context.profile.core)),
+      heuristic('Found', `${math.coreFound} of ${context.profile.core.length}`),
+      heuristic('Missing', missing.length === 0 ? 'none' : factList(missing)),
       heuristic(
-        'Core facts found',
-        `${math.coreFound}/${context.profile.core.length}${missing.length === 0 ? '' : ` — missing ${missing.join(', ')}`}`,
+        'Extra facts found',
+        `${math.extendedFound} of ${context.profile.extended.length}`,
       ),
-      heuristic('Extended facts found', `${math.extendedFound}/${context.profile.extended.length}`),
-      heuristic('Coverage', `${math.coveragePct}%`),
       heuristic(
-        'Density band',
-        `${math.densityPct}% (${math.factsPerKiB100} hundredths of a fact per KiB)`,
+        'Credit for the facts',
+        `${math.coveragePct}% (a fact stated in both the text and structured data counts in full)`,
       ),
-      measured('Bytes the agent received', String(context.agent.bytes)),
+      heuristic(
+        'Credit kept for length',
+        `${math.densityPct}% (${math.coreFound + math.extendedFound} facts in ${plainBytes(context.agent.bytes)}; the more text around each fact, the less is kept)`,
+      ),
     ],
     remedy:
-      missing.length === 0
-        ? undefined
-        : `State ${missing.join(', ')} in the representation the agent receives. A fact only the HTML carries is a fact the caller never saw.`,
+      missing.length > 0
+        ? `Add the ${factList(missing)} to what AI assistants receive. An assistant can only repeat what the page states.${
+            missing.includes('primary-action-url')
+              ? ' For the main action link, use a label that starts with a common action word, such as Buy, Book, Order, Contact, Sign up, Get started or Request a quote.'
+              : ''
+          }`
+        : earned === weight
+          ? undefined
+          : math.coveragePct < 100
+            ? 'Repeat the key facts in both the visible text and the structured data. A fact stated once gets half credit.'
+            : 'Your key facts are all there, but there is a lot of page around them, so this keeps only part of its credit. A Markdown copy for AI assistants that leads with the facts is the simplest fix; trimming the page also helps.',
   }
 }
 
@@ -1183,16 +1477,22 @@ function checkContextCost(context: ScoreContext): CheckOutcome {
     earned,
     evidence: [
       measured(
-        'Bytes the agent received',
-        `${context.agent.bytes}${context.agent.truncated ? ' (truncated at the cap)' : ''}`,
+        'Size AI assistants had to read',
+        `${plainBytes(context.agent.bytes)}${context.agent.truncated ? ' or more (cut off at the limit)' : ''}`,
       ),
-      measured('Byte reference for this page kind', `${reference} (${context.profile.pageKind})`),
-      measured('Ratio', `${ratio}% of the reference`),
+      measured(
+        `Typical size for a ${context.profile.pageKind === 'unknown' ? 'general' : context.profile.pageKind} page`,
+        plainBytes(reference),
+      ),
+      measured(
+        'Compared with typical',
+        ratio <= 100 ? 'at or under typical' : `about ${divRoundHalfUp(ratio, 100)} times typical`,
+      ),
     ],
     remedy:
       earned === full
         ? undefined
-        : 'Serve a representation sized to the facts. The reference is what a page of this kind reasonably costs, not an absolute budget.',
+        : 'Send AI assistants a Markdown copy, which carries the facts without the page code, or make the page lighter. Scripts, inline styles and repeated menus are usually most of the size.',
   }
 }
 
@@ -1266,11 +1566,13 @@ function checkQuantities(context: ScoreContext): CheckOutcome {
 
   return {
     earned,
-    evidence: [measured('Distinct quantities an answer could quote', `${count}`)],
+    evidence: [
+      measured('Different numbers an answer could quote', `${count} (prices, sizes, percentages, dates)`),
+    ],
     remedy:
       earned === full
         ? undefined
-        : 'State the numbers a reader would ask for, in text: price, sizes, hours, fees, dates. A quantity an agent can lift is what a cited answer is built from.',
+        : 'Write the numbers people ask about in the page text: prices, sizes, hours, fees and dates. Assistants quote numbers they can read.',
   }
 }
 
@@ -1326,11 +1628,11 @@ function checkDefinitions(context: ScoreContext): CheckOutcome {
 
   return {
     earned,
-    evidence: [heuristic('Labelled term and value pairs', `${count}`)],
+    evidence: [heuristic('Labelled facts, like "Returns: 60 days"', `${count}`)],
     remedy:
       earned === full
         ? undefined
-        : 'Label your facts. A line that reads "Returns: 60 days" is liftable whole; the same fact inside a paragraph has to be inferred.',
+        : 'Label your facts. A line like "Returns: 60 days" can be quoted as it is. The same fact inside a paragraph has to be worked out.',
   }
 }
 
@@ -1376,11 +1678,11 @@ function checkComparisons(context: ScoreContext): CheckOutcome {
 
   return {
     earned,
-    evidence: [measured('Comparable rows', `${rows}`)],
+    evidence: [measured('Table rows that compare options', `${rows}`)],
     remedy:
       earned === full
         ? undefined
-        : 'Put options side by side in a table with a row each. An assistant comparing two things reaches for rows it can line up.',
+        : 'Put options side by side in a table, one row each. Assistants answering "which one?" use rows they can line up.',
   }
 }
 
@@ -1400,22 +1702,20 @@ function checkFirstCoreFactOffset(context: ScoreContext, offsets: readonly numbe
   if (first === undefined) {
     return {
       earned: 0,
-      evidence: [heuristic('First core fact', 'none found — nothing to position')],
+      evidence: [heuristic('First key fact', 'none found, so there is nothing to place')],
     }
   }
+  const firstKind = context.facts.find((fact) => fact.offset === first)?.kind
   return {
     earned: atMost(context.ruleset.thresholds['fact-position.first-core-fact-offset'], first),
     evidence: [
-      measured('Byte offset of the first core fact', String(first)),
-      heuristic(
-        'Which fact',
-        context.facts.find((fact) => fact.offset === first)?.kind ?? 'unknown',
-      ),
+      measured('First key fact appears', first === 0 ? 'at the very start' : `after ${plainBytes(first)}`),
+      heuristic('Which fact', firstKind === undefined ? 'unknown' : factName(firstKind)),
     ],
     remedy:
       first <= 512
         ? undefined
-        : 'Move the core facts to the top of the representation. A caller that stops reading early stops before them.',
+        : 'Put the key facts near the top of what AI assistants receive. Assistants often read only the start.',
   }
 }
 
@@ -1429,8 +1729,8 @@ function checkFrontWindow(context: ScoreContext, offsets: readonly number[]): Ch
     return {
       earned: 0,
       evidence: [
-        measured('Front window', `${size} bytes`),
-        heuristic('Core facts inside it', 'none found — nothing to position'),
+        measured('Opening section', `the first ${plainBytes(size)}`),
+        heuristic('Key facts in it', 'none found, so there is nothing to place'),
       ],
     }
   }
@@ -1445,14 +1745,16 @@ function checkFrontWindow(context: ScoreContext, offsets: readonly number[]): Ch
   return {
     earned: atLeast(context.ruleset.thresholds['fact-position.front-window'], pct),
     evidence: [
-      measured('Front window', `${size} bytes (max(${floor}, bytes/${divisor}))`),
-      heuristic('Core facts inside it', `${inside}/${offsets.length} found (${pct}%)`),
-      heuristic('Core facts in this page kind', String(context.profile.core.length)),
+      measured(
+        'Opening section',
+        `the first ${plainBytes(size)} (a ${divisor === 5 ? 'fifth' : `1/${divisor}`} of the page, at least ${plainBytes(floor)})`,
+      ),
+      heuristic('Key facts in it', `${inside} of the ${offsets.length} found (${pct}%)`),
     ],
     remedy:
       pct >= 90
         ? undefined
-        : 'Front-load the core facts. Everything after the window costs the caller a full read.',
+        : 'Move the key facts into the first part of the page. Facts further down cost an assistant a full read.',
   }
 }
 
@@ -1466,7 +1768,7 @@ function checkStructuredDataPresent(context: ScoreContext): CheckOutcome {
   if (structural === null) {
     return {
       earned: 0,
-      evidence: [measured('HTML representation', 'none in this bundle — not evaluated')],
+      evidence: [measured('HTML page', 'not checked, because no HTML was returned')],
     }
   }
 
@@ -1488,16 +1790,16 @@ function checkStructuredDataPresent(context: ScoreContext): CheckOutcome {
   return {
     earned,
     evidence: [
-      measured('JSON-LD blocks', `${parsed} of ${blocks} parsed`),
-      measured('Microdata itemtype scopes', String(microdata)),
-      measured('RDFa typeof scopes', String(rdfa)),
+      measured('JSON-LD blocks that could be read', `${parsed} of ${blocks}`),
+      measured('Microdata items', String(microdata)),
+      measured('RDFa items', String(rdfa)),
     ],
     remedy:
       earned === split.clean
         ? undefined
         : blocks > parsed
-          ? 'One or more JSON-LD blocks did not parse. A block that does not parse is not structured data.'
-          : 'Add JSON-LD for this page. It is the one machine representation every consumer already reads.',
+          ? 'At least one JSON-LD block has a syntax error, so it cannot be read. Check it with a JSON validator.'
+          : 'Add a JSON-LD block describing this page, such as a schema.org Product with its price. Search engines and some AI assistants read it.',
   }
 }
 
@@ -1524,15 +1826,12 @@ function checkRequiredProperties(context: ScoreContext): CheckOutcome {
     return {
       earned: 0,
       evidence: [
-        measured('Recognised schema.org type', 'none'),
-        measured('Required properties for this page kind', required.join(', ') || 'none'),
-        measured(
-          'Scope',
-          'JSON-LD only in 0.1 — microdata satisfies D5.1 but is not walked for required properties',
-        ),
+        measured('Schema.org type', 'none found'),
+        measured('Properties we look for', required.join(', ') || 'none'),
+        measured('Where we look', 'JSON-LD. Microdata counts toward the check above, not this one.'),
       ],
       remedy:
-        'Declare a schema.org type in JSON-LD. Choosing no type does not avoid this check — an unrecognised page still scores against "any recognised type present".',
+        'Give the JSON-LD a schema.org type that matches the page, such as Product, LocalBusiness or Article, with the properties listed.',
     }
   }
 
@@ -1546,17 +1845,14 @@ function checkRequiredProperties(context: ScoreContext): CheckOutcome {
   return {
     earned: split.recognisedType + completeness,
     evidence: [
-      measured('Scored node @type', node.types.join(', ')),
-      measured(
-        'Required properties',
-        `${satisfied.length}/${required.length}${missing.length === 0 ? '' : ` — missing ${missing.join(', ')}`}`,
-      ),
-      measured('Table', `ruleset.requiredProperties.${context.profile.pageKind}`),
+      measured('Schema.org type', node.types.join(', ')),
+      measured('Properties present', `${satisfied.length} of ${required.length}`),
+      measured('Missing', missing.length === 0 ? 'none' : missing.join(', ')),
     ],
     remedy:
       missing.length === 0
         ? undefined
-        : `Add ${missing.join(', ')} to the ${node.types[0] ?? 'top-level'} node.`,
+        : `Add ${missing.join(', ')} to the ${node.types[0] ?? 'main'} item in your JSON-LD.`,
   }
 }
 
@@ -1568,27 +1864,34 @@ function checkTextAgreement(context: ScoreContext): CheckOutcome {
 
   const evidenceLines = [
     heuristic(
-      'Compared facts',
+      'Facts compared',
       compared.length === 0
-        ? 'none stated both in structured data and on the page'
-        : compared.join(', '),
+        ? 'none appear in both the structured data and the page text'
+        : factList(compared),
     ),
-    heuristic(
-      'Values',
-      divergent.length === 0
-        ? 'agree'
-        : divergent
-            .map((entry) => `${entry.kind}: structured data ${entry.left} / page ${entry.right}`)
-            .join('; '),
-    ),
+    ...(compared.length === 0
+      ? []
+      : [
+          heuristic(
+            'Values',
+            divergent.length === 0
+              ? 'match'
+              : divergent
+                  .map(
+                    (entry) =>
+                      `${factName(entry.kind)}: structured data ${entry.left}, page ${entry.right}`,
+                  )
+                  .join('; '),
+          ),
+        ]),
   ]
 
   if (compared.length === 0) {
     return {
       earned: 0,
-      evidence: [...evidenceLines, heuristic('Scored', 'no — nothing was comparable')],
+      evidence: evidenceLines,
       remedy:
-        'State the core facts in both the structured data and the visible page, so the two can be checked against each other.',
+        'State the key facts, such as name and price, in both the structured data and the visible page, so the two can be checked against each other.',
     }
   }
 
@@ -1600,7 +1903,7 @@ function checkTextAgreement(context: ScoreContext): CheckOutcome {
       message: divergent
         .map(
           (entry) =>
-            `The structured data reported ${entry.kind} ${entry.left}; the visible page reported ${entry.right}.`,
+            `The structured data says ${factName(entry.kind)} ${entry.left}; the visible page says ${entry.right}.`,
         )
         .join(' '),
       evidence: evidenceLines,
@@ -1609,7 +1912,7 @@ function checkTextAgreement(context: ScoreContext): CheckOutcome {
       earned: 0,
       evidence: evidenceLines,
       remedy:
-        'Generate the structured data from the same source as the rendered page, so the two cannot drift.',
+        'Build the structured data from the same source as the visible page, so the two cannot disagree.',
     }
   }
 
@@ -1654,10 +1957,10 @@ function checkCanonical(context: ScoreContext): CheckOutcome {
       id: 'canonical-mismatch',
       severity: 'warn',
       basis: 'measured',
-      message: `The two representations of this URL declare different canonicals: ${agentCanonical} and ${htmlCanonical}.`,
+      message: `The Markdown copy and the HTML page name different main addresses: ${agentCanonical} and ${htmlCanonical}.`,
       evidence: [
-        measured('Agent probe canonical', agentCanonical),
-        measured('HTML canonical', htmlCanonical),
+        measured('Main address given to AI assistants', agentCanonical),
+        measured('Main address in the HTML', htmlCanonical),
       ],
     })
   }
@@ -1668,16 +1971,21 @@ function checkCanonical(context: ScoreContext): CheckOutcome {
       (absolute ? split.absolute : 0) +
       (consistent ? split.consistentAcrossProbes : 0),
     evidence: [
-      measured('Canonical (HTML)', htmlCanonical ?? 'absent'),
-      measured('Canonical (agent representation)', agentCanonical ?? 'absent'),
-      measured('Absolute', yesNo(absolute)),
-      measured('Same across both probes', yesNo(consistent)),
+      measured('Canonical address in the HTML', htmlCanonical ?? 'none'),
+      measured('Canonical address AI assistants got', agentCanonical ?? 'none'),
+      measured('Full address with https://', yesNo(absolute)),
+      measured('Same for AI assistants and browsers', yesNo(consistent)),
     ],
-    remedy: consistent
-      ? undefined
-      : agentCanonical === null
-        ? 'Declare the canonical on the machine representation too — `Link: <https://…>; rel="canonical"`. A representation with no canonical cannot be attributed to a page.'
-        : 'Declare one canonical URL and use it in both representations.',
+    remedy:
+      consistent && absolute
+        ? undefined
+        : htmlCanonical === null
+          ? 'Add `<link rel="canonical" href="https://…">` with the full address of the page, so assistants know which address to cite.'
+          : agentCanonical === null
+            ? 'Your Markdown copy has no canonical address. Send `Link: <https://…>; rel="canonical"` with it, pointing at the page.'
+            : !consistent
+              ? 'Use one canonical address, written in full, for the page and its Markdown copy.'
+              : 'Write the canonical address in full, starting with https://.',
   }
 }
 
@@ -1702,14 +2010,14 @@ function checkCacheValidators(context: ScoreContext): CheckOutcome {
   return {
     earned: (sane ? split.saneCacheControl : 0) + (validator ? split.validator : 0),
     evidence: [
-      measured('Cache-Control', cacheControl ?? 'absent'),
-      measured('ETag', etag ?? 'absent'),
-      measured('Last-Modified', lastModified ?? 'absent'),
+      measured('Cache-Control header', cacheControl ?? 'not sent'),
+      measured('ETag header', etag ?? 'not sent'),
+      measured('Last-Modified header', lastModified ?? 'not sent'),
     ],
     remedy:
       sane && validator
         ? undefined
-        : 'Send a `Cache-Control` a cache can act on, plus an `ETag` or `Last-Modified`. Repeat fetches are most of agent traffic.',
+        : 'Send a `Cache-Control` header with a lifetime, plus an `ETag` or `Last-Modified` header, so repeat visits can skip unchanged pages.',
   }
 }
 
@@ -1728,9 +2036,9 @@ function checkLlmsTxt(context: ScoreContext): CheckOutcome {
   if (body === null || body.trim().length === 0) {
     return {
       earned: 0,
-      evidence: [measured('/llms.txt', body === null ? 'absent or non-2xx' : 'empty')],
+      evidence: [measured('/llms.txt', body === null ? 'not found' : 'empty')],
       remedy:
-        'Publish /llms.txt: an H1 title, a short summary, and links to the pages that matter. It is worth 1 point of 100, deliberately.',
+        'Publish /llms.txt with a `#` title, a short summary and links to your main pages.',
     }
   }
   // The llms.txt convention: an H1 title, then Markdown links. Both halves are
@@ -1743,11 +2051,13 @@ function checkLlmsTxt(context: ScoreContext): CheckOutcome {
   return {
     earned: specShaped ? split.specShaped : split.present,
     evidence: [
-      measured('/llms.txt', `${body.length} characters`),
-      measured('H1 title', yesNo(hasTitle)),
-      measured('Markdown links', yesNo(hasLinks)),
+      measured('/llms.txt', `found, ${body.length} characters`),
+      measured('Has a # title', yesNo(hasTitle)),
+      measured('Has links', yesNo(hasLinks)),
     ],
-    remedy: specShaped ? undefined : 'Give /llms.txt an H1 title and at least one Markdown link.',
+    remedy: specShaped
+      ? undefined
+      : 'Start /llms.txt with a `#` title and add at least one link written as `[name](url)`.',
   }
 }
 
@@ -1755,13 +2065,15 @@ function checkSitemap(context: ScoreContext): CheckOutcome {
   return {
     earned: context.policy.sitemapDeclared ? SUBPOINTS.sitemap.full : 0,
     evidence: [
-      measured('Sitemap: in robots.txt', yesNo(context.policy.sitemapDeclared)),
+      measured('Sitemap listed in robots.txt', yesNo(context.policy.sitemapDeclared)),
       measured(
-        'Sitemaps declared',
-        context.robots === null ? 'n/a' : context.robots.sitemaps.join(', ') || 'none',
+        'Sitemaps',
+        context.robots === null ? 'none' : context.robots.sitemaps.join(', ') || 'none',
       ),
     ],
-    remedy: context.policy.sitemapDeclared ? undefined : 'Declare `Sitemap:` in robots.txt.',
+    remedy: context.policy.sitemapDeclared
+      ? undefined
+      : 'Add a line like `Sitemap: https://example.com/sitemap.xml` to robots.txt.',
   }
 }
 
@@ -1817,18 +2129,18 @@ function checkMachineEndpoint(context: ScoreContext): CheckOutcome {
   ])
   for (const link of links) {
     if (link.rel.some((rel) => ENDPOINT_RELS.includes(rel)))
-      declarations.push(`Link rel=${link.rel.join(' ')} → ${link.url}`)
+      declarations.push(`Link header (${link.rel.join(' ')}) at ${link.url}`)
     else if (link.type !== null && ENDPOINT_TYPES.includes(link.type))
-      declarations.push(`Link type=${link.type} → ${link.url}`)
+      declarations.push(`Link header (${link.type}) at ${link.url}`)
   }
 
   if (context.structural !== null && context.structural.doc !== null) {
     for (const link of context.structural.doc.links) {
       if (link.href === null) continue
       if (link.rel.some((rel) => ENDPOINT_RELS.includes(rel)))
-        declarations.push(`<link rel="${link.rel.join(' ')}"> → ${link.href}`)
+        declarations.push(`link tag (${link.rel.join(' ')}) at ${link.href}`)
       else if (link.type !== null && ENDPOINT_TYPES.includes(link.type))
-        declarations.push(`<link type="${link.type}"> → ${link.href}`)
+        declarations.push(`link tag (${link.type}) at ${link.href}`)
     }
   }
 
@@ -1839,26 +2151,25 @@ function checkMachineEndpoint(context: ScoreContext): CheckOutcome {
     while ((match = MARKDOWN_LINK.exec(llms)) !== null) {
       const url = (match[1] ?? '').toLowerCase()
       if (ENDPOINT_PATH_MARKERS.some((marker) => url.includes(marker)))
-        declarations.push(`llms.txt → ${match?.[1] ?? url}`)
+        declarations.push(`llms.txt link to ${match?.[1] ?? url}`)
     }
   }
 
   const ucp = bodyOf(context.evidence.probes.wellKnownUcp)
   if (ucp !== null && ucp.trim().length > 0) declarations.push('/.well-known/ucp')
+  // Both probes usually carry the same `Link` header; list each once.
+  const unique = [...new Set(declarations)]
 
   return {
     earned: declarations.length > 0 ? SUBPOINTS.machineEndpoint.full : 0,
     evidence: [
-      measured(
-        'Declared machine endpoints',
-        declarations.length === 0 ? 'none' : declarations.join('; '),
-      ),
-      measured('Probed paths', '/robots.txt, /llms.txt, /.well-known/ucp — ARS probes no others'),
+      measured('Feeds or APIs we found', unique.length === 0 ? 'none' : unique.join('; ')),
+      measured('Where we looked', 'link tags, Link headers, /llms.txt and /.well-known/ucp'),
     ],
     remedy:
       declarations.length > 0
         ? undefined
-        : 'Declare one machine endpoint — a feed, an OpenAPI document, /.well-known/ucp — with a `Link` header or a `<link>`. ARS does not guess at paths.',
+        : 'Point to a product feed, API or calendar from the page with a `<link>` tag or a `Link` header. We only count ones the page names.',
   }
 }
 
@@ -2166,7 +2477,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
       severity: 'info',
       basis: 'measured',
       message:
-        'This site blocks model-training crawlers while allowing assistant fetches. That is neutral in ARS: it never lowers the score.',
+        'This site blocks AI training crawlers but lets AI assistants in. That does not affect the score.',
       evidence: [
         measured('Training audience', policy.audiences.training.matchedRule ?? 'disallowed'),
         measured('Effect on this score', 'none'),
@@ -2183,7 +2494,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
         severity: 'info',
         basis: 'measured',
         message:
-          'robots.txt disallows the rebilder-ars scanner. We obeyed it and did not score this page.',
+          'robots.txt asks Rebilder’s scanner not to read this site, so we did not score the page.',
         evidence: [measured('Matched rule', scannerDecision)],
       })
       return nonGrade(
@@ -2216,7 +2527,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
       severity: 'info',
       basis: 'measured',
       message:
-        'This site names assistant crawlers in robots.txt and disallows them. ARS records the choice and does not grade the page.',
+        'This site’s robots.txt blocks AI assistants by name. We respect that choice and do not grade the page.',
       evidence: [
         measured('Matched group', policy.audiences.assistant.matchedGroup ?? '(named group)'),
         measured('Matched rule', policy.audiences.assistant.matchedRule ?? 'Disallow'),
@@ -2242,7 +2553,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
         severity: 'warn',
         basis: 'measured',
         message:
-          'The origin answered the agent probe with a challenge or a block. ARS reports the evidence and does not grade the page.',
+          'The site answered our scanner with a bot check or a block, so we did not grade the page. AI assistants may be blocked the same way.',
         evidence: [measured('Probe error', agentProbe.result.error)],
       })
     }
@@ -2264,7 +2575,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
       id: 'scanner-blocked',
       severity: 'warn',
       basis: 'measured',
-      message: `The origin answered the agent probe with HTTP ${agentCapture.status}. ARS reports the evidence and does not grade the page.`,
+      message: `The site answered our scanner with HTTP ${agentCapture.status}, so we did not grade the page. AI assistants may be blocked the same way.`,
       evidence: [measured('HTTP status', String(agentCapture.status))],
     })
     return nonGrade(
@@ -2307,7 +2618,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
       id: 'body-truncated',
       severity: 'warn',
       basis: 'measured',
-      message: `A response exceeded the ${ruleset.maxBodyBytes}-byte body cap and was truncated. The fact set and the byte count would both be wrong, so the page is not scored.`,
+      message: `The page is larger than our ${plainBytes(ruleset.maxBodyBytes)} reading limit, so we did not score it. The facts and sizes would both be incomplete.`,
       evidence: [
         measured('Body cap', `${ruleset.maxBodyBytes} bytes`),
         measured('Bytes read', `≥ ${agentCapture.bytes}`),
@@ -2364,7 +2675,10 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
     structural === agent ? agentFacts : structural === browser ? browserFacts : []
   const facts = mergeFacts(agentFacts, structuralFacts)
 
+  const negotiated = isMachineCopy(agentCapture)
   const context: ScoreContext = {
+    negotiated,
+    linkedCopy: negotiated ? null : linkedCopyOf(evidence, agentCapture, browserCapture),
     evidence,
     ruleset,
     agentCapture,
@@ -2389,7 +2703,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
       id: 'paywalled',
       severity: 'info',
       basis: 'measured',
-      message: `This page declares a paywall (${paywall}). ARS scores the portion it was served and does not attempt to reach the gated part.`,
+      message: `This page says it is behind a paywall (${paywall}). We scored the part we were shown.`,
       evidence: [measured('Paywall signal', paywall)],
     })
   }
@@ -2397,13 +2711,13 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
   // ── the 22 checks ────────────────────────────────────────────────────────
   const math = coverageMath(context)
   const offsets = coreOffsets(context)
-  const negotiated = checkNegotiatedResponse(context)
+  const negotiatedResponse = checkNegotiatedResponse(context)
 
   const checks: ArsCheck[] = [
     buildCheck(ruleset, 'retrievability.reachable', checkReachable(context)),
     buildCheck(ruleset, 'retrievability.robots-policy', checkRobotsPolicy(context)),
     buildCheck(ruleset, 'retrievability.render-independence', checkRenderIndependence(context)),
-    buildCheck(ruleset, 'machine-representation.negotiated-response', negotiated),
+    buildCheck(ruleset, 'machine-representation.negotiated-response', negotiatedResponse),
     buildCheck(
       ruleset,
       'machine-representation.declared-alternates',
@@ -2412,12 +2726,12 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
     buildCheck(
       ruleset,
       'machine-representation.vary-accept',
-      checkVaryAccept(context, negotiated.earned),
+      checkVaryAccept(context),
     ),
     buildCheck(
       ruleset,
       'machine-representation.substance-parity',
-      checkSubstanceParity(context, negotiated.earned),
+      checkSubstanceParity(context),
     ),
     buildCheck(ruleset, 'fact-coverage.core-facts', checkCoreFacts(context, math)),
     buildCheck(ruleset, 'fact-coverage.context-cost', checkContextCost(context)),
@@ -2447,7 +2761,7 @@ export function score(evidence: ArsEvidence, ruleset: ArsRuleset = DEFAULT_RULES
 
   const perToken = ruleset.thresholds['cost.approx-bytes-per-token']?.[0] ?? 4
   const htmlBytes = structural?.bytes ?? agent.bytes
-  const negotiatedBytes = negotiated.earned > 0 ? agent.bytes : null
+  const negotiatedBytes = negotiated ? agent.bytes : null
   const cost: ArsCostReport = {
     htmlBytes,
     negotiatedBytes,

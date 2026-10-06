@@ -8,6 +8,7 @@ import { ARS_NOTICE } from '../disclosure'
 import type { Payload } from '../payload'
 import { exitCodeFor, outcomeSummary, statusOf } from '../report'
 import type { FormatContext } from './shared'
+import { markdownCopyOf } from '../markdown-copy'
 
 export function renderJson(payload: Payload, ctx: FormatContext): string {
   return JSON.stringify(jsonValue(payload, ctx), null, 2) + '\n'
@@ -46,6 +47,10 @@ function jsonValue(payload: Payload, ctx: FormatContext): unknown {
         agent: payload.diff.agent,
         browser: payload.diff.browser,
         substanceParity: payload.diff.parity,
+        // Where the Markdown copy came from, so a consumer knows what the
+        // parity check compared: `page-address` (negotiation), `linked` (the
+        // copy the page links to, ARS 0.3), or `none`.
+        markdownCopy: payload.diff.result === null ? null : markdownCopyOf(payload.diff.result),
         result: payload.diff.result,
       }
     case 'init':

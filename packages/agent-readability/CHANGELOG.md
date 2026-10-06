@@ -4,6 +4,15 @@ Notable changes to `@rebilder/agent-readability`. A patch release never changes 
 
 ## Unreleased
 
+## 0.4.0 (2026-10-06)
+
+Implements **ARS 0.3**. The weights and checks are unchanged; two rules widened, so this ships as a minor version and scores carry the new ruleset hash.
+
+- **A linked Markdown copy is checked.** When a page does not send a Markdown copy itself but links to one at another address on the same site, the probe fetches it (`probes.markdownAlternate`, one extra request at most). A copy that loads earns 6 of D2.1's 9 points and is compared with the page for substance parity. A copy that does not load earns nothing, and its link stops earning D2.2. New exports: `declaredMarkdownAlternates`, `markdownAlternateTarget`, `isMachineCopy`.
+- **More action words count as a page's main action.** The lexicon now includes, among others, "shop", "try", "install", "free trial", "get a demo", "get directions", "get in touch", "talk to sales" and "check out". Pages using those labels were told their main action link was missing.
+- The probe identifies itself as `rebilder-ars/0.3`.
+- Evidence lines, remedies and flag messages are rewritten in plain language for site owners. "Content negotiation" now reads as what it means: the page sends AI assistants a Markdown copy when they ask for one.
+- New conformance fixtures `064-linked-markdown-copy` and `065-linked-markdown-copy-broken`. Every existing fixture keeps its score.
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/agent-readability. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.3.0 (2026-09-28)

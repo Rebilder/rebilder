@@ -12,6 +12,7 @@ import { runCli } from '../src/cli'
 import { mapWithConcurrency } from '../src/commands/check'
 import { runBadge } from '../src/commands/badge'
 import { detectFramework, runInit } from '../src/commands/init'
+import { LINKED_PARITY_NOTE } from '../src/markdown-copy'
 import { createFakeRuntime, evidenceOutcome, FIXTURES, loadEvidence } from './support'
 
 const URL = 'https://basecamp-supply.example/products/alpine-trail-pack-28l'
@@ -26,6 +27,38 @@ describe('diff', () => {
     expect(text).toContain('text/markdown')
     expect(text).toContain('text/html')
     expect(text).toContain('Substance parity')
+  })
+
+  it('says when the parity check compared a linked Markdown copy, not the two columns', async () => {
+    for (const format of ['pretty', 'markdown']) {
+      const linked = createFakeRuntime({
+        outcomes: [evidenceOutcome(FIXTURES.linkedCopy)],
+        env: UTF8,
+      })
+      await runCli(['diff', URL, '--format', format], linked.runtime)
+      expect(linked.stdout(), format).toContain(LINKED_PARITY_NOTE)
+
+      for (const fixture of [FIXTURES.gatewayMd, FIXTURES.linkedCopyBroken]) {
+        const other = createFakeRuntime({ outcomes: [evidenceOutcome(fixture)], env: UTF8 })
+        await runCli(['diff', URL, '--format', format], other.runtime)
+        expect(other.stdout(), `${format} ${fixture}`).not.toContain(LINKED_PARITY_NOTE)
+      }
+    }
+  })
+
+  it('names the Markdown copy the parity check used in JSON output', async () => {
+    const cases: [string, string][] = [
+      [FIXTURES.gatewayMd, 'page-address'],
+      [FIXTURES.linkedCopy, 'linked'],
+      [FIXTURES.linkedCopyBroken, 'none'],
+    ]
+    for (const [fixture, expected] of cases) {
+      const fake = createFakeRuntime({ outcomes: [evidenceOutcome(fixture)], env: UTF8 })
+      await runCli(['diff', URL, '--format', 'json'], fake.runtime)
+      expect((JSON.parse(fake.stdout()) as { markdownCopy: string }).markdownCopy, fixture).toBe(
+        expected,
+      )
+    }
   })
 
   it('reports the two Accept headers and asserts they are the only difference', async () => {
@@ -193,6 +226,16 @@ describe('init', () => {
     expect(
       scaffold.notes.some((note) => note.includes('https://rebilder.com/docs/adapters/')),
     ).toBe(true)
+  })
+
+  it('states D2.1 at the weight the ruleset gives it', async () => {
+    const fake = createFakeRuntime({ files: {} })
+    const scaffold = await runInit(
+      { name: 'init', framework: 'next', format: 'pretty', out: null },
+      fake.runtime,
+    )
+    const note = scaffold.notes.find((entry) => entry.includes('D2.1'))
+    expect(note).toContain('D2.1 (9 points)')
   })
 
   it('refuses an unknown framework and lists the supported ones', async () => {

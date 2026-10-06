@@ -4,7 +4,7 @@ Help AI assistants understand the business information on your website.
 
 `rebilder check <url>` fetches a page the way an agent would, fetches it again
 the way a browser would, and scores the result against
-[the Rebilder Agent Readability Spec (ARS 0.2)](https://rebilder.com/spec/ars). It tells
+[the Rebilder Agent Readability Spec (ARS 0.3)](https://rebilder.com/spec/ars). It tells
 you what a machine caller actually receives from your site, what that costs in
 bytes, and which of the 22 checks you are losing points on.
 
@@ -103,9 +103,11 @@ esac
 
 Per URL it makes **two requests**, an agent probe and a browser control that
 differ in the `Accept` header **and in nothing else**, plus `/robots.txt`,
-`/llms.txt` and `/.well-known/ucp` per origin. Nothing else is requested; there
-is no guessing at `/sitemap.xml` or `/mcp`. `robots.txt` is fetched first and
-obeyed.
+`/llms.txt` and `/.well-known/ucp` per origin. When the page does not send a
+Markdown copy but links one on the same site, it fetches that one copy too. A
+copy that loads earns part of the Markdown check. Nothing else is requested;
+there is no guessing at `/sitemap.xml` or `/mcp`. `robots.txt` is fetched first
+and obeyed.
 
 Same User-Agent on both probes, because that is what makes the parity check
 meaningful and what stops a correctly installed gateway (which negotiates on
@@ -186,7 +188,7 @@ Fixes, most points first
         A caller that reads the first few kilobytes should already have the fac…
 
 Policy: robots.txt ok · assistant allow · training allow (neutral) · sitemap declared
-ARS 0.2.0 · ruleset 18f8b6ce4a0d · corpus 15ec5c9c0966 · evidence b774a1e59433 · vantage public
+ARS 0.3.0 · ruleset 1d07a1223b34 · corpus e88662472394 · evidence b774a1e59433 · vantage public
 
 ARS measures format and retrievability. It does not measure whether the
 facts are true, or whether any assistant cites this page.
@@ -258,7 +260,7 @@ Fixes, most points first
         Price, sizes, weights, hours, fees, lead times, dates — written out whe…
 
 Policy: robots.txt ok · assistant allow · training allow (neutral) · sitemap declared
-ARS 0.2.0 · ruleset 18f8b6ce4a0d · corpus 15ec5c9c0966 · evidence 1fe68289a133 · vantage public
+ARS 0.3.0 · ruleset 1d07a1223b34 · corpus e88662472394 · evidence 1fe68289a133 · vantage public
 
 ARS measures format and retrievability. It does not measure whether the
 facts are true, or whether any assistant cites this page.
@@ -306,11 +308,11 @@ Error         —                                 —
 
 Substance parity [heuristic] 3/3
   Compared on price, currency, availability and title only — never description or free text (§3.8).
-  • Compared facts: price, currency, availability, title [heuristic]
-  • Values: agree [heuristic]
+  • Facts compared: price, currency, availability, name or title [heuristic]
+  • Values: match [heuristic]
 
 Score: 93/100 A
-ARS 0.2.0 · ruleset 18f8b6ce4a0d · corpus 15ec5c9c0966 · evidence 1fe68289a133 · vantage public
+ARS 0.3.0 · ruleset 1d07a1223b34 · corpus e88662472394 · evidence 1fe68289a133 · vantage public
 
 ARS measures format and retrievability. It does not measure whether the
 facts are true, or whether any assistant cites this page.
@@ -340,10 +342,10 @@ page we never scored is an `<error>`.
       <property name="notice" value="ARS measures format and retrievability. It does not measure whether the facts are true, or whether any assistant cites this page."/>
       <property name="url" value="https://basecamp-supply.example/products/alpine-trail-pack-28l"/>
       <property name="generatedAt" value="2026-08-05T00:00:00.000Z"/>
-      <property name="tool" value="rebilder 0.3.0"/>
-      <property name="specVersion" value="0.2.0"/>
-      <property name="rulesetHash" value="18f8b6ce4a0df9a44e86bdb77f1098af4e6a9a8d9fd10e0df894649bb3eddf86"/>
-      <property name="corpusHash" value="15ec5c9c09665bc24174e86dbf037f8ea0433cf48c97eb5b2a720b8cfbc8684b"/>
+      <property name="tool" value="rebilder 0.4.0"/>
+      <property name="specVersion" value="0.3.0"/>
+      <property name="rulesetHash" value="1d07a1223b3460c3b4d37669c0970d67e9f7e60f121d861201e73dafc9b544b0"/>
+      <property name="corpusHash" value="e88662472394316deb404ff02cde136b26a08a54439c52dcd299d80bc8fd9f9e"/>
       <property name="evidenceHash" value="e1cc1ad1476117e7335e4b608e80b4a6e1e0072ce532dd6c9b5f4cce0b2f8b19"/>
       <property name="measuredWeight" value="63"/>
       <property name="heuristicWeight" value="37"/>
@@ -454,7 +456,7 @@ variable, and never inherited.
 
 Hand-rolled ANSI (off when stdout is not a TTY, off whenever `NO_COLOR` is set,
 on with `FORCE_COLOR`), Unicode box drawing with an ASCII fallback chosen by the
-locale, and `node:util`'s `parseArgs`. Node ≥ 20.11.
+locale, and `node:util`'s `parseArgs`. Node ≥ 22.
 
 Colour and Unicode are decided separately because they fail in different places:
 a pipe into a file is perfectly capable of holding `│`, and a `LANG=C` container

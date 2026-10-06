@@ -22,6 +22,7 @@
 
 import { CHECK_META } from '@rebilder/agent-readability'
 import type { JsonObject, JsonValue } from './json'
+import { ARS_LABEL } from './version'
 
 export type JsonSchema = JsonObject
 
@@ -47,8 +48,7 @@ const CHECK_EVIDENCE: JsonSchema = {
 export const ARS_RESULT_SCHEMA: JsonSchema = {
   type: 'object',
   title: 'ArsResult',
-  description:
-    'The ARS 0.2 result, exactly as `score()` returns it. Determinism is stated in terms of three hashes: a number without rulesetHash, corpusHash and evidenceHash is not an ARS score.',
+  description: `The ${ARS_LABEL} result, exactly as \`score()\` returns it. Determinism is stated in terms of three hashes: a number without rulesetHash, corpusHash and evidenceHash is not an ARS score.`,
   properties: {
     spec: { const: 'ars' },
     specVersion: { type: 'string' },
@@ -301,7 +301,7 @@ export const EXPLAIN_CHECK_INPUT: JsonSchema = {
     check_id: {
       type: 'string',
       enum: CHECK_IDS,
-      description: 'An ARS 0.2 check id, e.g. "machine-representation.negotiated-response".',
+      description: `An ${ARS_LABEL} check id, e.g. "machine-representation.negotiated-response".`,
     },
   },
   required: ['check_id'],
@@ -356,6 +356,8 @@ export const COMPARE_AGENT_VIEW_OUTPUT: JsonSchema = {
     browser: { type: 'object' },
     cost: { type: 'object' },
     negotiated: { type: 'boolean' },
+    markdownCopy: { type: 'string', enum: ['page-address', 'linked', 'none'] },
+    linkedCopyUrl: { type: ['string', 'null'] },
     divergence: { type: 'array', items: { type: 'object' } },
     untrustedContentNotice: { type: 'string' },
   },

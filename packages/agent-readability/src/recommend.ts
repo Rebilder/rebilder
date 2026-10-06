@@ -91,10 +91,17 @@ const TEMPLATES: readonly Template[] = [
     detail:
       'Return Markdown, plain text or JSON with a matching Content-Type when the request asks for one, and keep the same URL. This is the single largest recoverable block in ARS, and it is also what makes Vary: Accept and the substance-parity check scoreable at all.',
     checks: ['machine-representation.negotiated-response'],
-    unlocks: (state) =>
-      earnedOf(state, 'machine-representation.negotiated-response') === 0
+    // Vary is gated on negotiation itself, so it stays locked while D2.1 is
+    // short of full, including the ARS 0.3 partial credit for a linked copy.
+    // Parity also opens on a linked copy, so it is unlocked only from zero.
+    unlocks: (state) => {
+      const earned = earnedOf(state, 'machine-representation.negotiated-response')
+      const full = state.get('machine-representation.negotiated-response')?.weight ?? 0
+      if (earned >= full) return []
+      return earned === 0
         ? ['machine-representation.vary-accept', 'machine-representation.substance-parity']
-        : [],
+        : ['machine-representation.vary-accept']
+    },
   },
   {
     id: 'declare-alternates',

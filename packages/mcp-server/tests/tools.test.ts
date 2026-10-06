@@ -8,14 +8,17 @@
  *  - a refused target is an error RESULT with an explanation, never a throw and
  *    never a protocol error;
  *  - `install_snippet` makes no network call of any kind;
- *  - the probe sends exactly the five requests §3.3 allows.
+ *  - the probe sends exactly the five requests §3.3 allows, plus the one linked
+ *    Markdown copy ARS 0.3 adds when a page declares one instead of sending it.
  */
 
 import { describe, expect, it } from 'vitest'
 
+import { ARS_SPEC_VERSION, SUBPOINTS } from '@rebilder/agent-readability'
 import { isJsonObject, type JsonObject, type JsonValue } from '../src/json'
 import type { JsonRpcResponse } from '../src/jsonrpc'
-import { callFrame, INJECTION, readyHarness, type Harness } from './harness'
+import { LINKED_COPY_NOTE } from '../src/render'
+import { callFrame, INJECTION, LINKED_COPY_URL, readyHarness, type Harness } from './harness'
 
 interface ToolOutcome {
   readonly text: string
@@ -77,7 +80,7 @@ describe('scan_url', () => {
     const { structured, isError } = await call(harness, 'scan_url', { url: TARGET })
     expect(isError).toBe(false)
     expect(structured['spec']).toBe('ars')
-    expect(structured['specVersion']).toBe('0.2.0')
+    expect(structured['specVersion']).toBe(ARS_SPEC_VERSION)
     expect(typeof structured['rulesetHash']).toBe('string')
     expect(typeof structured['evidenceHash']).toBe('string')
     expect(arrayAt(structured['dimensions'])).toHaveLength(7)
@@ -134,6 +137,54 @@ describe('scan_url', () => {
     expect(agent?.accept).toContain('text/markdown')
     expect(browser?.accept).toContain('text/html')
     expect(agent?.accept).not.toBe(browser?.accept)
+  })
+
+  it('prints the byte reduction as the integer percent the scorer computed', async () => {
+    const harness = await readyHarness({ negotiates: true })
+    const { text, structured } = await call(harness, 'scan_url', { url: TARGET })
+    const ratio = Number(objectAt(structured['cost'])['reductionRatio'])
+    // `reductionRatio` is already a percent (94 means 94% fewer bytes). It was
+    // once multiplied by 100 again, which printed thousands of percent.
+    expect(Number.isInteger(ratio)).toBe(true)
+    expect(ratio).toBeGreaterThan(0)
+    expect(ratio).toBeLessThanOrEqual(100)
+    expect(text).toContain(`Reduction: ${ratio}% fewer bytes [measured]`)
+    expect(text).not.toMatch(/Reduction: \d{4,}%/)
+  })
+
+  it('credits a linked Markdown copy without calling it negotiation', async () => {
+    const harness = await readyHarness({ linksMarkdownCopy: true })
+    const { text, structured } = await call(harness, 'scan_url', { url: TARGET })
+    // ARS 0.3 adds one request: the declared copy, after the agent and browser
+    // probes and before the origin-level conventions.
+    const paths = harness.scanner.requested.map((entry) => new URL(entry.url).pathname)
+    expect(paths).toEqual([
+      '/robots.txt',
+      '/products/kettle',
+      '/products/kettle',
+      '/products/kettle.md',
+      '/llms.txt',
+      '/.well-known/ucp',
+    ])
+
+    const d21 = arrayAt(structured['dimensions'])
+      .flatMap((dimension) => arrayAt(objectAt(dimension)['checks']))
+      .map(objectAt)
+      .find((check) => check['id'] === 'machine-representation.negotiated-response')
+    expect(d21?.['earned']).toBe(SUBPOINTS.negotiatedResponse.linkedCopy)
+    expect(objectAt(structured['cost'])['negotiatedBytes']).toBeNull()
+
+    expect(text).toContain('Agent representation: none at the page address.')
+    expect(text).toContain(`  ${LINKED_COPY_NOTE} Use install_snippet`)
+    expect(text).not.toContain('Use compare_agent_view to inspect')
+  })
+
+  it('does not credit a linked copy on a page that negotiates', async () => {
+    const harness = await readyHarness({ negotiates: true, linksMarkdownCopy: true })
+    const { text } = await call(harness, 'scan_url', { url: TARGET })
+    const paths = harness.scanner.requested.map((entry) => new URL(entry.url).pathname)
+    expect(paths).not.toContain('/products/kettle.md')
+    expect(text).not.toContain(LINKED_COPY_NOTE)
   })
 
   it('scores a negotiating origin above one that serves HTML to everybody', async () => {
@@ -198,6 +249,8 @@ describe('compare_agent_view', () => {
     const harness = await readyHarness({ negotiates: true })
     const { structured, text } = await call(harness, 'compare_agent_view', { url: TARGET })
     expect(structured['negotiated']).toBe(true)
+    expect(structured['markdownCopy']).toBe('page-address')
+    expect(structured['linkedCopyUrl']).toBeNull()
     expect(objectAt(structured['agent'])['contentType']).toContain('text/markdown')
     expect(objectAt(structured['browser'])['contentType']).toContain('text/html')
     expect(Number(objectAt(structured['agent'])['bytes'])).toBeLessThan(
@@ -210,7 +263,20 @@ describe('compare_agent_view', () => {
     const harness = await readyHarness({ negotiates: false })
     const { structured, text } = await call(harness, 'compare_agent_view', { url: TARGET })
     expect(structured['negotiated']).toBe(false)
+    expect(structured['markdownCopy']).toBe('none')
     expect(text).toContain('serves an agent exactly what it serves a browser')
+    expect(text).not.toContain(LINKED_COPY_NOTE)
+  })
+
+  it('names a working linked Markdown copy instead of saying there is none', async () => {
+    const harness = await readyHarness({ linksMarkdownCopy: true })
+    const { structured, text } = await call(harness, 'compare_agent_view', { url: TARGET })
+    expect(structured['negotiated']).toBe(false)
+    expect(structured['markdownCopy']).toBe('linked')
+    expect(structured['linkedCopyUrl']).toBe(LINKED_COPY_URL)
+    expect(text).toContain(LINKED_COPY_NOTE)
+    expect(text).toContain(`The copy is at ${LINKED_COPY_URL}.`)
+    expect(text).not.toContain('There is no machine representation')
   })
 
   it('quarantines both excerpts and labels the token estimate as heuristic', async () => {
@@ -260,6 +326,18 @@ describe('explain_check', () => {
     expect(structured['basis']).toBe('measured')
     expect(objectAt(structured['remedy'])['effort']).toBeDefined()
     expect(text).toContain('How to close it')
+    // ARS 0.3 partial credit, in the scorer's own numbers.
+    const { full, linkedCopy } = SUBPOINTS.negotiatedResponse
+    expect(text).toContain(`earns ${linkedCopy} of the ${full} points when it loads`)
+  })
+
+  it('adds no partial-credit note to a check that has none', async () => {
+    const harness = await readyHarness()
+    const { text } = await call(harness, 'explain_check', {
+      check_id: 'machine-representation.vary-accept',
+    })
+    expect(text).not.toContain('linked Markdown copy')
+    expect(text).not.toContain('links to at another address')
   })
 
   it('labels a heuristic check as heuristic, in the words the UI must repeat', async () => {
@@ -270,6 +348,7 @@ describe('explain_check', () => {
     expect(structured['basis']).toBe('heuristic')
     expect(text).toContain('HEURISTIC')
     expect(text).toMatch(/37 of its 100 points/)
+    expect(text).toContain(`ARS ${ARS_SPEC_VERSION.split('.').slice(0, 2).join('.')} puts 37`)
   })
 
   it('is local: no quarantine markers, no requests', async () => {

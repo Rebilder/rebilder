@@ -39,6 +39,8 @@ import {
 import {
   SUBPOINTS,
   bandFor,
+  declaredMarkdownAlternates,
+  markdownAlternateTarget,
   subpointTotals,
   canonicalJson,
   evidenceHash,
@@ -1433,5 +1435,151 @@ describe('the ruleset cannot carry two disagreeing copies of a point value', () 
    */
   it('the published specVersion is the ruleset version', () => {
     expect(ARS_SPEC_VERSION).toBe(DEFAULT_RULESET.version)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// ARS 0.3 — a linked Markdown copy, and the wider action lexicon
+// ---------------------------------------------------------------------------
+
+describe('a linked Markdown copy (ARS 0.3)', () => {
+  const MD_URL = `${URL_UNDER_TEST}.md`
+  const linkedHtml = html('148.00', '$148.00').replace(
+    '</head>',
+    `<link rel="alternate" type="text/markdown" href="${MD_URL}"></head>`,
+  )
+  const htmlPage = (): ArsEvidence =>
+    bundle({
+      agent: ok(AGENT_ACCEPT, capture(URL_UNDER_TEST, linkedHtml, HTML_HEADERS)),
+      browser: ok(BROWSER_ACCEPT, capture(URL_UNDER_TEST, linkedHtml, HTML_HEADERS)),
+    })
+  const withCopy = (record: ArsProbeRecord): ArsEvidence => {
+    const evidence = htmlPage()
+    return { ...evidence, probes: { ...evidence.probes, markdownAlternate: record } }
+  }
+  const mdHeaders = { 'content-type': ['text/markdown; charset=utf-8'] }
+
+  it('earns partial credit when the copy loads as Markdown', () => {
+    const result = score(withCopy(ok(AGENT_ACCEPT, capture(MD_URL, markdown('$148.00'), mdHeaders))))
+    expect(checkOf(result, 'machine-representation.negotiated-response')).toBe(
+      SUBPOINTS.negotiatedResponse.linkedCopy,
+    )
+    expect(checkOf(result, 'machine-representation.declared-alternates')).toBe(3)
+    // Vary only means something when the page address itself negotiates.
+    expect(checkOf(result, 'machine-representation.vary-accept')).toBe(0)
+    // Parity compares the linked copy with the HTML, and the prices agree.
+    expect(checkOf(result, 'machine-representation.substance-parity')).toBe(3)
+    // The cost report describes negotiation only.
+    expect(result.cost.negotiatedBytes).toBeNull()
+  })
+
+  it('a different price in the linked copy costs parity and raises no flag', () => {
+    const result = score(withCopy(ok(AGENT_ACCEPT, capture(MD_URL, markdown('$99.00'), mdHeaders))))
+    expect(checkOf(result, 'machine-representation.substance-parity')).toBe(0)
+    expect(flagIds(result)).not.toContain('substance-divergence')
+  })
+
+  it('a broken copy earns nothing, and its link stops earning too', () => {
+    const missing = score(withCopy(ok(AGENT_ACCEPT, capture(MD_URL, 'not found', { 'content-type': ['text/plain'] }, 404))))
+    expect(checkOf(missing, 'machine-representation.negotiated-response')).toBe(0)
+    expect(checkOf(missing, 'machine-representation.declared-alternates')).toBe(0)
+    const htmlInstead = score(withCopy(ok(AGENT_ACCEPT, capture(MD_URL, linkedHtml, HTML_HEADERS))))
+    expect(checkOf(htmlInstead, 'machine-representation.negotiated-response')).toBe(0)
+    expect(checkOf(htmlInstead, 'machine-representation.declared-alternates')).toBe(0)
+  })
+
+  it('an unchecked or mismatched copy keeps 0.2 behaviour: the link earns, the copy does not', () => {
+    for (const evidence of [
+      htmlPage(),
+      withCopy(ok(AGENT_ACCEPT, capture(`${ORIGIN}/other.md`, markdown('$148.00'), mdHeaders))),
+    ]) {
+      const result = score(evidence)
+      expect(checkOf(result, 'machine-representation.negotiated-response')).toBe(0)
+      expect(checkOf(result, 'machine-representation.declared-alternates')).toBe(3)
+    }
+  })
+
+  it('leaves a bundle without the field hashing exactly as before', () => {
+    const evidence = htmlPage()
+    const withNull = { ...evidence, probes: { ...evidence.probes, markdownAlternate: null } }
+    expect(evidenceHash(evidence)).not.toBe(evidenceHash(withNull))
+    expect('markdownAlternate' in evidence.probes).toBe(false)
+  })
+
+  it('picks the first same-origin copy that is not the page itself, and none when negotiating', () => {
+    const page = capture(URL_UNDER_TEST, linkedHtml, HTML_HEADERS)
+    expect(declaredMarkdownAlternates([page])).toEqual([MD_URL])
+    expect(markdownAlternateTarget(page, null, ORIGIN)).toBe(MD_URL)
+    expect(markdownAlternateTarget(page, null, 'https://other.example')).toBeNull()
+    const negotiating = capture(URL_UNDER_TEST, markdown('$148.00'), MARKDOWN_HEADERS)
+    expect(markdownAlternateTarget(negotiating, page, ORIGIN)).toBeNull()
+    const selfLink = capture(
+      URL_UNDER_TEST,
+      linkedHtml.replace(MD_URL, URL_UNDER_TEST),
+      HTML_HEADERS,
+    )
+    expect(markdownAlternateTarget(selfLink, null, ORIGIN)).toBeNull()
+  })
+
+  it('credits the copy to the recommendation that serves it, and keeps Vary locked', () => {
+    const result = score(withCopy(ok(AGENT_ACCEPT, capture(MD_URL, markdown('$148.00'), mdHeaders))))
+    const serve = result.recommendations.find((entry) => entry.id === 'serve-machine-representation')
+    expect(serve?.checks).toEqual(['machine-representation.negotiated-response'])
+    expect(serve?.unlocks).toEqual(['machine-representation.vary-accept'])
+    expect(result.recommendations.some((entry) => entry.id === 'declare-vary-accept')).toBe(false)
+  })
+})
+
+describe('the action lexicon covers the buttons real pages use (ARS 0.3)', () => {
+  const servicePage = (label: string): ArsEvidence => {
+    const body = `<!doctype html><html><head><title>Bike fitting</title>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Bike fitting","offers":{"@type":"Offer","price":"120.00","priceCurrency":"USD"}}</script>
+</head><body><main><h1>Bike fitting</h1><p>A two-hour fit for $120.00.</p>
+<a href="/go">${label}</a></main></body></html>`
+    return bundle({
+      agent: ok(AGENT_ACCEPT, capture(URL_UNDER_TEST, body, HTML_HEADERS)),
+      browser: ok(BROWSER_ACCEPT, capture(URL_UNDER_TEST, body, HTML_HEADERS)),
+    })
+  }
+  const hasAction = (label: string): boolean =>
+    score(servicePage(label)).facts.some((fact) => fact.kind === 'primary-action-url')
+
+  it.each(['Shop now', 'Try it free', 'Install the app', 'Get a demo', 'Get directions', 'Talk to sales', 'Free trial'])(
+    'recognises "%s"',
+    (label) => {
+      expect(hasAction(label)).toBe(true)
+    },
+  )
+
+  it('still matches whole words only', () => {
+    expect(hasAction('Workshop schedule notes')).toBe(false)
+    expect(hasAction('Trying times')).toBe(false)
+  })
+})
+
+describe('a linked copy we were refused is unchecked, not broken', () => {
+  it('keeps the link credit and gives no copy credit', () => {
+    const MD_URL = `${URL_UNDER_TEST}.md`
+    const linkedHtml = html('148.00', '$148.00').replace(
+      '</head>',
+      `<link rel="alternate" type="text/markdown" href="${MD_URL}"></head>`,
+    )
+    const base = bundle({
+      agent: ok(AGENT_ACCEPT, capture(URL_UNDER_TEST, linkedHtml, HTML_HEADERS)),
+      browser: ok(BROWSER_ACCEPT, capture(URL_UNDER_TEST, linkedHtml, HTML_HEADERS)),
+    })
+    const refused: ArsEvidence = {
+      ...base,
+      probes: {
+        ...base.probes,
+        markdownAlternate: {
+          requestHeaders: { accept: AGENT_ACCEPT },
+          result: { ok: false, error: 'policy-rejected', detail: 'robots.txt' },
+        },
+      },
+    }
+    const result = score(refused)
+    expect(checkOf(result, 'machine-representation.negotiated-response')).toBe(0)
+    expect(checkOf(result, 'machine-representation.declared-alternates')).toBe(3)
   })
 })

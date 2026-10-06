@@ -64,8 +64,9 @@ const CHECK = `rebilder check <url...>
 
   Probes each URL twice — an agent request and a browser control that differ in
   the Accept header and in nothing else — plus /robots.txt, /llms.txt and
-  /.well-known/ucp per origin. Nothing else is requested. robots.txt is fetched
-  first and obeyed.
+  /.well-known/ucp per origin. When the page does not send a Markdown copy but
+  links one on the same site, that one copy is fetched too. Nothing else is
+  requested. robots.txt is fetched first and obeyed.
 
 OPTIONS
   --format ${FORMATS.join('|')}   default pretty
@@ -92,7 +93,8 @@ const DIFF = `rebilder diff <url>
 
   Shows what the agent request received next to what the browser request
   received: status, content type, decoded bytes, an estimated token count, and
-  the D2.4 substance-parity comparison verbatim.
+  the D2.4 substance-parity comparison verbatim. When the page links a Markdown
+  copy instead of sending one, that comparison uses the linked copy.
 
   It shows structure and numbers, never an excerpt of the page. --fail-on is not
   supported: diff reports, it does not grade.

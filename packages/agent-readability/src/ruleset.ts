@@ -1,5 +1,5 @@
 /**
- * ruleset.ts — `DEFAULT_RULESET`, the frozen ARS 0.2 ruleset.
+ * ruleset.ts — `DEFAULT_RULESET`, the frozen ARS 0.3 ruleset.
  *
  * WHAT THIS FILE IS. Every number a second implementation needs in order to
  * reproduce a score, and nothing that varies between runs. `rulesetHash()` is
@@ -454,6 +454,13 @@ const REQUIRED_PROPERTIES = {
  * `primary-action-url`. Matched case-insensitively against normalised anchor
  * text / `name`, whitespace collapsed.
  *
+ * ARS 0.3 ADDED THE COMMON ONES 0.2 MISSED. A shop whose button read "Shop
+ * now", software whose button read "Install" or "Try it free", and a local
+ * business whose button read "Get directions" were all told their main action
+ * link was missing. The additions are the labels those pages actually use, each
+ * still a whole phrase or a word-bounded prefix (`matchesLexicon`), so "shop"
+ * matches "Shop now" and never "Workshop".
+ *
  * PINNED, not inferred. §3.5 names ten stems — `book`, `apply`, `contact`,
  * `buy`, `subscribe`, `start`, `request`, `download`, `sign up`, `get a quote` —
  * "and their pinned synonyms"; this is that list. A lexicon that grew per page
@@ -472,33 +479,61 @@ const ACTION_LEXICON = [
   'book now',
   'buy',
   'buy now',
+  'call',
   'call now',
+  'check availability',
+  'check out',
   'checkout',
   'contact',
   'contact us',
+  'create account',
+  'create an account',
   'donate',
   'download',
   'email us',
+  'enquire',
+  'enrol',
   'enroll',
+  'free trial',
+  'get a demo',
   'get a quote',
+  'get directions',
+  'get in touch',
   'get quote',
   'get started',
+  'get the app',
+  'get tickets',
+  'hire',
+  'inquire',
+  'install',
   'join',
   'make an appointment',
+  'message us',
   'order',
   'order now',
+  'order online',
+  'pre-order',
+  'preorder',
   'purchase',
   'register',
+  'rent',
   'request',
   'request a demo',
   'request a quote',
   'reserve',
   'schedule',
+  'shop',
+  'shop now',
   'sign up',
   'signup',
   'start',
   'start free trial',
   'subscribe',
+  'talk to sales',
+  'talk to us',
+  'text us',
+  'try',
+  'upgrade',
 ] as const satisfies readonly string[]
 
 // ---------------------------------------------------------------------------
@@ -506,7 +541,7 @@ const ACTION_LEXICON = [
 // ---------------------------------------------------------------------------
 
 /**
- * ARS 0.2 integer grade bands. Meanings describe retrieved response structure;
+ * ARS 0.3 integer grade bands (unchanged from 0.2). Meanings describe retrieved response structure;
  * they do not predict third-party output or certify business facts. Interfaces
  * can link the measurement methodology rather than repeat fixed boilerplate.
  */
@@ -555,7 +590,7 @@ const BANDS = [
 // ---------------------------------------------------------------------------
 
 /**
- * ARS 0.2's frozen ruleset.
+ * ARS 0.3's frozen ruleset. Weights and bands are 0.2's; the action lexicon grew.
  *
  * DESIGNED CEILINGS, printed in the spec (§8) as intentional rather than
  * discovered, and stated here in 0.2's numbers: no content negotiation loses
@@ -567,7 +602,7 @@ const BANDS = [
  * rather than described.
  */
 export const DEFAULT_RULESET = deepFreeze({
-  version: '0.2.0',
+  version: '0.3.0',
   weights: WEIGHTS,
   thresholds: THRESHOLDS,
   audienceTokens: AUDIENCE_TOKENS,

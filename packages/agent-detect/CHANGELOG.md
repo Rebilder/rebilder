@@ -4,6 +4,8 @@ Notable changes to `@rebilder/agent-detect`. Dates are the day each version reac
 
 ## Unreleased
 
+## 0.3.1 (2026-10-06)
+
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/agent-detect. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.3.0 (2026-09-28)

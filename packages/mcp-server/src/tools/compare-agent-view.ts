@@ -11,6 +11,10 @@
  * §5.3 puts on raw excerpts anywhere else — and both of them travel inside the
  * untrusted-content markers along with everything else in the report.
  *
+ * Since ARS 0.3 the probe may also fetch a Markdown copy the page links to.
+ * This tool still shows the two requests side by side; the verdict names the
+ * linked copy when the scorer credited it.
+ *
  * The token figures are the spec's own heuristic (characters / 4) and are
  * labelled as estimates everywhere they appear. Bytes are measured: decoded
  * UTF-8 length, the normative measurement, which is why they can be compared
@@ -19,7 +23,13 @@
 
 import type { ArsHttpCapture, ArsProbeRecord, ArsVantage } from '@rebilder/agent-readability'
 import { toJsonObject, type JsonObject, type JsonValue } from '../json'
-import { formatApproxTokens, formatBytes, formatInteger } from '../render'
+import {
+  formatApproxTokens,
+  formatBytes,
+  formatInteger,
+  LINKED_COPY_NOTE,
+  markdownCopyOf,
+} from '../render'
 import { COMPARE_AGENT_VIEW_INPUT, COMPARE_AGENT_VIEW_OUTPUT } from '../schema'
 import type { ToolReturn } from '../result'
 import { runScan } from './scan'
@@ -197,9 +207,21 @@ export const compareAgentViewTool: Tool = defineTool<CompareArgs>({
       (flag) => flag.id === 'substance-divergence' || flag.id === 'structured-data-divergence',
     )
 
+    // ARS 0.3: a page can serve both requests the same HTML and still link a
+    // working Markdown copy at another address. That is not "no machine
+    // representation", so the verdict says where the copy is instead.
+    const linked = !negotiated && markdownCopyOf(result) === 'linked'
+    const linkedRecord = outcome.evidence.probes.markdownAlternate ?? null
+    const linkedUrl =
+      linkedRecord !== null && linkedRecord.result.ok
+        ? linkedRecord.result.capture.requestedUrl
+        : null
+
     const verdict = negotiated
       ? 'This origin serves a different representation to an agent than to a browser.'
-      : 'This origin serves an agent exactly what it serves a browser. There is no machine representation to negotiate for.'
+      : linked
+        ? `This origin serves an agent the same page it serves a browser. ${LINKED_COPY_NOTE}${linkedUrl === null ? '' : ` The copy is at ${linkedUrl}.`}`
+        : 'This origin serves an agent exactly what it serves a browser. There is no machine representation to negotiate for.'
 
     const savings =
       negotiated && agent.bytes !== null && browser.bytes !== null && browser.bytes > 0
@@ -223,6 +245,10 @@ export const compareAgentViewTool: Tool = defineTool<CompareArgs>({
     const structured: JsonObject = {
       target: toJsonObject(result.target),
       negotiated,
+      // ARS 0.3: where a Markdown copy came from. `page-address` is negotiation,
+      // `linked` is the copy the page links to (credited, at `linkedCopyUrl`).
+      markdownCopy: markdownCopyOf(result),
+      linkedCopyUrl: linked ? linkedUrl : null,
       agent: sideToJson(agent),
       browser: sideToJson(browser),
       cost: toJsonObject(result.cost),

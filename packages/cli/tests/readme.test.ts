@@ -25,6 +25,7 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
+import { ARS_SPEC_VERSION } from '@rebilder/agent-readability'
 import { runCli } from '../src/cli'
 import { createFakeRuntime, evidenceOutcome, FIXTURES } from './support'
 
@@ -159,6 +160,15 @@ describe('README example blocks', () => {
   it('states the zero-telemetry guarantee as a contract', () => {
     expect(markdown).toContain('Zero telemetry')
     expect(markdown).toMatch(/never uploads? a scan, a URL, a hostname, or a result/)
+  })
+
+  it('names the ARS version the scorer implements', () => {
+    // The intro is hand-written prose, so regenerating the example blocks does
+    // not keep its version current. This does.
+    const current = ARS_SPEC_VERSION.split('.').slice(0, 2).join('.')
+    expect(markdown).toContain(`(ARS ${current})`)
+    const named = [...markdown.matchAll(/\bARS (\d+\.\d+)/g)].map((match) => match[1])
+    expect(new Set(named)).toEqual(new Set([current]))
   })
 
   it('carries no conflict-of-interest disclosure', () => {

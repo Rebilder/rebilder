@@ -4,6 +4,8 @@ Notable changes to `@rebilder/profiles`. Each profile document also carries its 
 
 ## Unreleased
 
+## 0.2.1 (2026-10-06)
+
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/profiles. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.2.0 (2026-09-28)

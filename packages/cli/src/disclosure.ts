@@ -1,7 +1,7 @@
 /**
  * Shared measurement context for CLI reports. The current formatters include
  * these lines; other interfaces can explain the scope through concise labels
- * and linked methodology (ARS 0.2 §0). Wording can evolve with the product.
+ * and linked methodology (ARS §0). Wording can evolve with the product.
  */
 export const ARS_NOTICE_LINES: readonly string[] = [
   'ARS measures format and retrievability. It does not measure whether the',

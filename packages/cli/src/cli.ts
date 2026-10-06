@@ -33,7 +33,7 @@ import type { CliRuntime, ProbeRunner } from './runtime'
 import { detectCapabilities } from './term'
 
 /** Kept in step with package.json by a test, so a stale constant cannot ship. */
-export const CLI_VERSION = '0.3.0'
+export const CLI_VERSION = '0.4.0'
 
 export async function runCli(argv: readonly string[], runtime: CliRuntime): Promise<ExitCode> {
   const caps = detectCapabilities({

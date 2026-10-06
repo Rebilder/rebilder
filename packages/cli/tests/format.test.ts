@@ -22,6 +22,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
+import { ARS_SPEC_VERSION } from '@rebilder/agent-readability'
 import { runCli } from '../src/cli'
 import { ARS_NOTICE, ARS_NOTICE_LINES } from '../src/disclosure'
 import { createFakeRuntime, evidenceOutcome, FIXTURES, loadEvidence, rejection } from './support'
@@ -44,7 +45,7 @@ describe('pretty', () => {
     const text = await output(['check', URL], FIXTURES.rawHtml)
     expect(text).toContain('D  Partial  59/100')
     // No decimals, ever (§3.6). Checked on the score and points lines; the
-    // identity footer legitimately carries "ARS 0.2.0".
+    // identity footer legitimately carries the spec version, e.g. "ARS 0.3.0".
     for (const line of text.split('\n')) {
       if (line.startsWith('ARS ')) continue
       expect(line, line).not.toMatch(/\b\d+\.\d/)
@@ -137,7 +138,7 @@ describe('json', () => {
     expect(first?.result['score']).toBe(59)
     expect(first?.result['grade']).toBe('D')
     // §3.1: a number without all three identity fields is not an ARS score.
-    expect(first?.result['specVersion']).toBe('0.2.0')
+    expect(first?.result['specVersion']).toBe(ARS_SPEC_VERSION)
     expect(typeof first?.result['rulesetHash']).toBe('string')
     expect(typeof first?.result['corpusHash']).toBe('string')
     expect(typeof first?.result['evidenceHash']).toBe('string')

@@ -57,14 +57,16 @@ export interface CliRuntime {
 
 /**
  * The §3.3 request set is 5 requests for a cold URL (robots.txt, agent, browser,
- * /llms.txt, /.well-known/ucp) and the probe does not cache across calls, so a
- * multi-URL run needs a budget proportional to the URL count. `createLimiter`'s
- * default of 20 is a floor chosen for a single-shot caller; raising it is
- * supposed to be a decision someone made on purpose, and this is that decision,
- * written down: six per URL (five plus the robots retry) and four of slack.
+ * /llms.txt, /.well-known/ucp), plus one more since ARS 0.3 when the page links
+ * a Markdown copy instead of sending one. The probe does not cache across calls,
+ * so a multi-URL run needs a budget proportional to the URL count.
+ * `createLimiter`'s default of 20 is a floor chosen for a single-shot caller;
+ * raising it is supposed to be a decision someone made on purpose, and this is
+ * that decision, written down: seven per URL (six plus the robots retry) and
+ * four of slack.
  */
 export function budgetFor(urlCount: number): number {
-  return Math.max(20, urlCount * 6 + 4)
+  return Math.max(20, urlCount * 7 + 4)
 }
 
 function policyFor(setup: ProbeSetup, base: ProbePolicy): ProbePolicy {

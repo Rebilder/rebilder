@@ -6,6 +6,8 @@ Versions 0.3.0 and 0.4.0 were never published. Their changes first reached npm i
 
 ## Unreleased
 
+## 0.7.1 (2026-10-06)
+
 - The source code is public at https://github.com/rebilder/rebilder/tree/main/packages/events. `repository` and `bugs` point there, and issues and pull requests are welcome.
 
 ## 0.7.0 (2026-09-28)

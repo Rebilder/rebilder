@@ -45,13 +45,13 @@ Cursor: add this to `.cursor/mcp.json` in your project, or `~/.cursor/mcp.json` 
 
 ## The five tools
 
-| Tool                 | What it does                                                                                                                                                                                 | Network                                         |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `scan_url`           | Fetch one public https page the way an agent would and score it against ARS 0.2: grade, seven dimensions, every check with evidence, the measured/heuristic split, context cost, ranked fixes | the target origin, from **your** machine        |
-| `compare_agent_view` | Fetch the same URL twice, with an agent `Accept` and a browser `Accept` and nothing else different, and show both answers side by side with bounded excerpts                                   | the target origin, from **your** machine        |
-| `explain_check`      | Explain one ARS check: what it measures, its weight, measured or heuristic, and how to close it                                                                                              | none                                            |
-| `get_index_entry`    | Read a domain's entry in the public readability index                                                                                                                                        | **the only call this binary makes to Rebilder** |
-| `install_snippet`    | Generate a working gateway install for Next.js, Express/Fastify, a Cloudflare Worker or a Shopify App Proxy                                                                                  | none                                            |
+| Tool                 | What it does                                                                                                                                                                                  | Network                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `scan_url`           | Fetch one public https page the way an agent would and score it against ARS 0.3: grade, seven dimensions, every check with evidence, the measured/heuristic split, context cost, ranked fixes | the target origin, from **your** machine        |
+| `compare_agent_view` | Fetch the same URL twice, with an agent `Accept` and a browser `Accept` and nothing else different, and show both answers side by side with bounded excerpts                                  | the target origin, from **your** machine        |
+| `explain_check`      | Explain one ARS check: what it measures, its weight, measured or heuristic, and how to close it                                                                                               | none                                            |
+| `get_index_entry`    | Read a domain's entry in the public readability index                                                                                                                                         | **the only call this binary makes to Rebilder** |
+| `install_snippet`    | Generate a working gateway install for Next.js, Express/Fastify, a Cloudflare Worker or a Shopify App Proxy                                                                                   | none                                            |
 
 Every result is MCP **structured output**: one text block plus `structuredContent` typed to a declared `outputSchema`. `scan_url`'s output schema is the `ArsResult` shape from `@rebilder/agent-readability`, and a test validates a real scored result against it in both directions, so a field added upstream fails our build rather than shipping a schema that lies to clients.
 
@@ -94,7 +94,7 @@ Anything that crossed a network boundary is `'target'`, including `get_index_ent
 
 - **`probeStrict` only.** Public https origins. Hostnames are resolved and rejected if _any_ answer is a private, loopback, link-local, CGNAT or otherwise reserved address; the connection is pinned to the validated address with `Host` and SNI preserved; every redirect hop is re-resolved and re-pinned. Bodies are streamed and capped at 2 MiB.
 - **There is no flag that relaxes any of that**, and that is the point. `@rebilder/agent-readability/probe/local` (private hosts, plaintext http) is a separate entry point that throws at import time without a per-invocation opt-in, and this package does not import it. An MCP server on a developer's machine is driven by a model whose context contains untrusted web text; a boolean it could set would eventually be set. To check a private or local origin, use the CLI, where a human types `rebilder check --allow-private`.
-- **The politeness limiter is mandatory.** Fetching from your machine deletes our SSRF and amplification surface for this component. It does not delete the reputational one: our User-Agent (`rebilder-ars/0.2 (+https://rebilder.com/bots)`) is on every request your machine makes on our behalf. So: one concurrent request per host, two globally, ≥1s between requests to the same host, and a soft cap per session. No tool argument touches any of it.
+- **The politeness limiter is mandatory.** Fetching from your machine deletes our SSRF and amplification surface for this component. It does not delete the reputational one: our User-Agent (`rebilder-ars/0.3 (+https://rebilder.com/bots)`) is on every request your machine makes on our behalf. So: one concurrent request per host, two globally, ≥1s between requests to the same host, and a soft cap per session. No tool argument touches any of it.
 - **robots.txt is read first and obeyed.** A group naming `rebilder-ars` and disallowing the path means the page is not fetched. `vantage: "self"` bypasses that gate and is a claim that you operate the origin.
 
 ## Transport
@@ -111,10 +111,10 @@ MCP revisions: `2025-11-25` (the default), `2025-06-18` and `2025-03-26` when a 
 
 Two environment variables, read once at startup. Neither is a tool argument, and that distinction is deliberate: the person who launched the process gets to set these; a model reading a web page does not.
 
-| Variable                    | Meaning                                                                                                                              |
-| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `REBILDER_MCP_PROBE_BUDGET` | Requests per session before the politeness limiter refuses. Default 20 (about 4 cold URLs; a cold scan is 5 requests), clamped to 5–500. |
-| `REBILDER_API_URL`          | Public index base URL. https only, no credentials, no query; anything else falls back to `https://rebilder.com`.                     |
+| Variable                    | Meaning                                                                                                                                                                            |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `REBILDER_MCP_PROBE_BUDGET` | Requests per session before the politeness limiter refuses. Default 20 (about 4 cold URLs; a cold scan is 5 requests, or 6 when the page links a Markdown copy), clamped to 6–500. |
+| `REBILDER_API_URL`          | Public index base URL. https only, no credentials, no query; anything else falls back to `https://rebilder.com`.                                                                   |
 
 There is no environment variable that allows private hosts, plaintext http, a larger body cap, or skipping robots.txt.
 

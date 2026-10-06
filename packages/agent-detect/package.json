@@ -1,6 +1,6 @@
 {
   "name": "@rebilder/agent-detect",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": false,
   "description": "Tell AI agents, search crawlers and people apart from request headers, and verify Web Bot Auth signatures. No dependencies; runs at the edge.",
   "license": "Apache-2.0",

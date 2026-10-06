@@ -1,6 +1,6 @@
 {
   "name": "@rebilder/profiles",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": false,
   "description": "Open JSON lists of the facts each kind of web page should give AI agents: products, places, services, articles and more.",
   "license": "Apache-2.0",

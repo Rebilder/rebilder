@@ -3,7 +3,7 @@
   "name": "com.rebilder/mcp-server",
   "title": "Rebilder Agent Readability",
   "description": "Check how well AI agents can read a web page: a score, the evidence and a ranked fix list.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "websiteUrl": "https://rebilder.com/spec/ars",
   "repository": {
     "url": "https://github.com/rebilder/rebilder",
@@ -15,14 +15,14 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@rebilder/mcp-server",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "transport": {
         "type": "stdio"
       },
       "environmentVariables": [
         {
           "name": "REBILDER_MCP_PROBE_BUDGET",
-          "description": "Requests per session before the politeness limiter refuses. Clamped to 5-500.",
+          "description": "Requests per session before the politeness limiter refuses. Clamped to 6-500.",
           "isRequired": false,
           "format": "number",
           "default": "20"

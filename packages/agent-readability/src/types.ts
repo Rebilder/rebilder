@@ -1,5 +1,5 @@
 /**
- * types.ts — the public contract of the Agent Readability Score, ARS 0.2.
+ * types.ts — the public contract of the Agent Readability Score, ARS 0.3.
  *
  * Transcribed from the ARS design document's §3.9, which is the decided
  * contract. Where §3.9 abbreviates (it writes `id: string`
@@ -37,7 +37,7 @@
  * It cannot simply be re-exported from the ruleset: `types.ts` is the bottom of
  * the import graph and `ruleset.ts` imports from it.
  */
-export const ARS_SPEC_VERSION = '0.2.0' as const
+export const ARS_SPEC_VERSION = '0.3.0' as const
 
 /**
  * Where the scan was taken from.
@@ -148,6 +148,15 @@ export interface ArsEvidence {
     browser: ArsProbeRecord
     /** Third probe, ≥30s later, taken only when divergence was detected (§3.8). */
     parityConfirm: ArsProbeRecord | null
+    /**
+     * ADDED in ARS 0.3. The Markdown copy the page declares as an alternate
+     * (`Link: …; rel="alternate"; type="text/markdown"` or the `<link>` form),
+     * fetched with the agent's headers. Taken only when the agent probe did not
+     * already receive a machine copy and the declared URL is a different,
+     * same-origin address. Optional, so a 0.2 bundle stays valid and hashes as
+     * it did; absent or null means "not taken", never "failed".
+     */
+    markdownAlternate?: ArsProbeRecord | null
     robotsTxt: ArsProbeRecord | null
     llmsTxt: ArsProbeRecord | null
     wellKnownUcp: ArsProbeRecord | null

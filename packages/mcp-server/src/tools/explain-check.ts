@@ -16,10 +16,12 @@
  */
 
 import {
+  ARS_HEURISTIC_WEIGHT,
   ARS_SPEC_VERSION,
   CHECK_META,
   DEFAULT_RULESET,
   DIMENSION_META,
+  SUBPOINTS,
   recommend,
   rulesetHash,
   type ArsCheck,
@@ -31,6 +33,7 @@ import {
 import { toJsonObject, type JsonObject } from '../json'
 import { localFailure, type ToolReturn } from '../result'
 import { EXPLAIN_CHECK_INPUT, EXPLAIN_CHECK_OUTPUT } from '../schema'
+import { ARS_LABEL } from '../version'
 import { defineTool, isInvalidParams, rejectUnknownKeys, requireString, type Tool } from './types'
 
 const ALLOWED_KEYS = ['check_id'] as const
@@ -79,6 +82,17 @@ function syntheticGapAt(target: ArsCheckId): { dimensions: ArsDimension[]; score
   return { dimensions, score: 100 - weightOf(target) }
 }
 
+/**
+ * Partial credit a check pays that its weight and remedy do not show. ARS 0.3
+ * pays part of D2.1 for a linked Markdown copy, so "0 or 9" is no longer the
+ * whole story. The numbers come from `SUBPOINTS`, the scorer's own split.
+ */
+export function partialCreditNote(target: ArsCheckId): string | null {
+  if (target !== 'machine-representation.negotiated-response') return null
+  const { full, linkedCopy } = SUBPOINTS.negotiatedResponse
+  return `A Markdown copy the page links to at another address earns ${linkedCopy} of the ${full} points when it loads. Sending the copy from the page address itself earns all ${full}.`
+}
+
 /** The catalogue entry that closes this check, if the catalogue has one. */
 export function remedyFor(target: ArsCheckId): ArsRecommendation | null {
   const recommendations = recommend(syntheticGapAt(target))
@@ -90,7 +104,7 @@ export const explainCheckTool: Tool = defineTool<ArsCheckId>({
   title: 'Explain an ARS check',
   description: [
     'Explain one check from the Rebilder Agent Readability Spec (ARS): what it measures, which dimension it belongs to, how many of the 100 points it carries, whether it is measured or heuristic, and what a site owner does to close it.',
-    'Answered entirely from the frozen ARS 0.2 ruleset shipped with this server — no network call, no scan.',
+    `Answered entirely from the frozen ${ARS_LABEL} ruleset shipped with this server, with no network call and no scan.`,
   ].join(' '),
   inputSchema: EXPLAIN_CHECK_INPUT,
   outputSchema: EXPLAIN_CHECK_OUTPUT,
@@ -115,7 +129,7 @@ export const explainCheckTool: Tool = defineTool<ArsCheckId>({
     if (!isCheckId(rawId)) {
       return Promise.resolve(
         localFailure(
-          `"${rawId}" is not an ARS 0.2 check id. The twenty-two checks are:\n${CHECK_IDS.map((id) => `  ${id}`).join('\n')}`,
+          `"${rawId}" is not an ${ARS_LABEL} check id. The twenty-two checks are:\n${CHECK_IDS.map((id) => `  ${id}`).join('\n')}`,
           { ok: false, error: 'unknown-check-id', requested: rawId, checkIds: [...CHECK_IDS] },
         ),
       )
@@ -125,16 +139,19 @@ export const explainCheckTool: Tool = defineTool<ArsCheckId>({
     const dimension = DIMENSION_META[meta.dimension]
     const weight = weightOf(rawId)
     const remedy = remedyFor(rawId)
+    const partial = partialCreditNote(rawId)
 
     const basisNote =
       meta.basis === 'measured'
         ? 'MEASURED: the points come from something observed in the response.'
-        : 'HEURISTIC: the points come from an inference. ARS 0.2 puts 37 of its 100 points on heuristics and prints the split next to every score; a heuristic value must never be rendered without this label.'
+        : `HEURISTIC: the points come from an inference. ${ARS_LABEL} puts ${ARS_HEURISTIC_WEIGHT} of its 100 points on heuristics and prints the split next to every score; a heuristic value must never be rendered without this label.`
 
     const summary = [
       `${rawId} — ${meta.label}`,
       `Dimension: ${dimension.label} (${meta.dimension}), worth ${dimension.weight} of 100 points.`,
-      `This check is worth ${weight} of those ${dimension.weight}.`,
+      partial === null
+        ? `This check is worth ${weight} of those ${dimension.weight}.`
+        : `This check is worth ${weight} of those ${dimension.weight}. ${partial}`,
       basisNote,
       remedy === null
         ? 'The recommendation catalogue has no single action for this check; it is closed by the dimension as a whole.'

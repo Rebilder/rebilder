@@ -22,6 +22,7 @@
 
 import type { ArsCheck, ArsDimension, ArsResult } from '@rebilder/agent-readability'
 import { ARS_NOTICE_LINES } from '../disclosure'
+import { LINKED_PARITY_NOTE, markdownCopyOf } from '../markdown-copy'
 import { nextSteps } from '../next-steps'
 import type { BadgeSnippet, DiffPayload, Payload, Scaffold } from '../payload'
 import { outcomeSummary, statusOf, type UrlReport } from '../report'
@@ -348,6 +349,9 @@ function diffBlock(diff: DiffPayload, pretty: Pretty): string[] {
         'gray',
       ),
     )
+    if (diff.result !== null && markdownCopyOf(diff.result) === 'linked') {
+      lines.push(paint(`  ${LINKED_PARITY_NOTE}`, 'gray'))
+    }
     for (const evidence of diff.parity.evidence) {
       lines.push(
         `  ${glyphs.bullet} ${evidence.label}: ${evidence.value} [${basisLabel(evidence.basis)}]`,

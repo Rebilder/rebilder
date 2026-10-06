@@ -1,6 +1,6 @@
 {
   "name": "@rebilder/render-md",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": false,
   "description": "Render product, policy and page data as clean markdown and schema.org JSON-LD for AI agents. Deterministic output, no dependencies.",
   "license": "Apache-2.0",

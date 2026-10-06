@@ -5,11 +5,12 @@
 
 import { describe, expect, it } from 'vitest'
 
+import { ARS_SPEC_VERSION } from '@rebilder/agent-readability'
 import { ERROR_CODES, type JsonRpcResponse } from '../src/jsonrpc'
 import { isJsonObject, type JsonObject, type JsonValue } from '../src/json'
 import { SERVER_INSTRUCTIONS } from '../src/server'
 import { TOOLS } from '../src/tools/index'
-import { LATEST_PROTOCOL_VERSION, SERVER_NAME, SERVER_VERSION } from '../src/version'
+import { ARS_LABEL, LATEST_PROTOCOL_VERSION, SERVER_NAME, SERVER_VERSION } from '../src/version'
 import { callFrame, createHarness, initializeFrame, readyHarness } from './harness'
 
 function resultOf(response: JsonRpcResponse | null): JsonObject {
@@ -160,6 +161,15 @@ describe('tools/list', () => {
       expect(typeof tool['description']).toBe('string')
       expect(objectAt(tool['annotations'])['readOnlyHint']).toBe(true)
     }
+  })
+
+  it('names the spec version the bundled scorer implements', () => {
+    // Derived, so a scorer release cannot leave a description on the old version.
+    expect(ARS_LABEL).toBe(`ARS ${ARS_SPEC_VERSION.split('.').slice(0, 2).join('.')}`)
+    expect(SERVER_INSTRUCTIONS).toContain(`(${ARS_LABEL})`)
+    const descriptions = new Map(TOOLS.map((tool) => [tool.name, tool.description] as const))
+    expect(descriptions.get('scan_url')).toContain(`(${ARS_LABEL})`)
+    expect(descriptions.get('explain_check')).toContain(`frozen ${ARS_LABEL} ruleset`)
   })
 
   it('marks the offline tools closed-world and the fetching tools open-world', () => {
