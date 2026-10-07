@@ -1,3 +1,4 @@
+import { capabilitySignals, type CapabilityId, type ActionStatus } from './capabilities'
 /**
  * Intent-signal extraction — the shared, zero-dependency implementation every
  * emitter uses to populate `request.intent_signals` (schema v0.4).
@@ -173,8 +174,30 @@ export function buildProtocolIntentSignals(args: {
   tool: string
   query?: string
   resultCount?: number
+  requestedCapability?: CapabilityId
+  missingCapability?: CapabilityId
+  actionStatus?: ActionStatus
 }): Record<string, unknown> {
-  const signals: Record<string, unknown> = { tool: args.tool }
+  const knownTools: Record<string, CapabilityId> = {
+    'mcp.search_catalog': 'catalog.search',
+    'mcp.get_product': 'product.read',
+    'mcp.get_policies': 'policy.read',
+    'ucp.catalog': 'catalog.search',
+    'acp.feed': 'catalog.search',
+    'ucp.checkout': 'checkout.create',
+  }
+  const requested =
+    args.requestedCapability ??
+    (Object.hasOwn(knownTools, args.tool) ? knownTools[args.tool] : undefined)
+  const signals: Record<string, unknown> = {
+    tool: args.tool,
+    ...capabilitySignals({
+      capability_version: 1,
+      requested_capability: requested,
+      missing_capability: args.missingCapability,
+      action_status: args.actionStatus,
+    }),
+  }
   if (args.query !== undefined) {
     const query = scrubQueryText(args.query)
     if (query !== null) {
@@ -182,7 +205,11 @@ export function buildProtocolIntentSignals(args: {
       signals['query_param'] = args.tool
     }
   }
-  if (args.resultCount !== undefined && Number.isInteger(args.resultCount) && args.resultCount >= 0) {
+  if (
+    args.resultCount !== undefined &&
+    Number.isInteger(args.resultCount) &&
+    args.resultCount >= 0
+  ) {
     signals['result_count'] = args.resultCount
   }
   return signals
@@ -205,6 +232,9 @@ export function buildProtocolIntentSignals(args: {
 // ---------------------------------------------------------------------------
 
 export const INTENT_HEADER_TOOL = 'x-rebilder-intent-tool'
+export const INTENT_HEADER_CAPABILITY = 'x-rebilder-intent-capability'
+export const INTENT_HEADER_MISSING = 'x-rebilder-intent-missing-capability'
+export const INTENT_HEADER_ACTION = 'x-rebilder-intent-action-status'
 export const INTENT_HEADER_QUERY = 'x-rebilder-intent-query'
 export const INTENT_HEADER_RESULTS = 'x-rebilder-intent-results'
 
@@ -212,6 +242,9 @@ const INTENT_HEADER_NAMES = [
   INTENT_HEADER_TOOL,
   INTENT_HEADER_QUERY,
   INTENT_HEADER_RESULTS,
+  INTENT_HEADER_CAPABILITY,
+  INTENT_HEADER_MISSING,
+  INTENT_HEADER_ACTION,
 ] as const
 
 /** Header-value safety for the tool name: our own identifiers only. */
@@ -223,10 +256,14 @@ const TOOL_NAME_PATTERN = /^[a-z0-9._-]{1,64}$/i
  * `scrubQueryText` inside `buildProtocolIntentSignals` — pass this function
  * that builder's output, never raw input.
  */
-export function stampIntentSignalHeaders(
-  headers: Headers,
-  signals: Record<string, unknown>,
-): void {
+export function stampIntentSignalHeaders(headers: Headers, signals: Record<string, unknown>): void {
+  const capability = capabilitySignals(signals)
+  if (typeof capability.requested_capability === 'string')
+    headers.set(INTENT_HEADER_CAPABILITY, capability.requested_capability)
+  if (typeof capability.missing_capability === 'string')
+    headers.set(INTENT_HEADER_MISSING, capability.missing_capability)
+  if (typeof capability.action_status === 'string')
+    headers.set(INTENT_HEADER_ACTION, capability.action_status)
   const tool = signals['tool']
   if (typeof tool === 'string' && TOOL_NAME_PATTERN.test(tool)) {
     headers.set(INTENT_HEADER_TOOL, tool)
@@ -247,7 +284,12 @@ export function stampIntentSignalHeaders(
  * writer was this package.
  */
 export function readIntentSignalHeaders(headers: Headers): Record<string, unknown> {
-  const signals: Record<string, unknown> = {}
+  const signals: Record<string, unknown> = capabilitySignals({
+    capability_version: 1,
+    requested_capability: headers.get(INTENT_HEADER_CAPABILITY),
+    missing_capability: headers.get(INTENT_HEADER_MISSING),
+    action_status: headers.get(INTENT_HEADER_ACTION),
+  })
   const tool = headers.get(INTENT_HEADER_TOOL)
   if (tool !== null && TOOL_NAME_PATTERN.test(tool)) signals['tool'] = tool
 

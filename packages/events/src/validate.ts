@@ -39,7 +39,8 @@ function firstProblem(value: unknown): string | null {
   // Required string scalars.
   for (const key of ['event_id', 'ts', 'store_id'] as const) {
     if (value[key] === undefined) return `missing required field '${key}'`
-    if (typeof value[key] !== 'string') return `'${key}' must be a string, got ${describe(value[key])}`
+    if (typeof value[key] !== 'string')
+      return `'${key}' must be a string, got ${describe(value[key])}`
   }
 
   // requester
@@ -66,7 +67,8 @@ function firstProblem(value: unknown): string | null {
   if (typeof request['url'] !== 'string') {
     return `'request.url' must be a string, got ${describe(request['url'])}`
   }
-  if (request['intent_signals'] === undefined) return `missing required field 'request.intent_signals'`
+  if (request['intent_signals'] === undefined)
+    return `missing required field 'request.intent_signals'`
   if (!isRecord(request['intent_signals'])) {
     return `'request.intent_signals' must be an object, got ${describe(request['intent_signals'])}`
   }
@@ -91,9 +93,18 @@ function firstProblem(value: unknown): string | null {
   if (typeof response['render_ms'] !== 'number' || !Number.isFinite(response['render_ms'])) {
     return `'response.render_ms' must be a finite number, got ${describe(response['render_ms'])}`
   }
-  if (response['profile_id'] !== undefined && (typeof response['profile_id'] !== 'string' || !/^[a-z0-9-]{1,64}$/.test(response['profile_id']))) return "'response.profile_id' must be a bounded profile identifier"
+  if (
+    response['profile_id'] !== undefined &&
+    (typeof response['profile_id'] !== 'string' ||
+      !/^[a-z0-9-]{1,64}$/.test(response['profile_id']))
+  )
+    return "'response.profile_id' must be a bounded profile identifier"
   for (const key of ['profile_version', 'compatibility_runtime'] as const) {
-    if (response[key] !== undefined && (!Number.isSafeInteger(response[key]) || (response[key] as number) < 1)) return `'response.${key}' must be a positive integer`
+    if (
+      response[key] !== undefined &&
+      (!Number.isSafeInteger(response[key]) || (response[key] as number) < 1)
+    )
+      return `'response.${key}' must be a positive integer`
   }
   // ADDITIVE v0.2 — both optional, so every v0.1 event still validates.
   if (response['source'] !== undefined && typeof response['source'] !== 'string') {
@@ -109,12 +120,33 @@ function firstProblem(value: unknown): string | null {
   // outcome (optional; all fields optional — joined async in the warehouse)
   const outcome = value['outcome']
   if (outcome !== undefined) {
-    if (!isRecord(outcome)) return `'outcome' must be an object when present, got ${describe(outcome)}`
-    for (const key of ['cited', 'referred', 'add_to_cart', 'purchase'] as const) {
+    if (!isRecord(outcome))
+      return `'outcome' must be an object when present, got ${describe(outcome)}`
+    for (const key of [
+      'cited',
+      'referred',
+      'add_to_cart',
+      'purchase',
+      'booking',
+      'quote',
+      'action_completed',
+    ] as const) {
       if (outcome[key] !== undefined && typeof outcome[key] !== 'boolean') {
         return `'outcome.${key}' must be a boolean when present, got ${describe(outcome[key])}`
       }
     }
+    if (
+      outcome['order_value_minor'] !== undefined &&
+      (!Number.isSafeInteger(outcome['order_value_minor']) ||
+        (outcome['order_value_minor'] as number) < 0 ||
+        typeof outcome['currency'] !== 'string')
+    )
+      return "'outcome.order_value_minor' requires nonnegative integer minor units and currency"
+    if (
+      outcome['currency'] !== undefined &&
+      (typeof outcome['currency'] !== 'string' || !/^[A-Z]{3}$/.test(outcome['currency']))
+    )
+      return "'outcome.currency' must be a three-letter uppercase currency code"
     if (
       outcome['order_value'] !== undefined &&
       (typeof outcome['order_value'] !== 'number' || !Number.isFinite(outcome['order_value']))

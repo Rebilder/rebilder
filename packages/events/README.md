@@ -89,7 +89,7 @@ Content-Type: application/json
 - `requester`: `kind` (`agent`, `human`, `crawler` or `protocol`), `platform` when known, and `verified`.
 - `request`: `url` (query string limited to a short allowlist), `accept`, `referrer` and `intent_signals`.
 - `response`: `path` (`markdown`, `html-variant`, `protocol` or `denied`), `render_ms`, and the `source` and `coverage` that applied.
-- `outcome`: optional, joined later: referral, add to cart, purchase and order value.
+- `outcome`: optional, joined later: citation, referral, add to cart, purchase, booking, quote and completed action. For money, report paired `order_value_minor` (a non-negative safe integer) and `currency` (three uppercase letters). The legacy `order_value` field remains accepted but its units are not normalized.
 
 `validateEventV0(value)` is a type guard that never throws. `assertEventV0(value)` throws an error naming the first bad field. Both accept unknown extra keys, because schema changes are additive.
 
@@ -97,16 +97,36 @@ Content-Type: application/json
 
 `request.intent_signals` uses these keys, produced by the helpers in this package so every source writes the same shape:
 
-| Key | Meaning |
-|---|---|
-| `query` | Search text sent to your site, after `scrubQueryText` |
-| `query_param` | Where the query came from: `q`, `s` and so on, or a tool name such as `mcp.search_catalog` |
-| `referrer_platform` | The AI platform named by the Referer (`chatgpt`, `perplexity`, …). On a `human` event, an AI conversation sent this visitor |
-| `utm_source` / `utm_medium` | Campaign parameters, sanitized |
-| `tool` | Protocol tool or operation name |
-| `result_count` | Number of search results; `0` is demand your catalog could not answer |
+| Key                         | Meaning                                                                                                                     |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
+| `query`                     | Search text sent to your site, after `scrubQueryText`                                                                       |
+| `query_param`               | Where the query came from: `q`, `s` and so on, or a tool name such as `mcp.search_catalog`                                  |
+| `referrer_platform`         | The AI platform named by the Referer (`chatgpt`, `perplexity`, …). On a `human` event, an AI conversation sent this visitor |
+| `utm_source` / `utm_medium` | Campaign parameters, sanitized                                                                                              |
+| `tool`                      | Protocol tool or operation name                                                                                             |
+| `result_count`              | Number of search results; `0` is demand your catalog could not answer                                                       |
+| `capability_version`        | `1` for explicit capability signals below |
+| `requested_capability`      | A supported capability ID such as `pricing.read` or `quote.request` |
+| `missing_capability`        | The requested capability when the adapter explicitly reports it unavailable |
+| `action_status`             | An explicit action result: `requested`, `offered`, `succeeded`, `failed` or `unsupported` |
 
 `scrubQueryText` drops the whole query when it contains an `@`, a run of seven or more digits, a token-like fragment, a URL, or more than 200 characters. It never partially redacts.
+
+## Commercial demand
+
+`classifyDemand(observation)` groups agent and protocol requests using their observed tool, screened query, source or route. Its result includes a category, classification basis, commercial-interest flag and an observed gap. The classifier is deterministic and carries `DEMAND_CLASSIFICATION_VERSION`; it does not infer purchase attribution. A missing capability or failed action is counted only when explicitly reported.
+
+`unfulfilled` requires commercial interest plus an explicit unsourced response, a protocol response with numeric `result_count: 0`, an explicitly missing capability, or an explicitly failed/unsupported action. Diagnostic installation checks are excluded. Access-policy denials, unknown coverage and ordinary HTML pass-through are not fulfillment gaps. Human and crawler requests never count as commercial agent demand.
+
+`demandSignals(observation)` returns additive keys for `intent_signals`: `demand_version`, `intent_category`, `intent_basis`, `commercial_intent`, `unfulfilled_demand` and `demand_gap`. Hosted ingest derives these fields from the event, overriding supplied labels. Earlier events remain valid and can be classified from their original observations.
+
+## Public capability snapshots
+
+`CapabilitySnapshotV1` is a versioned declaration of public information and action capabilities for a domain. `CAPABILITIES` lists the ten supported identifiers. Each entry has an evidence source and a status: `declared`, `verified`, `unavailable` or `unknown`.
+
+`parseCapabilitySnapshot(value)` returns a validated snapshot or `null`. It rejects unknown fields, duplicate identifiers, private or credential-bearing endpoint addresses, and action capabilities marked verified by a serving probe. A declaration never grants negotiation, payment or account authority. Private seller limits, analytics, credentials and customer records do not belong in this shape.
+
+`capabilitySignals(value)` keeps only the finite capability identifiers and action statuses for event reporting. `stampIntentSignalHeaders` and `readIntentSignalHeaders` transport these signals through protocol responses; the gateway removes the headers before serving the response.
 
 ## Page-view events
 

@@ -4,7 +4,12 @@ Notable changes to `@rebilder/events`. Schema changes are versioned and additive
 
 Versions 0.3.0 and 0.4.0 were never published. Their changes first reached npm in 0.5.0 and are listed there.
 
-## Unreleased
+## 0.8.0 (2026-10-07)
+
+- Add `classifyDemand` and `demandSignals`: deterministic commercial-interest and observed-gap classification from requester, query, tool, source and coverage. Classification version 2 also accepts explicit requested/missing capabilities and failed or unsupported actions. Installation diagnostics, policy denials, human visits and crawler traffic do not count as unfulfilled commercial demand.
+- Add the public `CapabilitySnapshotV1` vocabulary and strict parser. Ten information/action identifiers carry declared, verified, unavailable or unknown evidence. Snapshots reject unknown fields and unsafe endpoint addresses; declarations never grant authority to act.
+- Add optional capability/action fields to the intent header channel, with finite-value validation. Existing events remain valid.
+- Add optional `outcome.booking`, `outcome.quote`, `outcome.action_completed`, and paired `outcome.order_value_minor`/`currency` fields. Minor-unit values must be non-negative safe integers. Legacy `order_value` remains accepted without normalization or inferred currency conversion.
 
 ## 0.7.1 (2026-10-06)
 

@@ -36,7 +36,8 @@
 
 import { classifyRequest } from '../../core/classify'
 import { buildEvent, emitEvent } from '../../core/events'
-import { handleRequest } from '../../core/handle'
+import { handleRequest, accessRuntimeFor } from '../../core/handle'
+import { evaluateAccess, accessDeniedResponse } from '../../core/access'
 import { jsonErrorResponse, stripPathPrefix } from '../../core/http'
 import { generateLlmsTxt, type LlmsTxtOptions } from '../../core/llms-txt'
 import { markdownAlternate, withNegotiationHeaders } from '../../core/negotiation'
@@ -113,7 +114,7 @@ export interface GatewayRouteHandlerOptions {
  * - Source match → 200 markdown response (same headers as the middleware
  *   path) + a 'markdown' RebilderEventV0 when `onEvent` is configured.
  * - No source match (including a source that returned null or threw) →
- *   404 `application/json` body `{ "error": "not_found" }`; no event.
+ *   404 `application/json` body `{ "error": "not_found" }`; one unsourced event.
  */
 export function createGatewayRouteHandler(
   config: GatewayConfig,
@@ -127,24 +128,46 @@ export function createGatewayRouteHandler(
       url.pathname = stripPathPrefix(url.pathname, stripPrefix)
     }
 
-    const resolution = await resolveMarkdownWithSource(url, config)
-    if (resolution === null) {
-      return jsonErrorResponse(404, 'not_found', 'No gateway source matched this path.')
+    const detection = classifyRequest(req).detection
+    if (config.access !== undefined) {
+      const runtime = accessRuntimeFor(config)
+      const verdict = evaluateAccess(runtime.policy(), detection, runtime.limiter, Date.now())
+      if (!verdict.allowed) {
+        emitEvent(
+          config,
+          buildEvent({
+            storeId: config.storeId,
+            detection,
+            url: url.href,
+            accept: req.headers.get('accept') ?? undefined,
+            path: 'denied',
+            coverage: 'not-applicable',
+            renderMs: performance.now() - start,
+          }),
+        )
+        return accessDeniedResponse(verdict)
+      }
     }
-
+    const resolution = await resolveMarkdownWithSource(url, config)
     emitEvent(
       config,
       buildEvent({
         storeId: config.storeId,
-        detection: classifyRequest(req).detection,
-        url: req.url,
+        detection,
+        url: url.href,
         accept: req.headers.get('accept') ?? undefined,
         referrer: req.headers.get('referer') ?? undefined,
+        diagnostic: req.headers.get('user-agent')?.startsWith('rebilder-install-check/') === true,
         path: 'markdown',
-        profile: resolution.profile,
+        profile: resolution?.profile,
+        source: resolution?.source ?? 'none',
+        coverage: resolution === null ? 'unsourced' : 'sourced',
         renderMs: performance.now() - start,
       }),
     )
+    if (resolution === null) {
+      return jsonErrorResponse(404, 'not_found', 'No gateway source matched this path.')
+    }
     return markdownResponse(resolution.markdown, undefined, resolution.profile)
   }
 }

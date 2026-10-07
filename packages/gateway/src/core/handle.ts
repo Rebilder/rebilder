@@ -83,6 +83,7 @@ export async function handleRequest(req: Request, config: GatewayConfig): Promis
         url: req.url,
         accept: req.headers.get('accept') ?? undefined,
         referrer: req.headers.get('referer') ?? undefined,
+        diagnostic: req.headers.get('user-agent')?.startsWith('rebilder-install-check/') === true,
         path,
         renderMs: performance.now() - start,
         coverage,
@@ -253,7 +254,7 @@ const RUNTIMES = new WeakMap<object, { runtime: AccessRuntime; verificationConfi
  * source reappears under different verification wiring, since compilation
  * depends on it.
  */
-function accessRuntimeFor(config: GatewayConfig): AccessRuntime {
+export function accessRuntimeFor(config: GatewayConfig): AccessRuntime {
   const source = config.access as NonNullable<GatewayConfig['access']>
   const verificationConfigured = config.verification !== undefined
   const existing = RUNTIMES.get(source)

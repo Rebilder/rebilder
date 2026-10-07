@@ -2,7 +2,13 @@
 
 Notable changes to `@rebilder/gateway`. Versions follow semantic versioning. Dates are the day each version reached npm.
 
-## Unreleased
+## 0.5.2 (2026-10-07)
+
+- Dedicated Next.js markdown routes now apply the configured agent access policy before resolving content, sharing the middleware policy and rate-limit runtime.
+
+- Record exactly one unsourced event when the dedicated Next.js markdown route has no matching source and returns 404. Event sinks remain isolated from serving failures.
+- Propagate supported capability and action intent signals from protocol adapters. Mark diagnostic installation requests so they do not inflate commercial-demand reporting.
+- Depend on `@rebilder/events` 0.8.0 for the additive event helpers and capability vocabulary.
 
 ## 0.5.1 (2026-10-06)
 

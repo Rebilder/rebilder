@@ -106,10 +106,7 @@ describe('event emission — every handled request emits exactly one event', () 
   it('human pass-through → one event with response.path=html-variant', async () => {
     const { config, events } = collectingConfig()
     const referer = `${STORE_ORIGIN}/collections/trail`
-    await handleRequest(
-      makeRequest(PDP_PATH, { ...BROWSER_CHROME_HEADERS, referer }),
-      config,
-    )
+    await handleRequest(makeRequest(PDP_PATH, { ...BROWSER_CHROME_HEADERS, referer }), config)
     expect(events).toHaveLength(1)
     const event = events[0]!
     expectEventShape(event)
@@ -389,9 +386,8 @@ describe('request.intent_signals — populated at emission', () => {
   })
 
   it('protocol path: reads the intent channel headers into the event and strips them', async () => {
-    const { stampIntentSignalHeaders, buildProtocolIntentSignals } = await import(
-      '@rebilder/events'
-    )
+    const { stampIntentSignalHeaders, buildProtocolIntentSignals } =
+      await import('@rebilder/events')
     const { config, events } = collectingConfig({
       protocols: async () => {
         const res = new Response('{}', { headers: { 'content-type': 'application/json' } })
@@ -414,6 +410,8 @@ describe('request.intent_signals — populated at emission', () => {
     expect(res?.headers.get('x-rebilder-intent-results')).toBeNull()
     expect(events).toHaveLength(1)
     expect(events[0]!.request.intent_signals).toEqual({
+      capability_version: 1,
+      requested_capability: 'catalog.search',
       tool: 'mcp.search_catalog',
       query: 'trail boots',
       query_param: 'mcp.search_catalog',

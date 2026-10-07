@@ -12,12 +12,7 @@ export type RequesterKindV0 = 'agent' | 'human' | 'protocol' | 'crawler'
  * literal types (autocomplete), but any newly observed platform string is
  * valid — additions here are additive schema changes, not breaking ones.
  */
-export type RequesterPlatformV0 =
-  | 'chatgpt'
-  | 'gemini'
-  | 'claude'
-  | 'perplexity'
-  | (string & {})
+export type RequesterPlatformV0 = 'chatgpt' | 'gemini' | 'claude' | 'perplexity' | (string & {})
 
 /**
  * Which serving path answered the request (ARCHITECTURE.md § The Compiler).
@@ -133,6 +128,13 @@ export interface RebilderEventOutcomeV0 {
   referred?: boolean
   add_to_cart?: boolean
   purchase?: boolean
+  /** Explicit merchant/platform reports, never inferred from a request or a handoff link. */
+  booking?: boolean
+  quote?: boolean
+  action_completed?: boolean
+  /** Use these paired fields for unambiguous monetary reporting. Legacy order_value is not normalized. */
+  order_value_minor?: number
+  currency?: string
   /** Order value in the store's currency minor units or as reported by the merchant platform. */
   order_value?: number
 }

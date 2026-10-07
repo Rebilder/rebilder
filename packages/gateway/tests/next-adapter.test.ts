@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import type { RebilderEventV0 } from '@rebilder/events'
 import type { GatewayConfig } from '../src/index'
 import { createGatewayProxy, createGatewayRouteHandler } from '../src/adapters/next/index'
@@ -130,6 +130,71 @@ describe('createGatewayProxy', () => {
 })
 
 describe('createGatewayRouteHandler', () => {
+  it('records one miss against the canonical path even when a source throws', async () => {
+    const events: RebilderEventV0[] = []
+    const handler = createGatewayRouteHandler(
+      config({
+        sources: {
+          product: () => {
+            throw new Error('source failed')
+          },
+        },
+        onEvent: (event) => {
+          events.push(event)
+        },
+      }),
+      { stripPrefix: '/md' },
+    )
+    expect(
+      (await handler(makeRequest('/md/products/missing?token=private', CLAUDE_CODE_HEADERS)))
+        .status,
+    ).toBe(404)
+    expect(events).toHaveLength(1)
+    expect(events[0]!.request.url).toBe('https://store.example.com/products/missing')
+    expect(events[0]!.response).toMatchObject({
+      path: 'markdown',
+      source: 'none',
+      coverage: 'unsourced',
+    })
+  })
+
+  it('honors the same access policy before invoking a dedicated route source', async () => {
+    const product = vi.fn(() => null)
+    const events: RebilderEventV0[] = []
+    const handler = createGatewayRouteHandler(
+      config({
+        access: { default: 'deny' },
+        sources: { product },
+        onEvent: (event) => {
+          events.push(event)
+        },
+      }),
+    )
+    expect((await handler(makeRequest(PDP_PATH, CLAUDE_CODE_HEADERS))).status).toBe(403)
+    expect(product).not.toHaveBeenCalled()
+    expect(events).toHaveLength(1)
+    expect(events[0]!.response).toMatchObject({ path: 'denied', coverage: 'not-applicable' })
+  })
+
+  it('marks install diagnostics and contains event-sink failures', async () => {
+    const events: RebilderEventV0[] = []
+    const handler = createGatewayRouteHandler(
+      config({
+        onEvent: (event) => {
+          events.push(event)
+          return Promise.reject(new Error('ingest down'))
+        },
+      }),
+    )
+    const response = await handler(
+      makeRequest(PDP_PATH, {
+        accept: 'text/markdown',
+        'user-agent': 'rebilder-install-check/0.1',
+      }),
+    )
+    expect(response.status).toBe(200)
+    expect(events[0]!.request.intent_signals).toMatchObject({ diagnostic: 'install-check' })
+  })
   it('always renders markdown, even for a plain browser request', async () => {
     const handler = createGatewayRouteHandler(config())
     const res = await handler(makeRequest(PDP_PATH, BROWSER_CHROME_HEADERS))

@@ -111,7 +111,9 @@ describe('extractUrlIntentSignals', () => {
 
   it('records sanitized utm params and ignores misshapen ones', () => {
     expect(
-      extractUrlIntentSignals('https://shop.example/p/x?utm_source=ChatGPT.com&utm_medium=referral'),
+      extractUrlIntentSignals(
+        'https://shop.example/p/x?utm_source=ChatGPT.com&utm_medium=referral',
+      ),
     ).toEqual({ utm_source: 'chatgpt.com', utm_medium: 'referral' })
     expect(
       extractUrlIntentSignals('https://shop.example/p/x?utm_source=<script>alert(1)</script>'),
@@ -135,14 +137,22 @@ describe('buildProtocolIntentSignals', () => {
   it('always records the tool', () => {
     expect(buildProtocolIntentSignals({ tool: 'mcp.get_policies' })).toEqual({
       tool: 'mcp.get_policies',
+      capability_version: 1,
+      requested_capability: 'policy.read',
     })
   })
 
   it('records a scrubbed query attributed to the tool, and the result count', () => {
     expect(
-      buildProtocolIntentSignals({ tool: 'mcp.search_catalog', query: 'trail boots', resultCount: 4 }),
+      buildProtocolIntentSignals({
+        tool: 'mcp.search_catalog',
+        query: 'trail boots',
+        resultCount: 4,
+      }),
     ).toEqual({
       tool: 'mcp.search_catalog',
+      capability_version: 1,
+      requested_capability: 'catalog.search',
       query: 'trail boots',
       query_param: 'mcp.search_catalog',
       result_count: 4,
@@ -162,7 +172,12 @@ describe('buildProtocolIntentSignals', () => {
         query: 'jane@example.com order',
         resultCount: 0,
       }),
-    ).toEqual({ tool: 'mcp.search_catalog', result_count: 0 })
+    ).toEqual({
+      tool: 'mcp.search_catalog',
+      result_count: 0,
+      capability_version: 1,
+      requested_capability: 'catalog.search',
+    })
   })
 
   it('ignores negative or non-integer result counts', () => {

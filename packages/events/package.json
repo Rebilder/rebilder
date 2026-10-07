@@ -1,6 +1,6 @@
 {
   "name": "@rebilder/events",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "private": false,
   "description": "Typed request events and a batching HTTP sink for @rebilder/gateway: record which AI agents read your site and what they asked for.",
   "license": "Apache-2.0",

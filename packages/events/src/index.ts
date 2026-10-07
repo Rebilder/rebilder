@@ -38,6 +38,9 @@ export {
   INTENT_HEADER_TOOL,
   INTENT_HEADER_QUERY,
   INTENT_HEADER_RESULTS,
+  INTENT_HEADER_CAPABILITY,
+  INTENT_HEADER_MISSING,
+  INTENT_HEADER_ACTION,
   scrubQueryText,
   classifyReferrerPlatform,
   extractUrlIntentSignals,
@@ -54,3 +57,25 @@ export { createHttpEventSink, createConsoleEventSink } from './sink'
 // The Rebilder Tag wire contract (v0.5, additive) — a browser pageview
 // beacon, a DIFFERENT observation from RebilderEventV0, which stays frozen.
 export type { ClientEventV0 } from './client'
+
+// Deterministic commercial-demand interpretation over the existing event contract.
+export { DEMAND_CLASSIFICATION_VERSION, classifyDemand, demandSignals } from './demand'
+export type { IntentCategory, DemandGap, DemandObservation, DemandClassification } from './demand'
+
+export {
+  CAPABILITY_SCHEMA_VERSION,
+  CAPABILITIES,
+  ACTION_STATUSES,
+  isCapabilityId,
+  isPublicCapabilityDomain,
+  normalizeCapabilityEndpoint,
+  parseCapabilitySnapshot,
+  capabilitySignals,
+} from './capabilities'
+export type {
+  CapabilityId,
+  CapabilityStatus,
+  CapabilityV1,
+  CapabilitySnapshotV1,
+  ActionStatus,
+} from './capabilities'

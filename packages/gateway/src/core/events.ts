@@ -66,9 +66,7 @@ export function sanitizeEventUrl(rawUrl: string): string {
   try {
     parsed = new URL(rawUrl)
   } catch {
-    const cut = Math.min(
-      ...[rawUrl.indexOf('?'), rawUrl.indexOf('#')].filter((i) => i >= 0),
-    )
+    const cut = Math.min(...[rawUrl.indexOf('?'), rawUrl.indexOf('#')].filter((i) => i >= 0))
     return rawUrl.slice(0, cut)
   }
 
@@ -107,6 +105,8 @@ export interface BuildEventArgs {
   url: string
   accept?: string
   referrer?: string
+  /** A declared installation probe is recorded for wiring health, not customer demand. */
+  diagnostic?: boolean
   path: ResponsePathV0
   /** Measured with performance.now() around classify + render. */
   renderMs: number
@@ -147,13 +147,20 @@ export function buildEvent(args: BuildEventArgs): RebilderEventV0 {
       intent_signals: {
         ...extractUrlIntentSignals(args.url, args.referrer),
         ...args.protocolIntent,
+        ...(args.diagnostic ? { diagnostic: 'install-check' } : {}),
       },
       ...(args.accept !== undefined ? { accept: args.accept } : {}),
       ...(args.referrer !== undefined ? { referrer: args.referrer } : {}),
     },
     response: {
       path: args.path,
-      ...(args.profile === undefined ? {} : { profile_id: args.profile.id, profile_version: args.profile.version, compatibility_runtime: COMPATIBILITY_RUNTIME_VERSION }),
+      ...(args.profile === undefined
+        ? {}
+        : {
+            profile_id: args.profile.id,
+            profile_version: args.profile.version,
+            compatibility_runtime: COMPATIBILITY_RUNTIME_VERSION,
+          }),
       render_ms: args.renderMs,
       ...(args.source !== undefined ? { source: args.source } : {}),
       ...(args.coverage !== undefined ? { coverage: args.coverage } : {}),
